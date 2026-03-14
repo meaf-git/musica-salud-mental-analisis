@@ -75,24 +75,8 @@ datos_musica |>
 #VERIFICANDO SI LAS COLUMNAS DE FREQUENCY TIENEN ESPACIOS VACIOS 
 datos_musica |> 
   summarise(across(starts_with("frequency_"), ~sum(is.na(.) | . == "" | . == " ")))
-orden_logico <- c("Never", "Rarely", "Sometimes", "Very frequently")
+orden_logico <- c("Never", "Rarely", "Sometimes", "Frequently", "Very frequently")
 datos_musica <- datos_musica |> mutate(across(starts_with("frequency_"), 
 ~factor(., levels = orden_logico, ordered = TRUE)))
 glimpse(datos_musica |> select(frequency_rock))
-
-## Instalamos librerias necesarias 
-install.packages("usethis")
-install.packages("gitcreds")
-## Cargamos libreria y configuramos
-library(usethis)
-use_git_config(
-  user.name = "ddaza-alt", # Cambia esto por tu nombre
-  user.email = "danieladaza400@gmail.com" # Usa el email asociado a tu cuenta de GitHub
-)
-## Creamos token para credenciales de github
-create_github_token()
-## Configuramos token
-library(gitcreds)
-gitcreds_set()
-
-write_csv(datos_musica, "datos_musica_limpios_FINAL.csv")
+  write_csv(datos_musica, "datos_musica_limpios_FINAL.csv")
