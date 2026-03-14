@@ -2,10 +2,10 @@
 # --- Metadatos Básicos ---
 title: "Título del Trabajo Final"
 author:
-   - Daniela Daza
-   - Segundo participant
-   - Tercer participante
-date: "Febrero 2026"
+   - Nicole Melissa Altera Pino
+   - María Emilia Arteaga Fernández
+   - Daniela Alexandra Daza Tovar
+date: "Abril 2026"
 
 # --- Metadatos Específicos de Plantilla ---
 degree: "Computación I"
