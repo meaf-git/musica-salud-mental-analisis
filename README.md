@@ -6,13 +6,12 @@ Con este proyecto, se busca establecer relaciones acerca de cómo, la forma en q
 
 # Objetivos
 # - Objetivo Principal: 
-analizar la correlación entre los hábitos de consumo musical y diferentes indicadores de salud mental mediante el uso de técnicas de análisis estadístico. 
+Describir y analizar la correlación entre los hábitos de consumo musical y diferentes indicadores de salud mental mediante el uso de técnicas de análisis estadístico. 
 # - Objetivos Específicos:
-1.	Realizar un proceso de limpieza y preparación de datos que permita garantizar la credibilidad y consistencia de la información utilizada en el análisis.
-2.	Analizar la estructura y características del conjunto de datos relacionado con hábitos musicales y variables de salud mental.
-3.	Identificar posibles valores atípicos o inconsistencias que puedan influir en los resultados del análisis estadístico.
-4.	Explorar la posible relación entre el tiempo dedicado a escuchar música y los niveles de ansiedad, depresión, insomnio y trastorno obsesivo-compulsivo.
-5.	Analizar la relación entre los géneros musicales preferidos y los indicadores de salud mental presentes.
-6.	Desarrollar gráficos que permitan interpretar de manera clara las relaciones existentes entre las variables analizadas.
-7.	Determinar la relación estadística entre las horas escuchadas diarias y la intensidad del insomnio en los participantes, evaluando si el consumo prolongado de música actúa como un factor influyente. 
-8.	Determinar si el escuchar música mientras se está trabajando influye en la percepción del "Music effect" o efecto de la música (Mejora/Empeora/Nulo).
+1.	Describir la estructura y características del conjunto de datos relacionado con hábitos musicales y variables de salud mental.
+2.	Describir la distribución de los indicadores de salud mental mediante medidas de tendencia central y dispersion para identificar el perfil general de salud mental de los participantes.
+3.	Comparar la distribucion de los indicadores de salud mental preferido utilizando herramientas graficas como diagramas de caja.
+4.	Analizar la relación entre el ritmo musical y el nivel de insomnio. Realizar un diagrama de dispersión para observar si ritmos más acelerados tienen una relación con la dificultad par dormir.
+5.	Describir la distribución de la percepción del "Music Effect" (mejora, empeora, nulo) según si los participantes escuchan música mientras trabajan.
+6.	Comparar la distribución de edades de la muestra con sus niveles de salud mental reportados. 
+7.	Explorar la asociación entre la diversidad de generos musicales eschudaos y los niveles de bienestar emocional mediante herramientas de estadística descriptiva.
