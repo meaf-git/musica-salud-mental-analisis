@@ -5,7 +5,7 @@ En este contexto, se ha incrementado el interés por analizar los factores cotid
 Con este proyecto, se busca establecer relaciones acerca de cómo, la forma en que los hábitos de escucha musical (el tiempo dedicado a escuchar música, los géneros preferidos o la frecuencia de consumo), pueden relacionarse con indicadores de salud mental, como la ansiedad, la depresión, el insomnio o los comportamientos compulsivos; esto mediante la realización de un análisis estadístico de la correlación entre los hábitos de consumo musical y variables asociadas a la salud mental.
 
 # Objetivos
-# - Objetivo Principal: 
+# - Objetivo General: 
 Describir y analizar la correlación entre los hábitos de consumo musical y diferentes indicadores de salud mental mediante el uso de técnicas de análisis estadístico. 
 # - Objetivos Específicos:
 1.	Describir la estructura y características del conjunto de datos relacionado con hábitos musicales y variables de salud mental.
