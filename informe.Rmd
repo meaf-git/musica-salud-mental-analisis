@@ -1,11 +1,11 @@
 ---
 # --- Metadatos Básicos ---
-title: "Título del Trabajo Final"
+title: "Análisis Estadístico de la Correlación entre Hábitos Auditivos y Perfiles de Salud Mental"
 author:
-   - Daniela Daza
-   - Segundo participant
-   - Tercer participante
-date: "Febrero 2026"
+   - Nicole Melissa Altera Pino
+   - María Emilia Arteaga Fernández
+   - Daniela Alexandra Daza Tovar
+date: "Abril 2026"
 
 # --- Metadatos Específicos de Plantilla ---
 degree: "Computación I"
@@ -58,84 +58,92 @@ library(kableExtra)
 library(scales)
 library(janitor)
 
-#BASE DE DATOS 
+#Base de datos
 datos_musica <- read_csv("1. Musica.csv")
-#RENOMBRAR COLUMNAS 
+
+#Renombrar columnas 
 datos_musica <- datos_musica |> clean_names()
-#LIMPIEZA DE BASE DE DATOS
+
+#Limpieza de base de datos
 View(datos_musica)
-#ELIMINACIÓN DE COLUMNAS INNECESARIA PARA EL ANÁLISIS
+
+#Eliminación de columnas innecesarias para el análisis
 datos_musica <- datos_musica |> select(-timestamp, -permissions)
-#VERIFICACIÓN DE DATOS FALTANTES
+
+#Verificación de datos faltantes
 summary(datos_musica)
-#ESTURUCTURA DE LOS DATOS
+
+#Estructura de los datos 
 glimpse(datos_musica)
-#ELIMINACIÓN DE NA Y SU SUSTITUCIÓN CON LA MEDIANA
+
+#Eliminación de NA y su sustitución con la mediana
 datos_musica <- datos_musica |>
-  mutate(age = if_else(is.na(age), median(age, na.rm = TRUE), age))
-datos_musica <- datos_musica |>
-  mutate(bpm = if_else(is.na(bpm), median(bpm, na.rm = TRUE), bpm))
+  mutate(age = if_else(is.na(age), median(age, na.rm = TRUE), age),
+         bpm = if_else(is.na(bpm), median(bpm, na.rm = TRUE), bpm))
 colSums(is.na(datos_musica))
-#VERIFICACIÓN DE ESPACIOS VACIOS 
+
+##Verificación de espacios vacíos
 datos_musica |>
-  summarise(across(where(is.character), ~sum(. == "" | . == " ", na.rm = TRUE)))
-#VER CUALES VARIABLES SE REPITEN EN LAS VARIABLES CUALITATIVAS Y SUSTITUIR POR LA MODA
-#1 music_effects
+  summarise(across(where(is.character), ~sum(. == "" | is.na(.), na.rm = TRUE)))
+
+#Ver cuales variables se repiten en las variables cualitativas y sustituir por la moda
+# Ver la moda de cada columna
 datos_musica |> tabyl(music_effects) |> arrange(desc(n))
-datos_musica <- datos_musica |> 
-  mutate(music_effects = if_else(music_effects == "" | music_effects == " " | is.na(music_effects), 
-  "Improve", music_effects))
-datos_musica |> tabyl(music_effects)
-#2 foreign_languages
 datos_musica |> tabyl(foreign_languages) |> arrange(desc(n))
-datos_musica <- datos_musica |> 
-  mutate(foreign_languages = if_else(foreign_languages == "" | foreign_languages == " " | is.na(foreign_languages), 
-  "Yes", foreign_languages))
-datos_musica |> tabyl(foreign_languages)
-#3 instrumentalist            
 datos_musica |> tabyl(instrumentalist) |> arrange(desc(n))
-datos_musica <- datos_musica |> 
-  mutate(instrumentalist = if_else(is.na(instrumentalist) | instrumentalist == "" | instrumentalist == " ", 
-  "No", instrumentalist))
-datos_musica |> tabyl(instrumentalist)
-#4 while_working
 datos_musica |> tabyl(while_working) |> arrange(desc(n))
-datos_musica <- datos_musica |> 
-  mutate(while_working = if_else(is.na(while_working) | while_working == "" | while_working == " ", 
-  "Yes", while_working))
-datos_musica |> tabyl(while_working)
-#5 primary_streaming_service 
 datos_musica |> tabyl(primary_streaming_service) |> arrange(desc(n))
-datos_musica <- datos_musica |> 
-  mutate(primary_streaming_service = if_else(is.na(primary_streaming_service) | primary_streaming_service == "" | primary_streaming_service == " ", 
-  "Spotify", primary_streaming_service))
-datos_musica |> tabyl(primary_streaming_service)
-#6 composer                   
 datos_musica |> tabyl(composer) |> arrange(desc(n))
-datos_musica <- datos_musica |> 
-  mutate(composer = if_else(is.na(composer) | composer == "" | composer == " ", "No", composer))
-datos_musica |> tabyl(composer)
-#REVISIÓN DE LAS EDADES
+
+datos_musica <- datos_musica |>
+  mutate(music_effects = if_else(music_effects == "" | is.na(music_effects), "Improve",
+      music_effects)) |>
+  mutate(foreign_languages = if_else(foreign_languages == "" | is.na(foreign_languages), "Yes",
+      foreign_languages)) |>
+  mutate(instrumentalist = if_else(instrumentalist == "" | is.na(instrumentalist), "No", 
+      instrumentalist)) |>
+  mutate(while_working = if_else(while_working == "" | is.na(while_working), "Yes", 
+      while_working)) |>
+  mutate(primary_streaming_service = if_else(primary_streaming_service == "" | 
+      is.na(primary_streaming_service), "Spotify", primary_streaming_service)) |>
+  mutate(composer = if_else(composer == "" | is.na(composer), "No", composer))
+
+#Revisión de las edades
 summary(datos_musica$age)
-#DEFINIMOS QUE CUALQUIER BPM MAYOR A 500 ES UN ERROR Y LO PASAMOS A LA MEDIANA 
+
+#Definimos que cualquier bpm mayor a 500 es un error y lo pasamos a la mediana 
 summary(datos_musica$bpm)
+
 #Usamos 500 porque es el límite aproximado de géneros súper rápidos como el Speedcore
 datos_musica <- datos_musica |> 
   mutate(bpm = if_else(bpm > 500 | bpm < 40, median(bpm, na.rm = TRUE), bpm))
 summary(datos_musica$bpm)
-#VERIFICANDO EL RESUMEN DE ESCUCHA POR DIA
+
+#Verificando el resumen de escucha por día
 summary(datos_musica$hours_per_day)
-#VERIFICANDO EL RANGO DE LAS ESCALAS, QUE EL MINIMO SEA 0 Y EL MAXIMO 10
+
+#Verificando el rango de las escalas, que el mínimo sea 0 y el máximo 10
 datos_musica |> 
   select(anxiety, depression, insomnia, ocd) |> summary()
-#VERIFICANDO SI LAS COLUMNAS DE FREQUENCY TIENEN ESPACIOS VACIOS 
+
+#Verificando si las columnas de frequency tienen espacios vacíos
 datos_musica |> 
   summarise(across(starts_with("frequency_"), ~sum(is.na(.) | . == "" | . == " ")))
-orden_logico <- c("Never", "Rarely", "Sometimes", "Very frequently")
-datos_musica <- datos_musica |> mutate(across(starts_with("frequency_"), 
-~factor(., levels = orden_logico, ordered = TRUE)))
-glimpse(datos_musica |> select(frequency_rock))
 
+#Definimos el orden lógico
+orden_logico <- c("Never", "Rarely", "Sometimes", "Frequently", "Very frequently")
+
+#Convertimos a factor ordenado
+datos_musica <- datos_musica |>
+  mutate(across(starts_with("frequency_"), ~factor(., levels = orden_logico, 
+      ordered = TRUE)))
+
+#Verificamos correción
+datos_musica |> 
+  select(starts_with("frequency_")) |> 
+  glimpse()
+
+#Guardamos los datos limpios
 write_csv(datos_musica, "datos_musica_limpios_FINAL.csv")
 dfclean <- read_csv("datos_musica_limpios_FINAL.csv")
 view(dfclean)
@@ -149,71 +157,73 @@ view(dfclean)
 Introducción del trabajo de investigación
 
 \chapter{Planteamiento del Problema}
-Describir planteamiento del problema\
 
-Argumento final. Debido a esto, se plantea las siguientes preguntas de investigación:\
+Según la Organización Mundial de la Salud (OMS), “La salud mental es un estado de bienestar mental que permite a las personas hacer frente a los momentos de estrés de la vida, desarrollar todo su potencial, aprender y trabajar adecuadamente y contribuir a su comunidad”. Sin embargo, durante los últimos años, diversos estudios han reportado un incremento significativo en los trastornos relacionados con la salud mental, como trastornos de ansiedad, del estado de ánimo, de la personalidad, entre otros; especialmente entre adolescentes y adultos jóvenes. Este incremento es debido a factores como: la pandemia de COVID-19, el aislamiento social y las presiones económicas, según la Organización Panamericana de Salud (OPS). En este contexto, se ha incrementado el interés por analizar los factores cotidianos que pueden influir en la salud mental. Uno de los más relevantes es el consumo de música, actividad que forma parte de la vida diaria de millones de personas, y que puede cumplir diferentes funciones emocionales, cognitivas y sociales. Con este proyecto, se busca establecer relaciones acerca de cómo, la forma en que los hábitos de escucha musical (el tiempo dedicado a escuchar música, los géneros preferidos o la frecuencia de consumo), pueden relacionarse con indicadores de salud mental, como la ansiedad, la depresión, el insomnio o los comportamientos compulsivos; esto mediante la realización de un análisis estadístico de la correlación entre los hábitos de consumo musical y variables asociadas a la salud mental.\
+
+Debido a esto, se plantea las siguientes preguntas de investigación:\
 
 
-\textbf{1.}	Pregunta1\
+\textbf{1.}¿Existe una asociación estadísticamente significativa entre el tempo del género musical preferido por los participantes y su nivel de insomnio?\
 
-\textbf{2.}	Pregunta2\
+\textbf{2.}¿Cómo se distribuye la percepción del efecto de la música sobre el estado emocional en función de si los participantes escuchan música mientras trabajan o estudian?\
 
-\textbf{3.}	Pregunta3\
+\textbf{3.}¿Qué relación existe entre la diversidad de géneros musicales escuchados por los participantes) y sus niveles de bienestar emocional?\
 
 
 \section{Justificación}
 
-Justificación del trabajo de investigación\
-
+El estudio de la relación entre la música y la salud mental ha adquirido una creciente relevancia en diversas disciplinas, especialmente en la psicología y la sociología. La música constituye una de las formas de expresión cultural más universales y accesibles, y su consumo forma parte de la rutina diaria de una gran parte de la población.
+Asimismo, debido a su capacidad para influir en las emociones, el estado de ánimo y los procesos cognitivos, la música ha sido considerada en múltiples investigaciones como un factor asociado al bienestar psicológico.
+Desde una perspectiva académica y científica, resulta significativo analizar esta relación mediante el uso de herramientas de análisis estadístico y modelado de datos que permitan identificar patrones, tendencias y correlaciones entre variables asociadas con los hábitos musicales y distintos indicadores de salud mental. Este tipo de análisis puede contribuir a ampliar el conocimiento sobre la influencia del consumo musical en el bienestar emocional, así como a generar conclusiones a raíz de los resultados obtenidos sobre la relación entre estas variables dentro de una población determinada.\
 \section{Objetivos}
  
 \subsection{Objetivo General}
 \begin{itemize}
-  \item{Describir objetivo general del trabajo de investigación}
+  \item{Describir y analizar la correlación entre los hábitos de consumo musical y diferentes indicadores de salud mental mediante el uso de técnicas de análisis estadístico.}
 \end{itemize}
 
 \subsection{Objetivos Específicos}
 \begin{itemize}
-  \item{Describir objetivo 1 del trabajo de investigación}
-  \item{Describir objetivo 2 del trabajo de investigación}
-  \item{Describir objetivo 3 del trabajo de investigación}
+  \item{Describir la estructura y características del conjunto de datos relacionado con hábitos musicales y variables de salud mental.}
+  \item{Describir la distribución de los indicadores de salud mental mediante medidas de tendencia central y dispersion para identificar el perfil general de salud mental de los participantes.}
+  \item{Comparar la distribucion de los indicadores de salud mental preferido utilizando herramientas graficas como diagramas de caja.}
+  \item{Analizar la relación entre el ritmo musical y el nivel de insomnio. Realizar un diagrama de dispersión para observar si ritmos más acelerados tienen una relación con la dificultad par dormir.}
+  \item{Describir la distribución de la percepción del "Music Effect" (mejora, empeora, nulo) según si los participantes escuchan música mientras trabajan.}
+  \item{Comparar la distribución de edades de la muestra con sus niveles de salud mental reportados.}
+  \item{Explorar la asociación entre la diversidad de generos musicales eschudaos y los niveles de bienestar emocional mediante herramientas de estadística descriptiva.}
 \end{itemize}
 
 
-\section{Cobertura}
+\section{Variables}
 
-\subsection{Horizontal}
+La variable principal en estudio (Variable Dependiente/Objetivo) es el Nivel de Salud Mental, que representa el estado de bienestar psicológico del individuo. Esta se mide a través de una escala cuantitativa de 0 a 10, donde 0 indica ausencia total de síntomas y 10 representa la severidad máxima.\
 
-Describir la cobertura Horizontal del trabajo de investigación\
+Para un análisis detallado, se consideran las siguientes variables:\
 
+\textbf{1.}Variables Psicológicas: Ansiedad y Depresión, evaluadas como indicadores del estado emocional predominante.\
+
+\textbf{2.}Variable Fisiológica: Insomnio, la cual mide la calidad e higiene del sueño y su impacto en el descanso.\
+
+\textbf{3.}Variable Conductual: OCD (Trastorno Obsesivo-Compulsivo), utilizada como indicador de comportamientos compulsivos asociados a niveles de estrés.\
+
+Como variables explicativas o independientes se analizan:\
 \begin{table}[ht]
 \centering
-\caption{Variables consideradas} 
-\resizebox{10cm}{!} {
+\renewcommand{\arraystretch}{1}
+\resizebox{15cm}{!} {
 \begin{tabular}{ccc}
   \hline
-\ \ \ \ \ NOMBRE DE LA VARIABLE \\ 
+TIPO & VARIABLE & DESCRIPCIÓN \\
   \hline
-   VARIABLE 1 \\ 
-VARIABLE 2\\ 
-VARIABLE n\\ 
+Cuantitativa & Tempo (BPM) & Velocidad o pulsaciones por minuto del género preferido. \\
+Cualitativa & Música en horario laboral & Si el participante escucha música mientras trabaja o estudia. \\
+Cualitativa & Percepción & Opinión sobre si la música mejora o empeora el estado emocional. \\
+Cuantitativa & Diversidad & Cantidad o variedad de géneros musicales escuchados. \\
    \hline
 \end{tabular}
 }
+\caption{Variables consideradas}
 \end{table}
-
-\subsection{Vertical}
-
-Describir la cobertura Vertical del trabajo de investigación
-
-
-\section{Periodo de Referencia}
-
-Describir la fuente y el Periodo de Referencia utilizado en el trabajo de investigación
-
-\section{Variables}
-
-Describir la variable en estudio en el trabajo de investigación
 
 \chapter{Marco Teórico}
 
@@ -298,4 +308,3 @@ Recomendación 2 del trabajo de investigación.\
 \chapter{Anexo B}
 
 \chapter{Anexo C}
-
