@@ -67,6 +67,18 @@ summary(datos_musica$bpm)
 #Verificando el resumen de escucha por día
 summary(datos_musica$hours_per_day)
 
+#Reemplazar valores fuera de rango (0-24) con NA
+datos_musica <- datos_musica |> 
+  mutate(hours_per_day = ifelse(hours_per_day > 24 | hours_per_day < 0, NA, 
+  hours_per_day))
+
+#Calcular la mediana
+mediana_hours <- median(datos_musica$hours_per_day, na.rm = TRUE)
+
+#Imputar la mediana en los huecos
+datos_musica <- datos_musica |> 
+  mutate(hours_per_day = ifelse(is.na(hours_per_day), mediana_hours, hours_per_day))
+
 #Verificando el rango de las escalas, que el mínimo sea 0 y el máximo 10
 datos_musica |> 
   select(anxiety, depression, insomnia, ocd) |> summary()
