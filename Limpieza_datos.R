@@ -2,6 +2,7 @@
 #nstall.packages("janitor")
 library(janitor)
 library(tidyverse)
+library(readr)
 
 #Base de datos
 datos_musica <- read_csv("1. Musica.csv")
@@ -103,9 +104,3 @@ datos_musica |>
 write_csv(datos_musica, "datos_musica_limpios_FINAL.csv")
 dfclean <- read_csv("datos_musica_limpios_FINAL.csv")
 view(dfclean)
-
-orden_logico <- c("Never", "Rarely", "Sometimes", "Frequently", "Very frequently")
-datos_musica <- datos_musica |> mutate(across(starts_with("frequency_"), 
-~factor(., levels = orden_logico, ordered = TRUE)))
-glimpse(datos_musica |> select(frequency_rock))
-  write_csv(datos_musica, "datos_musica_limpios_FINAL.csv")
