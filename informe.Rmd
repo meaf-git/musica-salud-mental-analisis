@@ -181,6 +181,19 @@ datos_musica <- datos_musica |>
 #Verificamos el cambio
 str(datos_musica[c("while_working", "exploratory", "instrumentalist", "composer")])
 
+# Vemos la estructura y el tipo de dato antes del cambio
+table(datos_musica$music_effects)
+
+#Identificar las columnas y le asignamos su nuevo valor 
+datos_musica <- datos_musica |> 
+  mutate(music_effects = case_match(music_effects,
+                                    "Worsen" ~ -1,
+                                    "No effect" ~ 0,
+                                    "Improve" ~ 1,
+                                    .default = NA_real_))
+#Verificamos el cambio
+table(datos_musica$music_effects)
+
 #Guardamos los datos limpios
 write_csv(datos_musica, "datos_musica_limpios_FINAL.csv")
 dfclean <- read_csv("datos_musica_limpios_FINAL.csv")
