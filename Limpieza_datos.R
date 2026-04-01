@@ -73,10 +73,10 @@ datos_musica <- datos_musica |>
   mutate(hours_per_day = ifelse(hours_per_day > 24 | hours_per_day < 0, NA, 
   hours_per_day))
 
-#Calcular la mediana
+#Calculamos la mediana
 mediana_hours <- median(datos_musica$hours_per_day, na.rm = TRUE)
 
-#Imputar la mediana en los huecos
+#Rellenamos con la mediana en los huecos
 datos_musica <- datos_musica |> 
   mutate(hours_per_day = ifelse(is.na(hours_per_day), mediana_hours, hours_per_day))
 
@@ -99,6 +99,26 @@ datos_musica <- datos_musica |>
 datos_musica |> 
   select(starts_with("frequency_")) |> 
   glimpse()
+
+# Vemos la estructura y el tipo de dato
+str(datos_musica[c("while_working", "exploratory", "instrumentalist", "composer")])
+
+# Identificar las columnas que tienen "Yes"/"No"
+columnas_si_no <- c("while_working", "instrumentalist", "composer", 
+                    "exploratory", "foreign_languages")
+
+# Convertimos Yes a 1 y No a 0
+datos_musica <- datos_musica |> 
+  mutate(across(c(while_working, instrumentalist, composer, 
+                  exploratory, foreign_languages),
+                ~ case_when(
+                  . == "Yes" ~ 1,
+                  . == "No" ~ 0,
+                  TRUE ~ NA_real_
+                )))
+
+#Verificamos el cambio
+str(datos_musica[c("while_working", "exploratory", "instrumentalist", "composer")])
 
 #Guardamos los datos limpios
 write_csv(datos_musica, "datos_musica_limpios_FINAL.csv")
