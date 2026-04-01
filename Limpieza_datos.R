@@ -84,26 +84,33 @@ datos_musica <- datos_musica |>
 datos_musica |> 
   select(anxiety, depression, insomnia, ocd) |> summary()
 
+# Vemos la estructura y el tipo de datos antes del cambio
+datos_musica |> 
+select(starts_with("frequency_")) |> 
+glimpse()
+
 #Verificando si las columnas de frequency tienen espacios vacíos
 datos_musica |> 
   summarise(across(starts_with("frequency_"), ~sum(is.na(.) | . == "" | . == " ")))
 
-#Definimos el orden lógico
-orden_logico <- c("Never", "Rarely", "Sometimes", "Frequently", "Very frequently")
-
-#Convertimos a factor ordenado
-datos_musica <- datos_musica |>
-  mutate(across(starts_with("frequency_"), ~factor(., levels = orden_logico, 
-                                                   ordered = TRUE)))
-#Verificamos correción
+#Identificar las columnas y le asignamos su nuevo valor 
+datos_musica <- datos_musica |> 
+  mutate(across(starts_with("frequency_"), 
+                ~ case_match(.,
+                             "Never" ~ 1,
+                             "Rarely" ~ 2,
+                             "Sometimes" ~ 3,
+                             "Very frequently" ~ 4,
+                             .default = NA_real_)))
+#Verificamos el cambio
 datos_musica |> 
-  select(starts_with("frequency_")) |> 
+  select(starts_with("frequency_")) %>% 
   glimpse()
 
 # Vemos la estructura y el tipo de dato
 str(datos_musica[c("while_working", "exploratory", "instrumentalist", "composer")])
 
-# Identificar las columnas que tienen "Yes"/"No"
+#Identificamos las columnas que tienen "Yes"/"No"
 columnas_si_no <- c("while_working", "instrumentalist", "composer", 
                     "exploratory", "foreign_languages")
 
