@@ -45,7 +45,7 @@ print(resumen_nulos)
 if (porcentaje_faltantes >= 50.00).any():
     print("\nHay columnas con un exceso de datos faltantes (> 50%).")
 else:
-    print("\nLa calidad de los datos es aceptable (Ninguna columna supera el 50% de nulos).")
+    print("\nLa calidad de los datos es aceptable (Ninguna columna supera el 50% de registros nulos).")
 
 #Sustituyendo los valores faltantes para cada columna float (numérica):
 #1. Columna "Age":
@@ -56,7 +56,7 @@ for i in df.index:
     if pd.isna(edad):
         continue
     
-    #Verificación de rango y sustitución por mediana de NaN
+    #Verificación de rango y sustitución por mediana 
     if edad > 110 or edad < 0:
         df.at[i, 'Age'] = np.nan
 
@@ -64,25 +64,14 @@ mediana_age = df["Age"].median()
 for i in df.index:
     if pd.isna(df.at[i, 'Age']):
        df.at[i, "Age"] = mediana_age
-    
 
-print(mediana_age)
-print(df["Age"].head(14)) #Borrar más adelante 
-
+df["Age"]= df["Age"].astype(int) 
 
 #2. Columna "Hours per day":
-for i in df.index:
-    horas = df.at[i, "Hours per day"]
-    if pd.isna(horas):
-        continue 
 
-    if horas > 24 or horas < 0:
-        df.at[i, "Hours per day"] = np.nan
-
+df.loc[(df["Hours per day"] > 24) | (df["Hours per day"] < 0), "Hours per day"] = np.nan
 mediana_hours = df["Hours per day"].median()
-for i in df.index:
-    if pd.isna(df.at[i, "Hours per day"]):
-        df.at[i, "Hours per day"] = mediana_hours
+df["Hours per day"] = df["Hours per day"].fillna(mediana_hours)
 
 #3. Columna "BPM":
 for i in df.index:
@@ -99,79 +88,69 @@ for i in df.index:
         df.at[i, "BPM"] = mediana_bpm
 
 
-#Una vez listas las variables float, se procede con las variables cuantitativas ordinales 
-#Como no hay datos vacíos, simplemente se calculan las medidas de tendencia pertinentes 
-
-moda_anx = df["Anxiety"].mode()
-media_anx = df["Anxiety"].mean()
-mediana_anx = df["Anxiety"].median()
-moda_dep = df["Depression"].mode()
-media_dep = df["Depression"].mean()
-mediana_dep = df["Depression"].median()
-moda_ins = df["Insomnia"].mode()
-media_ins = df["Insomnia"].mean()
-mediana_ins = df["Insomnia"].median()
-moda_ocd = df["OCD"].mode()
-media_ocd =df["OCD"].mean()
-mediana_ocd = df["OCD"].median()
-
 #Para variables cualitativas
 #Asignación de valores enteros a las columnas de Frecuencia ("Frequency")
 
-columnas_frecuencia = df.columns[11:27]
-print(columnas_frecuencia) ###
+columnas_frecuencia = df.columns[10:26]
 
+dicc_frecuencia = {
+    'Very frequently': 4,
+    'Sometimes': 3,
+    'Rarely': 2,
+    'Never': 1
+}
 for col in columnas_frecuencia:
-    print(f"Analizando columna: {col}")
-    for i in df.index:
-        frecuencia = df.at[i, col]
-        if frecuencia == 'Very frequently':
-            df.at[i, col] = 4
-        elif frecuencia == 'Sometimes':
-            df.at[i, col] = 3
-        elif frecuencia == 'Rarely':
-            df.at[i, col] = 2
-        elif frecuencia == 'Never':
-            df.at[i, col] = 1
-            
-    df[col] = pd.to_numeric(df[col], errors='coerce')        
+    df[col] = df[col].replace(dicc_frecuencia)
+    df[col] = df[col].astype(int)       
+    df[col] = pd.to_numeric(df[col], errors='coerce')   
 
-#Asignación de valores enteros a las columnas con datos booleanos (YES NO)
+#Asignación de valores enteros a las columnas con datos booleanos (YES = 1, NO = 0)
 
-rango1 = df.columns[4:7]
-rango2 = df.columns[8:10]
-datos_dicotomicos = list(rango1) + list(rango2)
+rango1 = df.columns[3:6]
+rango2 = df.columns[7:9]
+datos_dicotomicos = list(rango1) + list(rango2) 
 
 for col in datos_dicotomicos:
     print(f"Analizando columna: {col}")
-    for i in df.index:
-        frecuencia = df.at[i, col]
-        if frecuencia == 'Yes':
-            df.at[i, col] = 1
-        elif frecuencia == 'No':
-            df.at[i, col] = 0
-            
-    df[col] = pd.to_numeric(df[col], errors='coerce') 
+    moda_col = df[col].mode()[0]
+    df[col] = df[col].fillna(moda_col)
+    df[col] = df[col].replace({'Yes': 1, 'No': 0})
+    df[col] = df[col].astype(int)
+       
 
-#Para columna "Music Effects":
-for i in df.index:
-    music_efects = df.at[i, 'Music effects']
-    
-    if pd.isna(music_efects):
-        continue
-    
-    if music_efects == 'No effect':
-        df.at[i, 'Music effects'] = 0
-    elif music_efects == 'Improve':
-        df.at[i, 'Music effects'] = 1
-        
-    df['Music effects'] = pd.to_numeric(df['Music effects'], errors='coerce')
+#Para columna "Music Effects" (Improve = 1, No Effect = 0, Worsen = -1):
+
+moda_me = df['Music effects'].mode()[0]
+df['Music effects'] = df['Music effects'].fillna(moda_me)
+diccionario_efectos = {
+    'Improve': 1,
+    'No effect': 0,
+    'Worsen': -1
+}
+df['Music effects'] = df['Music effects'].replace(diccionario_efectos)
+df['Music effects'] = pd.to_numeric(df['Music effects'], errors='coerce')
+print(df['Music effects'].value_counts())
 
 
-#Para columna Género Favorito ("Fav Genre"). Como no hay datos faltantes, simplemente se calcula la moda
-
+#Para columna Género Favorito ("Fav Genre"). No tiene vacíos ni registros mal escritos. Únicamente cálculo de moda (Rock).
 moda_genre = df["Fav genre"].mode()
-print(moda_genre)
+
+#Para columna Servicio de Streaming Principal ("Primary streaming service"). Hay vacíos.
+
+primary_ss_moda = df["Primary streaming service"].mode()[0]    #Spotify
+df["Primary streaming service"] = df["Primary streaming service"].fillna(primary_ss_moda)
+
+#Las columnas de salud mental no presentan vacíos.
+
+df.to_csv('limpieza_final_python.csv', index=False)
+
+
+
+
+
+
+
+
 
 
 
