@@ -2,6 +2,7 @@
 #nstall.packages("janitor")
 library(janitor)
 library(tidyverse)
+library(readr)
 
 #Base de datos
 datos_musica <- read_csv("1. Musica.csv")
@@ -67,33 +68,79 @@ summary(datos_musica$bpm)
 #Verificando el resumen de escucha por día
 summary(datos_musica$hours_per_day)
 
+#Reemplazar valores fuera de rango (0-24) con NA
+datos_musica <- datos_musica |> 
+  mutate(hours_per_day = ifelse(hours_per_day > 24 | hours_per_day < 0, NA, 
+  hours_per_day))
+
+#Calculamos la mediana
+mediana_hours <- median(datos_musica$hours_per_day, na.rm = TRUE)
+
+#Rellenamos con la mediana en los huecos
+datos_musica <- datos_musica |> 
+  mutate(hours_per_day = ifelse(is.na(hours_per_day), mediana_hours, hours_per_day))
+
 #Verificando el rango de las escalas, que el mínimo sea 0 y el máximo 10
 datos_musica |> 
   select(anxiety, depression, insomnia, ocd) |> summary()
+
+# Vemos la estructura y el tipo de datos antes del cambio
+datos_musica |> 
+select(starts_with("frequency_")) |> 
+glimpse()
 
 #Verificando si las columnas de frequency tienen espacios vacíos
 datos_musica |> 
   summarise(across(starts_with("frequency_"), ~sum(is.na(.) | . == "" | . == " ")))
 
-#Definimos el orden lógico
-orden_logico <- c("Never", "Rarely", "Sometimes", "Frequently", "Very frequently")
-
-#Convertimos a factor ordenado
-datos_musica <- datos_musica |>
-  mutate(across(starts_with("frequency_"), ~factor(., levels = orden_logico, 
-                                                   ordered = TRUE)))
-#Verificamos correción
+#Identificar las columnas y le asignamos su nuevo valor 
+datos_musica <- datos_musica |> 
+  mutate(across(starts_with("frequency_"), 
+                ~ case_match(.,
+                             "Never" ~ 1,
+                             "Rarely" ~ 2,
+                             "Sometimes" ~ 3,
+                             "Very frequently" ~ 4,
+                             .default = NA_real_)))
+#Verificamos el cambio
 datos_musica |> 
-  select(starts_with("frequency_")) |> 
+  select(starts_with("frequency_")) %>% 
   glimpse()
+
+# Vemos la estructura y el tipo de dato
+str(datos_musica[c("while_working", "exploratory", "instrumentalist", "composer")])
+
+#Identificamos las columnas que tienen "Yes"/"No"
+columnas_si_no <- c("while_working", "instrumentalist", "composer", 
+                    "exploratory", "foreign_languages")
+
+# Convertimos Yes a 1 y No a 0
+datos_musica <- datos_musica |> 
+  mutate(across(c(while_working, instrumentalist, composer, 
+                  exploratory, foreign_languages),
+                ~ case_when(
+                  . == "Yes" ~ 1,
+                  . == "No" ~ 0,
+                  TRUE ~ NA_real_
+                )))
+
+#Verificamos el cambio
+str(datos_musica[c("while_working", "exploratory", "instrumentalist", "composer")])
+
+# Vemos la estructura y el tipo de dato antes del cambio
+table(datos_musica$music_effects)
+
+#Identificar las columnas y le asignamos su nuevo valor 
+datos_musica <- datos_musica |> 
+  mutate(music_effects = case_match(music_effects,
+                                    "Worsen" ~ -1,
+                                    "No effect" ~ 0,
+                                    "Improve" ~ 1,
+                                    .default = NA_real_))
+#Verificamos el cambio
+table(datos_musica$music_effects)
 
 #Guardamos los datos limpios
 write_csv(datos_musica, "datos_musica_limpios_FINAL.csv")
 dfclean <- read_csv("datos_musica_limpios_FINAL.csv")
 view(dfclean)
-
-orden_logico <- c("Never", "Rarely", "Sometimes", "Frequently", "Very frequently")
-datos_musica <- datos_musica |> mutate(across(starts_with("frequency_"), 
-~factor(., levels = orden_logico, ordered = TRUE)))
-glimpse(datos_musica |> select(frequency_rock))
-  write_csv(datos_musica, "datos_musica_limpios_FINAL.csv")
