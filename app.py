@@ -2,7 +2,11 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import plotly.express as px
+import matplotlib as mp
+import matplotlib.pyplot as plt
+import seaborn as sb
 import os
+
 
 # Configuracion de la pagina 
 st.set_page_config(page_title="Musica y Salud Mental", page_icon="🎵", layout="wide")
@@ -20,13 +24,7 @@ FILE_PATH = "datos_musica_limpios_FINAL.csv"
 def load_data(path):
     data = pd.read_csv(path)
     return data
-
-try:
-    df =load_data(FILE_PATH)
-    st.success(f"Datos cargados correctamente: **{df.shape[0]}** participantes y **{df.shape[1]}** columnas.")
-except Exception as e:
-    st.error(f"Error al cargar datos: {e}")
-    st.stop()
+df =load_data(FILE_PATH)
 
 # Filtros para la interactividad
 st.sidebar.header("Filtros de Interactividad")
@@ -89,26 +87,38 @@ selected_effect_values = [effect_map[text] for text in selected_effect_text]
 
 # Aplicacion de los filtros
 filtered_df = df[
-    (df['age'] >= age_min) & (df['age'] <= age_max) &
-    (df['primary_streaming_service'].isin(selected_streaming)) &
-    (df['fav_genre'].isin(selected_genres)) &
-    (df['hours_per_day'].between(hours_min, hours_max)) &
-    (df['music_effects'].isin(selected_effect_values))
+    (df["age"] >= age_min) & (df["age"] <= age_max) &
+    (df["primary_streaming_service"].isin(selected_streaming)) &
+    (df["fav_genre"].isin(selected_genres)) &
+    (df["hours_per_day"].between(hours_min, hours_max)) &
+    (df["music_effects"].isin(selected_effect_values))
 ]
 
 # Filtro adicional para "While Working" (Sí/No)
 if selected_while_working:
     while_map = {"Sí": 1, "No": 0}
     selected_values = [while_map[w] for w in selected_while_working]
-    filtered_df = filtered_df[filtered_df['while_working'].isin(selected_values)]
+    filtered_df = filtered_df[filtered_df["while_working"].isin(selected_values)]
+
+
+# Seccion desplegable para datos generales del estudio (visualizacion del dataset limpio y bonitico):
+with st.expander("Ver Datos filtrados", expanded=False):
+    # Solo se mostraran las primeros 14 filas 
+    preview = filtered_df.head(14)
+# Tabla
+    st.dataframe(
+        preview,
+        use_container_width=True,
+        hide_index=True
+    )
+
+    st.caption(f"Mostrando 15 de {len(filtered_df):,} registros • Total de columnas: {filtered_df.shape[1]}")
+
 
 
 # Tabs Principales
-st.markdown("---")
-
-tab_inicio, tab_datos, tab_salud, tab_habitos, tab_avanzado = st.tabs([
-    "🏠 Inicio y KPIs",
-    "📋 Datos Generales",
+tab_inicio, tab_salud, tab_habitos, tab_avanzado = st.tabs([
+    "🏠 Inicio",
     "🧠 Salud Mental",
     "🎵 Hábitos Musicales",
     "📊 Análisis Avanzado"
@@ -116,18 +126,18 @@ tab_inicio, tab_datos, tab_salud, tab_habitos, tab_avanzado = st.tabs([
 
 # tab_inicio:
 with tab_inicio:
-    st.subheader("KPIs principales del estudio")                          
+    st.subheader("Metricas Principales")                          
 
     # Creacion de columnas
     col1, col2, col3 = st.columns(3)
 
-    with col1:
+    with col1.container(border=True):
         st.metric(
             label="Total de Participantes.",
             value=len(filtered_df)
         )
 
-    with col2:
+    with col2.container(border=True):
         improve_pct = (filtered_df["music_effects"] == 1).mean() * 100
         st.metric(
             label="% que dice que la música mejora",
@@ -135,7 +145,7 @@ with tab_inicio:
             help="Porcentaje de participantes que perciben mejora en su bienestar con la música"
         )
     
-    with col3:
+    with col3.container(border=True):
         score_promedio = filtered_df[['anxiety', 'depression', 'insomnia', 'ocd']].mean(axis=1).mean()
         st.metric(
             label="Promedio General de Salud Mental",
@@ -145,55 +155,36 @@ with tab_inicio:
 
     st.markdown("---")
 
-#tab_datos
-with tab_datos:
-    st.subheader("Estructura y características del conjunto de datos")
+# tab_salud
+with tab_salud:
+    st.subheader("Distribucion de Indicadores de Salud Mental")
+
+cols_salud = ["anxiety", "depression", "insomnia", "ocd"]
+# Columnas para ver el cuadro a un lado y el grafico al otro.
+col_grafico, col_tabla = st.columns([3, 2])
+
+with col_tabla:
+    st.write("Medidas de tendencia central y dispersión:")
+    stats = filtered_df[cols_salud].describe().round(2)
+    # Cambiar los nombres de la tabla de ingles a español.
+    stats = stats.rename(index={
+        "count": "Cantidad",
+        "mean": "Media",
+        "std": "Desviación Estándar",
+        "min": "Mínimo",
+        "25%": "Percentil 25",
+        "50%": "Mediana",
+        "75%": "Percentil 75",
+        "max": "Máximo"
+    })
+    st.dataframe(stats, use_container_width=True)
     
-    # Información básica
-    st.markdown(f"""
-    **Dimensiones actuales:** {filtered_df.shape[0]:,} filas (participantes) × {filtered_df.shape[1]} columnas
-    """)
-    
-    st.metric("Número total de participantes", f"{len(filtered_df):,}")
 
-    st.markdown("---")
 
-    # Resumen por categorias
-    st.write("**Clasificación de las variables del dataset:**")
 
-    col1, col2, col3 = st.columns(3)
 
-    with col1:
-        st.markdown("**📋 Datos Demográficos y Generales**")
-        st.write("• age")
-        st.write("• primary_streaming_service")
-        st.write("• instrumentalist")
-        st.write("• composer")
-        st.write("• foreign_languages")
 
-    with col2:
-        st.markdown("**🎵 Hábitos y Preferencias Musicales**")
-        st.write("• fav_genre")
-        st.write("• hours_per_day")
-        st.write("• bpm")
-        st.write("• while_working")
-        st.write("• music_effects")
-        st.write("• frequency_... (12 géneros musicales)")
 
-    with col3:
-        st.markdown("**🧠 Indicadores de Salud Mental**")
-        st.write("• anxiety")
-        st.write("• depression")
-        st.write("• insomnia")
-        st.write("• ocd")
 
-    st.markdown("---")
 
-    # Tabla completa de columnas (opcional, pero útil)
-    st.write("**Lista completa de columnas:**")
-    columnas_df = pd.DataFrame({"Nombre de la columna": df.columns.tolist()})
-    st.dataframe(columnas_df, use_container_width=True, hide_index=True)
 
-    st.caption(f"Total de columnas: **{len(df.columns)}**")
-
-    st.markdown("---")
