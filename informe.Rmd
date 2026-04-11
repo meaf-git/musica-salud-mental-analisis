@@ -205,11 +205,23 @@ view(dfclean)
 
 \chapter*{Introducción}
 
-Introducción del trabajo de investigación
+\begin{flushright}
+\textit{“La música no es, como todas las otras artes, una representación de las ideas o grados de la objetivación de la voluntad, sino la expresión directa de la voluntad misma; lo cual explica su acción inmediata sobre la voluntad, es decir, sobre los sentimientos, las pasiones y las emociones del oyente, de modo que rápidamente los exalta o los modifica”} \\
+\medskip
+Schopenhauer, 2005, pág. 177
+\end{flushright}
+
+   La música es una manifestación cultural inherente a la condición humana, presente en todas las civilizaciones y épocas históricas. Además de su valor recreativo, diversos estudios contemporáneos han demostrado que la música posee una capacidad única para influir en la química del cerebro. Según Daniel Levitin (neurocientífico y músico): “la música actúa sobre los sistemas neuroquímicos que regulan el estrés y el placer, afectando así directamente en las emociones y el comportamiento humano”.
+   
+Al interactuar con el sistema límbico, la música no solo genera placer, sino que actúa como un regulador del estado de ánimo, capaz de modular la liberación de neurotransmisores claves. De igual forma, se ha documentado que ciertas frecuencias y ritmos musicales, facilitan la reducción de los niveles de cortisol, la principal hormona esteroide del estrés, impactando positivamente en el manejo del mismo y la ansiedad clínica.
+
+Bajo estos precedentes, el presente trabajo se propone describir cuantitativamente la intersección entre la experiencia musical y la salud mental de los participantes. El objetivo central es investigar, mediante técnicas de estadística descriptiva, cómo variables específicas, tales como: el género musical favorito, las pulsaciones por minuto (BPM) y los hábitos de consumo (tiempo de exposición), influyen en indicadores de salud mental, como: la ansiedad, la depresión, y el insomnio, en la muestra estudiada.
+
+
 
 \chapter{Planteamiento del Problema}
 
-Según la Organización Mundial de la Salud (OMS), “La salud mental es un estado de bienestar mental que permite a las personas hacer frente a los momentos de estrés de la vida, desarrollar todo su potencial, aprender y trabajar adecuadamente y contribuir a su comunidad”. Sin embargo, durante los últimos años, diversos estudios han reportado un incremento significativo en los trastornos relacionados con la salud mental, como trastornos de ansiedad, del estado de ánimo, de la personalidad, entre otros; especialmente entre adolescentes y adultos jóvenes. Este incremento es debido a factores como: la pandemia de COVID-19, el aislamiento social y las presiones económicas, según la Organización Panamericana de Salud (OPS). En este contexto, se ha incrementado el interés por analizar los factores cotidianos que pueden influir en la salud mental. Uno de los más relevantes es el consumo de música, actividad que forma parte de la vida diaria de millones de personas, y que puede cumplir diferentes funciones emocionales, cognitivas y sociales. Con este proyecto, se busca establecer relaciones acerca de cómo, la forma en que los hábitos de escucha musical (el tiempo dedicado a escuchar música, los géneros preferidos o la frecuencia de consumo), pueden relacionarse con indicadores de salud mental, como la ansiedad, la depresión, el insomnio o los comportamientos compulsivos; esto mediante la realización de un análisis estadístico de la correlación entre los hábitos de consumo musical y variables asociadas a la salud mental.\
+   Según la Organización Mundial de la Salud (OMS), “La salud mental es un estado de bienestar mental que permite a las personas hacer frente a los momentos de estrés de la vida, desarrollar todo su potencial, aprender y trabajar adecuadamente y contribuir a su comunidad”. Sin embargo, durante los últimos años, diversos estudios han reportado un incremento significativo en los trastornos relacionados con la salud mental, como trastornos de ansiedad, del estado de ánimo, de la personalidad, entre otros; especialmente entre adolescentes y adultos jóvenes. Este incremento se debe a factores como: la pandemia de COVID-19, el aislamiento social y las presiones económicas, según la Organización Panamericana de Salud (OPS). En este contexto, se ha incrementado el interés por analizar los factores cotidianos que pueden influir en la salud mental. Uno de los más relevantes es el consumo de música, actividad que forma parte de la vida diaria de millones de personas, y que puede cumplir diferentes funciones emocionales, cognitivas y sociales. Con este proyecto, se busca establecer relaciones acerca de cómo, la forma en que los hábitos de escucha musical (el tiempo dedicado a escuchar música, los géneros preferidos o la frecuencia de consumo), pueden relacionarse con indicadores de salud mental, como la ansiedad, la depresión, el insomnio o los comportamientos compulsivos; esto mediante la realización de un análisis estadístico de la evaluación entre los hábitos de consumo musical y variables asociadas a la salud mental.\
 
 Debido a esto, se plantea las siguientes preguntas de investigación:\
 
@@ -218,7 +230,7 @@ Debido a esto, se plantea las siguientes preguntas de investigación:\
 
 \textbf{2.}¿Cómo se distribuye la percepción del efecto de la música sobre el estado emocional en función de si los participantes escuchan música mientras trabajan o estudian?\
 
-\textbf{3.}¿Qué relación existe entre la diversidad de géneros musicales escuchados por los participantes) y sus niveles de bienestar emocional?\
+\textbf{3.}¿Qué relación existe entre la diversidad de géneros musicales escuchados por los participantes y sus niveles de bienestar emocional?\
 
 
 \section{Justificación}
@@ -230,18 +242,18 @@ Desde una perspectiva académica y científica, resulta significativo analizar e
  
 \subsection{Objetivo General}
 \begin{itemize}
-  \item{Describir y analizar la correlación entre los hábitos de consumo musical y diferentes indicadores de salud mental mediante el uso de técnicas de análisis estadístico.}
+  \item{Describir y analizar la evaluación entre los hábitos de consumo musical y diferentes indicadores de salud mental mediante el uso de técnicas de análisis estadístico.}
 \end{itemize}
 
 \subsection{Objetivos Específicos}
 \begin{itemize}
-  \item{Describir la estructura y características del conjunto de datos relacionado con hábitos musicales y variables de salud mental.}
-  \item{Describir la distribución de los indicadores de salud mental mediante medidas de tendencia central y dispersion para identificar el perfil general de salud mental de los participantes.}
-  \item{Comparar la distribucion de los indicadores de salud mental preferido utilizando herramientas graficas como diagramas de caja.}
-  \item{Analizar la relación entre el ritmo musical y el nivel de insomnio. Realizar un diagrama de dispersión para observar si ritmos más acelerados tienen una relación con la dificultad par dormir.}
-  \item{Describir la distribución de la percepción del "Music Effect" (mejora, empeora, nulo) según si los participantes escuchan música mientras trabajan.}
-  \item{Comparar la distribución de edades de la muestra con sus niveles de salud mental reportados.}
-  \item{Explorar la asociación entre la diversidad de generos musicales eschudaos y los niveles de bienestar emocional mediante herramientas de estadística descriptiva.}
+  \item{Describir la estructura y características del conjunto de datos relacionados con hábitos musicales y variables de salud mental.}
+  \item{Describir la distribución de los indicadores de salud mental mediante medidas de tendencia central y dispersión para identificar el perfil general de salud mental de los participantes.}
+  \item{Comparar la distribución de los indicadores de salud mental, utilizando herramientas gráficas como diagramas de caja.}
+  \item{Analizar la evaluación entre el ritmo musical (BPM) y el nivel de insomnio declarado, empleando diagramas de dispersión, para evaluar la existencia de una relación entre ritmos acelerados y dificultades del sueño.}
+  \item{Describir la relación entre el uso de la música en el trabajo y la percepción de su impacto (Mejora, Empeora, Nulo) en el bienestar de los participantes.}
+  \item{Comparar la distribución de edades de la muestra con los niveles de salud mental reportados.}
+  \item{Explorar la asociación entre la diversidad de géneros musicales escuchados y los niveles de bienestar emocional mediante herramientas de estadística descriptiva.}
 \end{itemize}
 
 
