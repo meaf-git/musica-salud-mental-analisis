@@ -189,7 +189,7 @@ with tab_salud:
     y=["anxiety", "depression", "insomnia", "ocd"],
     title="Distribución de los Indicadores de Salud Mental - Diagramas de Caja",
     labels={"variable": "Indicador", "value": "Puntuación (0-10)"},
-    color_discrete_sequence=["#3F82A3"]
+    color_discrete_sequence=["#E3D0EA"]
     )
 
     fig_box.update_layout(
@@ -252,7 +252,7 @@ with tab_habitos:
     st.caption("Analizar si ritmos más acelerados tienen relación con la dificultad para dormir.")
 
     # Grafico de dispersion intereactivo
-    col1, col_central, col3 = st.columns([1, 8, 1])
+    _, col_central, _= st.columns([1, 8, 1])
 
     with col_central:
         fig = px.scatter(
@@ -265,15 +265,43 @@ with tab_habitos:
                 "insomnia": "Nivel de Insomnio (0-10)"
             },
             opacity=0.8,
-            color_discrete_sequence=["#3F82A3"],
+            color_discrete_sequence=["#A33F76"],
             hover_data=["age", "fav_genre", "hours_per_day"]
         )
         fig.update_layout(
         title_font_size=22  ,
-        title_font_color="#824D69",
+        title_font_color="#884572",
         height=500,
     )
         st.plotly_chart(fig, use_container_width=True)
 
     st.divider()
     
+    # Tabla cruzada
+    tabla = pd.crosstab(
+        filtered_df['while_working'], 
+        filtered_df['music_effects']
+    )
+    # diccionarios de mapeo
+    map_filas = {0: "No escucha mientras trabaja", 1: "Si escucha mientras trabaja"}
+    map_cols = {-1: "Empeora", 0: "Nulo", 1: "Mejora"}
+
+    # Renombramos
+    tabla = tabla.rename(index=map_filas, columns=map_cols)
+    fig_bar = px.bar(
+        tabla,
+        title="Impacto de la Música al trabajar",
+        labels={"index": "Escucha música mientras trabaja", "value": "Cantidad de personas"},
+        color_discrete_sequence=["#DC91AE","#B06D84", "#588F46"],
+        text_auto=True
+    )
+    fig_bar.update_layout(
+        title_font_size=22  ,
+        title_font_color="#2F7A35",
+        height=500,
+        xaxis_title="¿Escucha música mientras trabaja?",
+        yaxis_title="Cantidad de personas",
+        legend_title="Efecto de la música",
+        barmode='group'
+    )
+    st.plotly_chart(fig_bar, use_container_width=True)
