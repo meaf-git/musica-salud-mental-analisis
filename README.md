@@ -11,7 +11,7 @@ Describir y analizar la correlación entre los hábitos de consumo musical y dif
 1.	Describir la estructura y características del conjunto de datos relacionado con hábitos musicales y variables de salud mental.
 2.	Describir la distribución de los indicadores de salud mental mediante medidas de tendencia central y dispersion para identificar el perfil general de salud mental de los participantes.
 3.	Comparar la distribución de los indicadores de salud mental, utilizando herramientas gráficas como diagramas de caja.
-4.	Analizar la correlación entre el ritmo musical (BPM) y el nivel de insomnio declarado, empleando diagramas de dispersión, para evaluar la existencia de una relación entre ritmos acelerados y dificultades del sueño.
+4.	Evaluar la asociación entre el ritmo musical (BPM) y el nivel general de afección mental declarado, para evaluar la existencia de una relación entre ritmos acelerados y complicaciones de salud mental.
 5.	Describir la relación entre el uso de música en el trabajo y la percepción de su impacto (Mejora, Empeora, Nulo) en el bienestar de los participantes.
 6.	Comparar la distribución de edades de la muestra con los niveles de salud mental reportados. 
 7.	Explorar la asociación entre la diversidad de generos musicales escuchados y los niveles de bienestar emocional mediante herramientas de estadística descriptiva.
