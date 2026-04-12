@@ -275,6 +275,10 @@ Desde una perspectiva académica y científica, resulta significativo analizar e
 \end{itemize}
 
 
+\section{Periodo de Referencia}
+
+
+
 \section{Variables}
 
 La variable principal en estudio (Variable Dependiente/Objetivo) es el Nivel de Salud Mental, que representa el estado de bienestar psicológico del individuo. Esta se mide a través de una escala cuantitativa de 0 a 10, donde 0 indica ausencia total de síntomas y 10 representa la severidad máxima.\
@@ -307,6 +311,9 @@ Cuantitativa & Diversidad & Cantidad o variedad de géneros musicales escuchados
 \end{table}
 
 \chapter{Marco Teórico}
+
+
+$$Total_{Salud} = \sum_{i=1}^{n} (Anxiety + Depression + Insomnia + OCD)$$
 
 
 \section{Bases Teóricas}
