@@ -305,3 +305,47 @@ with tab_habitos:
         barmode='group'
     )
     st.plotly_chart(fig_bar, use_container_width=True)
+    
+    st.divider()
+    
+    # Horas de musica al dia vs Insomnio
+    filtered_df["hours_range"] = pd.cut(
+    filtered_df["hours_per_day"],
+    bins=[0, 1, 3, 5, 8, 24],
+    labels=["0-1h", "1-3h", "3-5h", "5-8h", "Más de 8h"]
+    )
+    
+    # Grafico de violin.
+    fig_violin_hours = px.violin(
+    filtered_df,
+    x="hours_range",
+    y="insomnia",
+    title="Insomnio según Horas de Música al Día",
+    box=True,
+    points="outliers",
+    color_discrete_sequence=["#9D5694"]
+    )
+    
+    fig_violin_hours.update_layout(height=550)
+    st.plotly_chart(fig_violin_hours, use_container_width=True)
+    
+    # Metricas en dos filas
+    m1, m2 = st.columns(2)
+    m3, m4 = st.columns(2)
+
+    with m1.container(border=True):
+        st.metric(" BPM Promedio", f"{filtered_df['bpm'].mean():.0f}")
+
+    with m2.container(border=True):
+        st.metric("Horas de música al día", f"{filtered_df['hours_per_day'].mean():.1f} h")
+
+    with m3.container(border=True):
+        pct = (filtered_df['while_working'] == 1).mean() * 100
+        st.metric(" Escucha música mientras trabaja", f"{pct:.1f}%")
+
+    with m4.container(border=True):
+        genre_cols = [col for col in filtered_df.columns if col.startswith('frequency_')]
+        if genre_cols:
+            avg_genres = (filtered_df[genre_cols] >= 3).sum(axis=1).mean()
+            st.metric(" Géneros escuchados frecuentemente", f"{avg_genres:.1f}")
+
