@@ -142,6 +142,16 @@ df["Primary streaming service"] = df["Primary streaming service"].fillna(primary
 
 #Las columnas de salud mental no presentan vacíos.
 
+#Creación de columna adicional: suma de los indicadores de salud mental y división por rangos
+indicadores = ["Anxiety", "Depression", "Insomnia", "OCD"]
+df['Total_Salud'] = df[indicadores].sum(axis=1)
+
+# Rangos = 0-13: Buena (1), 14-26: Regular (0), 27-40: Crítica (-1)
+bins = [-1, 13, 26, 40]
+labels = ['1', '0', '-1']
+df['Rango_Salud'] = pd.cut(df['Total_Salud'], bins=bins, labels=labels)
+
+# Exportación en csv
 df.to_csv('limpieza_final_python.csv', index=False)
 
 
