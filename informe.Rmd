@@ -194,6 +194,24 @@ datos_musica <- datos_musica |>
 #Verificamos el cambio
 table(datos_musica$music_effects)
 
+#Definimos los indicadores
+indicadores <- c("anxiety", "depression", "insomnia", "ocd")
+
+#Hacemos la suma por fila
+datos_musica$total_salud <- rowSums(datos_musica[, indicadores], na.rm = TRUE)
+
+#Ahora creamos el rango 
+datos_musica$rango_salud <- cut(datos_musica$total_salud, 
+                                breaks = c(-Inf, 13, 26, 40), 
+                                labels = c(1, 0, -1))
+
+#Lo convertimos a número
+datos_musica$rango_salud <- as.numeric(as.character(datos_musica$rango_salud))
+
+#Verificamos el cambio
+table(datos_musica$rango_salud)
+summary(datos_musica$total_salud)
+
 #Guardamos los datos limpios
 write_csv(datos_musica, "datos_musica_limpios_FINAL.csv")
 dfclean <- read_csv("datos_musica_limpios_FINAL.csv")
@@ -250,7 +268,7 @@ Desde una perspectiva académica y científica, resulta significativo analizar e
   \item{Describir la estructura y características del conjunto de datos relacionados con hábitos musicales y variables de salud mental.}
   \item{Describir la distribución de los indicadores de salud mental mediante medidas de tendencia central y dispersión para identificar el perfil general de salud mental de los participantes.}
   \item{Comparar la distribución de los indicadores de salud mental, utilizando herramientas gráficas como diagramas de caja.}
-  \item{Analizar la evaluación entre el ritmo musical (BPM) y el nivel de insomnio declarado, empleando diagramas de dispersión, para evaluar la existencia de una relación entre ritmos acelerados y dificultades del sueño.}
+  \item{Evaluar la asociación entre el ritmo musical (BPM) y el nivel general de afección mental declarado, para evaluar la existencia de una relación entre ritmos acelerados y complicaciones de salud mental.}
   \item{Describir la relación entre el uso de la música en el trabajo y la percepción de su impacto (Mejora, Empeora, Nulo) en el bienestar de los participantes.}
   \item{Comparar la distribución de edades de la muestra con los niveles de salud mental reportados.}
   \item{Explorar la asociación entre la diversidad de géneros musicales escuchados y los niveles de bienestar emocional mediante herramientas de estadística descriptiva.}
