@@ -277,7 +277,7 @@ Desde una perspectiva académica y científica, resulta significativo analizar e
 
 \section{Periodo de Referencia}
 
-
+La población objeto de estudio está conformada por individuos que participaron en una encuesta relacionada con hábitos musicales y salud mental. Dicha encuesta estuvo disponible entre el 27 de julio de 2022 y el 8 de noviembre del mismo año, a nivel mundial. La muestra utilizada corresponde a, aproximadamente, 700 registros (736 observaciones), los cuales contienen información sobre: variables demográficas, hábitos de consumo musical y condiciones relacionadas con la salud mental de los encuestados.\
 
 \section{Variables}
 
