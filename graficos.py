@@ -1,4 +1,4 @@
-##
+#
 import pandas as pd
 import numpy as np
 import matplotlib as mp
@@ -48,20 +48,44 @@ plt.xlabel('Indicadores', fontsize=12)
 plt.savefig("graficos_img/boxplot_mental.png")
 plt.show()
 
-# Objetivo 4: relación entre BPM e Insomnio 
-# Cálculo de Coeficiente de Correlación de Pearson:
-correlacion = df['BPM'].corr(df['Insomnia'])
-print("Coeficiente de correlación:", correlacion)
+# Objetivo 4: relación entre BPM y perfil general de Salud mental
+# Gráfico de embudo 
 
-plt.figure(figsize=(9, 5))
-plt.scatter(df['BPM'], df['Insomnia'], alpha=0.5, color="violet")
-m, b = np.polyfit(df['BPM'], df['Insomnia'], 1)
-plt.plot(df['BPM'], m*df['BPM'] + b, color="blue", label=f"Tendencia (r={correlacion:.2f})")
-plt.title("Relación entre Ritmo Musical (BPM) e Insomnio")
-plt.xlabel("BPM")
-plt.ylabel("Nivel de Insomnio")
-plt.legend()
-plt.savefig("graficos_img/dispersion_bpm.png")
+df['Rango_Salud'] = pd.to_numeric(df['Rango_Salud'], errors='coerce')
+orden = [1, 0, -1]
+df_resumen = df.groupby('Rango_Salud')['BPM'].mean().reindex(orden).reset_index()
+
+plt.figure(figsize=(12, 7), facecolor='#f8f9fa') 
+colores = ["#8DF58D", "#FFFF7A", "#E4160C"] 
+
+max_bpm = df_resumen['BPM'].max()
+left_margin = (max_bpm - df_resumen['BPM']) / 2
+
+barras = plt.barh(range(len(df_resumen)), df_resumen['BPM'], 
+                  left=left_margin, color=colores, 
+                  height=0.7, edgecolor='white', linewidth=2)
+
+
+for i, valor in enumerate(df_resumen['BPM']):
+    if not pd.isna(valor):
+        plt.text(max_bpm/2, i, f"{valor:.2f} BPM", 
+                 va='center', ha='center', fontsize=12, 
+                 color="#1D1D1D")
+
+plt.yticks(range(len(df_resumen)), ['Buena (1)', 'Regular (0)', 'Alarmante (-1)'], 
+           fontsize=11, color='#333333')
+
+plt.title("BPM Promedio según Estado General de Salud Mental", 
+          fontsize=16, pad=30, fontweight="bold", color='#2C3E50')
+
+plt.gca().spines['top'].set_visible(False)
+plt.gca().spines['right'].set_visible(False)
+plt.gca().spines['left'].set_visible(False)
+plt.gca().spines['bottom'].set_visible(False)
+plt.xticks([]) 
+
+plt.gca().invert_yaxis() 
+plt.savefig("graficos_img/embudo_bpm.png", dpi=300, bbox_inches='tight', facecolor='#f8f9fa')
 plt.show()
 
 #Objetivo 5: relación entre Music Effect y While working
@@ -80,10 +104,10 @@ plt.savefig("graficos_img/barras_trabajo.png")
 plt.show()
 
 # Objetivo 6: comparación de salud mental por edad de los participantes
-# Correlación entre edad y salud mental 
+# Correlación entre edad, salud mental y BPM (variables numéricas)
 plt.figure(figsize=(8, 6))
-sb.heatmap(df[['Age', 'Anxiety', 'Depression', "OCD", "Insomnia"]].corr(), annot=True, cmap="magma")
-plt.title("Correlación: Edad vs Salud Mental")
+sb.heatmap(df[['Age', 'Anxiety', 'Depression', "OCD", "Insomnia", "BPM"]].corr(), annot=True, cmap="magma")
+plt.title("Correlación: Variables Numéricas")
 plt.savefig("graficos_img/heatmap_correlacion.png")
 plt.show()
 
