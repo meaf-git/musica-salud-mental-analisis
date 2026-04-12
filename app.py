@@ -7,14 +7,18 @@ import matplotlib.pyplot as plt
 import seaborn as sb
 
 
-
 # Configuracion de la pagina 
 st.set_page_config(page_title="Musica y Salud Mental", page_icon="🎵", layout="wide")
 
 # Titulo y descripcion de la app
-st.title("Análisis estadístico de la Correlación entre Hábitos Auditivos y Perfiles de Salud Mental.")
-st.write("Visualizacion entre los hábitos de consumo musical y diferentes indicadores de salud mental mediante el uso de técnicas de análisis estadístico.")
+col_titulo, col_imagen = st.columns([8, 1])
+with col_titulo:
+    st.header("Análisis estadístico de la Correlación entre Hábitos Auditivos y Perfiles de Salud Mental.")
+    st.write("Visualizacion entre los hábitos de consumo musical y diferentes indicadores de salud mental mediante el uso de técnicas de análisis estadístico.")
+with col_imagen:
+    st.image("assets/63 sin título_20260411224059.png", width=200)
 st.markdown("---")
+
 
 # Carga de Datos
 
@@ -28,10 +32,10 @@ df =load_data(FILE_PATH)
 
 # Filtros para la interactividad
 # Columnas para mover el titulo a un lado y la imagen a otro
-col_tit, col_gif = st.sidebar.columns([3, 1])
+col_tit, col_image = st.sidebar.columns([3, 1])
 with col_tit:
     st.header("Filtros de Interactividad")
-with col_gif:
+with col_image:
     st.image("assets/63 sin título_20260411153136.png", width=100)
 
 # Rango de edad
@@ -176,6 +180,15 @@ with tab_inicio:
     with col_c:
         with st.container(border=True):
             st.markdown(f"**⏰ Promedio de Escucha**\n\n{avg_hours:.1f} horas/día")
+st.markdown("""
+---
+> “La música no es, como todas las otras artes, una representación de las ideas o grados de la objetivación de la voluntad, sino la **expresión directa de la voluntad misma**; 
+>
+> lo cual explica su acción inmediata sobre la voluntad, es decir, sobre los sentimientos, las pasiones y las emociones del oyente, de modo que rápidamente los exalta o los modifica.”
+>
+> — **Schopenhauer, A. (2005).** *El mundo como voluntad y representación (Vol. 1).*
+---
+""")
 
 # tab_salud
 with tab_salud:
@@ -189,7 +202,7 @@ with tab_salud:
     y=["anxiety", "depression", "insomnia", "ocd"],
     title="Distribución de los Indicadores de Salud Mental - Diagramas de Caja",
     labels={"variable": "Indicador", "value": "Puntuación (0-10)"},
-    color_discrete_sequence=["#E3D0EA"]
+    color_discrete_sequence=["#236A24"]
     )
 
     fig_box.update_layout(
@@ -239,7 +252,7 @@ with tab_salud:
             if col == opcion:                    
                 fig, ax = plt.subplots(figsize=(8, 5))
 
-                sb.histplot(df[col], bins=11, kde=True, color="orchid", ax=ax) 
+                sb.histplot(filtered_df[col], bins=11, kde=True, color="orchid", ax=ax) 
                 plt.title(f"Análisis de {col}")
                 plt.xlim(0, 10)
     
@@ -348,4 +361,81 @@ with tab_habitos:
         if genre_cols:
             avg_genres = (filtered_df[genre_cols] >= 3).sum(axis=1).mean()
             st.metric(" Géneros escuchados frecuentemente", f"{avg_genres:.1f}")
+
+#tab_avanzado
+with tab_avanzado:
+    st.subheader("Analisis Avanzado")
+    st.caption("Correlaciones y asociaciones entre la musica y la salud mental")
+    
+    # Heatmap
+    st.write("Correlaciones entre variables")
+    cols_interes = ["anxiety", "depression", "insomnia", "ocd", "bpm", 
+                    "hours_per_day", "age"]
+    corr_matrix = filtered_df[cols_interes].corr()
+    custom_colors = [
+    "#3A1C36",   
+    "#9B71B2",
+    "#E3D0EA", 
+    "#A56495"  
+    ]
+    
+    fig_heatmap = px.imshow(
+        corr_matrix,
+        text_auto=True,
+        color_continuous_scale=custom_colors,
+        title="Matriz de Correlaciones"
+    )
+    fig_heatmap.update_layout(height=600, title_font_size=20)
+    st.plotly_chart(fig_heatmap, use_container_width=True)
+    
+    with st.popover("¿Qué significa esto?"):
+        st.markdown("### Guía Rápida")
+        st.info("Los valores cercanos a **1** indican una relación fuerte, mientras que los cercanos a **0** indican que no hay relación clara.")
+        st.write("En este gráfico, los tonos más claros representan las conexiones más importantes entre variables.")
+
+    
+    # Graficos de dispersion
+    # filtrado necesario para los graficos
+    filtered_df["mental_health_score"] = filtered_df[["anxiety", "depression", "insomnia", "ocd"]].mean(axis=1)
+
+
+# Grafico de dispersion horas de música por día vs Salud Mental
+    fig1 = px.scatter(
+            filtered_df,
+            x="hours_per_day",
+            y="mental_health_score",
+            title="Horas de música por día vs Salud Mental",
+            trendline="ols",
+            color_discrete_sequence=["#9D567C"]
+        )
+    fig1.update_layout(height=480)
+    st.plotly_chart(fig1, use_container_width=True)
+
+# Grafico de dispersion para edad vs salud mental
+    fig2 = px.scatter(
+        filtered_df,
+        x="age",
+        y="mental_health_score",
+        title="Edad vs Puntaje General de Salud Mental",
+        labels={"age": "Edad", "mental_health_score": "Puntaje de Salud Mental (0-10)"},
+        opacity=0.7,
+        trendline="ols",
+        color_discrete_sequence=["#3D6C2F"]
+    )
+    fig2.update_layout(height=520)
+    st.plotly_chart(fig2, use_container_width=True)
+
+# Grafico de dispersion ritmo musical vs salud mental
+    fig3 = px.scatter(
+            filtered_df,
+            x="bpm",
+            y="mental_health_score",
+            title="Ritmo musical (BPM) vs Salud Mental",
+            trendline="ols",
+            color_discrete_sequence=["#9866B9"]
+        )
+    fig3.update_layout(height=480)
+    st.plotly_chart(fig3, use_container_width=True)
+
+
 
