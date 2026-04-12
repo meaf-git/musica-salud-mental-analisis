@@ -87,21 +87,27 @@ plt.title("Correlación: Edad vs Salud Mental")
 plt.savefig("graficos_img/heatmap_correlacion.png")
 plt.show()
 
-#Objetivo 7: exploración entre top 5 géneros musicales y niveles de bienestar emocional (tabla)
-
+# Objetivo 7: exploración entre top 5 géneros (estadística descriptiva)
 top_5 = df['Fav genre'].value_counts().nlargest(5).index
 df_top5 = df[df['Fav genre'].isin(top_5)]
 
 indicadores = ["Anxiety", "Depression", "OCD", "Insomnia"]
 tabla = df_top5.groupby('Fav genre')[indicadores].agg(['mean', 'var']).round(2)
 
-fig, ax = plt.subplots(figsize=(10, 5))
+fig, ax = plt.subplots(figsize=(14, 6)) 
 ax.axis('off')
-res_tabla = ax.table(cellText=tabla.values, colLabels=[f"{c[0]} ({'x̄' if c[1]=='mean' else 'S²'})" for c in tabla.columns], 
-                     rowLabels=tabla.index, loc='center', cellLoc='center')
-res_tabla.scale(1, 2)
-plt.title("Estadísticos Descriptivos - Top 5 Géneros: Media (x̄) y Varianza (S²)", pad=20, weight='bold')
-plt.savefig("graficos_img/tabla_top5.png")
+
+res_tabla = ax.table(cellText=tabla.values, 
+                     colLabels=[f"{c[0]} ({'x̄' if c[1]=='mean' else 'S²'})" for c in tabla.columns], 
+                     rowLabels=tabla.index, 
+                     loc='center', 
+                     cellLoc='center')
+
+res_tabla.auto_set_font_size(False)
+res_tabla.set_fontsize(10) 
+res_tabla.scale(1, 2.5) 
+plt.title("Estadísticos Descriptivos (Top 5 Géneros): Media (x̄) y Varianza (S²)", pad=30, weight='bold')
+plt.savefig("graficos_img/tabla_top5.png", dpi=300, bbox_inches='tight')
 plt.show()
 
 
