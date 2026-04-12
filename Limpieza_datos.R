@@ -140,7 +140,26 @@ datos_musica <- datos_musica |>
 #Verificamos el cambio
 table(datos_musica$music_effects)
 
+#Definimos los indicadores
+indicadores <- c("anxiety", "depression", "insomnia", "ocd")
+
+#Hacemos la suma por fila
+datos_musica$total_salud <- rowSums(datos_musica[, indicadores], na.rm = TRUE)
+
+#Ahora creamos el rango 
+datos_musica$rango_salud <- cut(datos_musica$total_salud, 
+                                breaks = c(-Inf, 13, 26, 40), 
+                                labels = c(1, 0, -1))
+
+#Lo convertimos a número
+datos_musica$rango_salud <- as.numeric(as.character(datos_musica$rango_salud))
+
+#Verificamos el cambio
+table(datos_musica$rango_salud)
+summary(datos_musica$total_salud)
+
 #Guardamos los datos limpios
 write_csv(datos_musica, "datos_musica_limpios_FINAL.csv")
 dfclean <- read_csv("datos_musica_limpios_FINAL.csv")
 view(dfclean)
+
