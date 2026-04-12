@@ -5,7 +5,7 @@ import plotly.express as px
 import matplotlib as mp
 import matplotlib.pyplot as plt
 import seaborn as sb
-import os
+
 
 
 # Configuracion de la pagina 
@@ -27,14 +27,19 @@ def load_data(path):
 df =load_data(FILE_PATH)
 
 # Filtros para la interactividad
-st.sidebar.header("Filtros de Interactividad")
+# Columnas para mover el titulo a un lado y la imagen a otro
+col_tit, col_gif = st.sidebar.columns([3, 1])
+with col_tit:
+    st.header("Filtros de Interactividad")
+with col_gif:
+    st.image("assets/63 sin título_20260411153136.png", width=100)
 
 # Rango de edad
 age_min, age_max = st.sidebar.slider(
     "Edad", 
-    int(df['age'].min()), 
-    int(df['age'].max()), 
-    (int(df['age'].min()), int(df['age'].max()))
+    int(df["age"].min()), 
+    int(df["age"].max()), 
+    (int(df["age"].min()), int(df["age"].max()))
 )
 
 # Servicio de streaming
@@ -94,7 +99,7 @@ filtered_df = df[
     (df["music_effects"].isin(selected_effect_values))
 ]
 
-# Filtro adicional para "While Working" (Sí/No)
+# Filtro para "While Working" (Si/No)
 if selected_while_working:
     while_map = {"Sí": 1, "No": 0}
     selected_values = [while_map[w] for w in selected_while_working]
@@ -146,45 +151,129 @@ with tab_inicio:
         )
     
     with col3.container(border=True):
-        score_promedio = filtered_df[['anxiety', 'depression', 'insomnia', 'ocd']].mean(axis=1).mean()
+        score_promedio = filtered_df[["anxiety", "depression", "insomnia", "ocd"]].mean(axis=1).mean()
         st.metric(
             label="Promedio General de Salud Mental",
             value=f"{score_promedio:.2f}",
             help="Promedio combinado de ansiedad, depresión, insomnio y OCD (0-10). Mayor valor = peor salud mental reportada."
         )
+    
+    st.subheader("Perfil basico de la muestra")
+    # Asegurar que haya datos antes de calcular
+    if not filtered_df.empty:
+        top_service = filtered_df['primary_streaming_service'].mode()[0]
+        top_genre = filtered_df['fav_genre'].mode()[0]
+        avg_hours = filtered_df['hours_per_day'].mean()
 
-    st.markdown("---")
+    # Columnas de highlights(cual es laplataforma mas usada en el filtro?)
+    col_a, col_b, col_c = st.columns(3)
+    with col_a:
+        with st.container(border=True):
+            st.markdown(f"**🎧 Plataforma Líder**\n\n{top_service}")
+    with col_b:
+        with st.container(border=True):
+            st.markdown(f"**🎸 Género Favorito**\n\n{top_genre}")
+    with col_c:
+        with st.container(border=True):
+            st.markdown(f"**⏰ Promedio de Escucha**\n\n{avg_hours:.1f} horas/día")
 
 # tab_salud
 with tab_salud:
     st.subheader("Distribucion de Indicadores de Salud Mental")
+    st.markdown("---")
+    st.write("Comparación de distribuciones mediante daiagrams de caja")
 
-cols_salud = ["anxiety", "depression", "insomnia", "ocd"]
-# Columnas para ver el cuadro a un lado y el grafico al otro.
-col_grafico, col_tabla = st.columns([3, 2])
+    # Box plot  
+    fig_box = px.box(                          
+    filtered_df,
+    y=["anxiety", "depression", "insomnia", "ocd"],
+    title="Distribución de los Indicadores de Salud Mental - Diagramas de Caja",
+    labels={"variable": "Indicador", "value": "Puntuación (0-10)"},
+    color_discrete_sequence=["#3F82A3"]
+    )
 
-with col_tabla:
-    st.write("Medidas de tendencia central y dispersión:")
-    stats = filtered_df[cols_salud].describe().round(2)
-    # Cambiar los nombres de la tabla de ingles a español.
-    stats = stats.rename(index={
-        "count": "Cantidad",
-        "mean": "Media",
-        "std": "Desviación Estándar",
-        "min": "Mínimo",
-        "25%": "Percentil 25",
-        "50%": "Mediana",
-        "75%": "Percentil 75",
-        "max": "Máximo"
-    })
-    st.dataframe(stats, use_container_width=True)
+    fig_box.update_layout(
+    height=580,
+    xaxis_title="Indicadores de Salud Mental",
+    yaxis_title="Puntuación (0-10)",
+    showlegend=False,
+    title_font_size=20
+    )
+
+    st.plotly_chart(fig_box, use_container_width=True)
     
+    cols_salud = ["anxiety", "depression", "insomnia", "ocd"]
+    # Columnas para ver el cuadro a un lado y el grafico al otro.
+    col_grafico, col_tabla = st.columns([3, 2])
 
+    with col_tabla:
+        st.write("Medidas de tendencia central y dispersión:")
+        stats = filtered_df[cols_salud].describe().round(2)
+        
+        # Renombrar índices
+        stats = stats.rename(index={
+            "count": "Cantidad",
+            "mean": "Media",
+            "std": "Desviación Estándar",
+            "min": "Mínimo",
+            "25%": "Percentil 25",
+            "50%": "Mediana",
+            "75%": "Percentil 75",
+            "max": "Máximo"
+        })
 
+        st.dataframe(stats, use_container_width=True)
+    
+    with col_grafico:
+        # Tema para seaborn
+        sb.set_theme(style="whitegrid", palette="muted")
+        # Definir variables 
+        variables = cols_salud
+        # Select box (para elegir la opcion)
+        opcion = st.selectbox(
+        "Selecciona un indicador para visualizar:", 
+        variables,
+        format_func=lambda x: x.capitalize())
+    
+        for col in variables:
+            if col == opcion:                    
+                fig, ax = plt.subplots(figsize=(8, 5))
 
+                sb.histplot(df[col], bins=11, kde=True, color="orchid", ax=ax) 
+                plt.title(f"Análisis de {col}")
+                plt.xlim(0, 10)
+    
+                st.pyplot(fig)
+                plt.close(fig)
+                break
+# tab_habitos
+with tab_habitos:
+    st.subheader("Relación entre ritmo musical (BPM) y nivel de insomnio")
+    st.caption("Analizar si ritmos más acelerados tienen relación con la dificultad para dormir.")
 
+    # Grafico de dispersion intereactivo
+    col1, col_central, col3 = st.columns([1, 8, 1])
 
+    with col_central:
+        fig = px.scatter(
+            filtered_df,
+            x="bpm",
+            y="insomnia",
+            title="Relación entre Ritmo Musical (BPM) y Insomnio",
+            labels={
+                "bpm": "Ritmo Musical (BPM)",
+                "insomnia": "Nivel de Insomnio (0-10)"
+            },
+            opacity=0.8,
+            color_discrete_sequence=["#3F82A3"],
+            hover_data=["age", "fav_genre", "hours_per_day"]
+        )
+        fig.update_layout(
+        title_font_size=22  ,
+        title_font_color="#824D69",
+        height=500,
+    )
+        st.plotly_chart(fig, use_container_width=True)
 
-
-
-
+    st.divider()
+    
