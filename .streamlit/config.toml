@@ -1,12 +1,12 @@
 [theme]
 # Color de acento 
-primaryColor = "#8E44AD"
+primaryColor = "#BC69AA"
 
 # Fondo principal 
-backgroundColor = "#FDFCF8"
+backgroundColor = "#FFFFFF"
 
 # Fondo de tarjetas y sidebar 
-secondaryBackgroundColor = "#F4EEFF"
+secondaryBackgroundColor = "#F8F1F4
 
 # Texto principal
 textColor = "#2C2C2C"

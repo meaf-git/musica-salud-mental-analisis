@@ -5,6 +5,7 @@ import plotly.express as px
 import matplotlib as mp
 import matplotlib.pyplot as plt
 import seaborn as sb
+import random
 
 
 # Configuracion de la pagina 
@@ -276,6 +277,22 @@ with tab_inicio:
                 <h3 style="margin:8px 0 0 0; color:#AF42AE;">{horas_str} horas/día</h3>
                 </div>
                 """, unsafe_allow_html=True)
+    
+# Boton para datos curiosos de la muestra
+    if st.button("Generar Dato Curioso", use_container_width=True):
+        # Lista de insights basados en los datos filtrados
+        datos_curiosos= [
+            f"En este grupo, la mayoría prefiere usar **{top_servicio}**.",
+            f"El género **{top_genero}** es el mas escuchado de estos filtros.",
+            f"En promedio, se escuchan **{horas_promedio:.1f} horas** de música al día aquí.",
+            "¿Sabías que la música puede reducir el estrés?",
+            "Los usuarios que escuchan música clásica suelen reportar mayor enfoque."
+        ]
+        
+        # Se selecciona uno al azar y se muestra como mensaje temporal
+        dato_elegido = random.choice(datos_curiosos)
+        st.toast(dato_elegido, icon="💡")
+        st.markdown(f"**Dato del momento:** *{dato_elegido}*")
 
 # Cita de Schopenhauer, A. (2005).
 st.markdown("""
