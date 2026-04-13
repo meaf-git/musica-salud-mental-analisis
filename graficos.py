@@ -48,6 +48,23 @@ plt.xlabel('Indicadores', fontsize=12)
 plt.savefig("graficos_img/boxplot_mental.png")
 plt.show()
 
+# Comparación de indicadores de salud mental (Ansiedad y Depresión) por género musical favorito
+
+sb.set_theme(style="ticks")
+indicadores = ["Anxiety", "Depression"]
+
+for indicador in indicadores:
+    plt.figure(figsize=(10, 5))
+    sb.boxplot(x="Fav genre", y=indicador, data=df, palette="viridis")
+    
+    plt.title(f"Distribución de {indicador} por Género Musical", fontsize=14)
+    plt.xticks(rotation=45)
+    plt.grid(axis='y', linestyle='--', alpha=0.7) 
+    
+    plt.tight_layout()
+    plt.savefig(f"graficos_img/box_{indicador.lower()}.png")
+    plt.show()
+
 # Objetivo 4: relación entre BPM y perfil general de Salud mental
 # Gráfico de embudo 
 
