@@ -285,19 +285,18 @@ Como variables explicativas o independientes se analizan:\
   \hline
 TIPO & VARIABLE & DESCRIPCIÓN \\
   \hline
-Cuantitativa & Tempo (BPM) & Velocidad o pulsaciones por minuto del género preferido. \\
-Cualitativa & Música en horario laboral & Si el participante escucha música mientras trabaja o estudia. \\
-Cualitativa & Percepción & Opinión sobre si la música mejora o empeora el estado emocional. \\
-Cuantitativa & Diversidad & Cantidad o variedad de géneros musicales escuchados. \\
-Cuantitativa & Edad & Edad cronológica del participante. \\
-Cualitativa & Servicio streaming & Plataforma utilizada para escuchar música. \\
-Cuantitativa & Horas por dia & Tiempo diario dedicado a la escucha de música. \\
-Cualitativa & Instrumentista & Indica si el participante toca algún instrumento musical. \\
-Cualitativa & Compositor & Indica si el participante compone música propia. \\
-Cualitativa & Genero favorito & Género musical preferido del usuario. \\
-Cualitativa & Exploratorio & Indica si busca activamente nuevos géneros. \\
-Cualitativa & Idiomas extranjeros & Escucha de música en idiomas no nativos. \\
-Cualitativa & Frecuencia generos & Nivel de recurrencia de escucha por género. \\
+Cuantitativa & BPM & Velocidad o pulsaciones por minuto del género preferido. \\
+Cualitativa & While working & Si el participante escucha música mientras trabaja o estudia. \\
+Cualitativa & Music effects & Opinión sobre si la música mejora o empeora el estado emocional.\\
+Cuantitativa & Age & Edad cronológica del participante. \\
+Cualitativa & Primary streaming service & Plataforma utilizada para escuchar música. \\
+Cuantitativa & Hours per day & Tiempo diario dedicado a la escucha de música. \\
+Cualitativa & Instrumentalist & Indica si el participante toca algún instrumento musical. \\
+Cualitativa & Composer & Indica si el participante compone música propia. \\
+Cualitativa & Fav genre & Género musical preferido del usuario. \\
+Cualitativa & Exploratory & Indica si busca activamente nuevos géneros. \\
+Cualitativa & Foreign languages & Escucha de música en idiomas no nativos. \\
+Cualitativa & Frequency & Nivel de recurrencia de escucha por género. \\
 Cuantitativa & Salud total & Puntaje sumatorio de indicadores de salud mental. \\
 Cualitativa & Rango salud & Clasificación del estado de salud según puntaje. \\
 
