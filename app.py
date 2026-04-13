@@ -14,10 +14,18 @@ st.set_page_config(page_title="Musica y Salud Mental", page_icon="🎵", layout=
 col_titulo, col_imagen = st.columns([8, 1])
 with col_titulo:
     st.header("Análisis estadístico de la Correlación entre Hábitos Auditivos y Perfiles de Salud Mental.")
-    st.write("Visualizacion entre los hábitos de consumo musical y diferentes indicadores de salud mental mediante el uso de técnicas de análisis estadístico.")
+    st.write("Visualización entre los hábitos de consumo musical y diferentes indicadores de salud mental mediante el uso de técnicas de análisis estadístico.")
 with col_imagen:
-    st.image("assets/63 sin título_20260411224059.png", width=200)
+    st.image("assets/316752.png", width=200)
 st.markdown("---")
+
+# Paleta de colores
+color_palette = {
+    "claro": "#D6BBC0",
+    "medio": "#C585B3",
+    "principal": "#BC69AA",
+    "fuerte": "#AF42AE",
+    "oscuro": "#8A2E8F",}
 
 
 # Carga de Datos
@@ -30,7 +38,44 @@ def load_data(path):
     return data
 df =load_data(FILE_PATH)
 
+# column_labels para que las columnas del dataset sean legibles
+column_labels = {
+    "age": "Edad",
+    "primary_streaming_service":"Servicio de streaming principal",
+    "hours_per_day": "Horas de musica al día",
+    "while_working": "Escucha música mientras trabaja",
+    "instrumentalist": "Toca algun instrumento",
+    "composer": "Es compositor/a",
+    "fav_genre": "Género musical favorito",
+    "exploratory": "Explora nuevos géneros",
+    "foreign_languages": "Escucha música en otros idiomas",
+    "bpm": "Ritmo musical (BPM)",
+    "frequency_classical": "Frecuencia de escucha - Clásica",
+    "frequency_country": "Frecuencia de escucha - Country",
+    "frequency_edm": "Frecuencia de escucha - EDM",
+    "frequency_folk": "Frecuencia de escucha - Folk",
+    "frequency_gospel": "Frecuencia de escucha - Gospel",
+    "frequency_hip_hop": "Frecuencia de escucha - Hip Hop",
+    "frequency_jazz": "Frecuencia de escucha - Jazz",
+    "frequency_k_pop": "Frecuencia de escucha - K-Pop",
+    "frequency_latin": "Frecuencia de escucha - Latina",
+    "frequency_lofi": "Frecuencia de escucha - LoFi",
+    "frequency_metal": "Frecuencia de escucha - Metal",
+    "frequency_pop": "Frecuencia de escucha - Pop",
+    "frequency_r_b": "Frecuencia de escucha - R&B",
+    "frequency_rap": "Frecuencia de escucha - Rap",
+    "frequency_rock": "Frecuencia de escucha - Rock",
+    "frequency_video_game_music": "Frecuencia de escucha - Música de Videojuegos",
+    "anxiety": "Ansiedad",
+    "depression":"Depresión",
+    "insomnia": "Insomnia",
+    "ocd": "TOC",
+    "music_effects":"Efectos percibido de la Música",
+    "total_salud": "Puntaje Total de Salud",
+    "rango_salud": "Nivel de Impacto"}
+
 # Filtros para la interactividad
+
 # Columnas para mover el titulo a un lado y la imagen a otro
 col_tit, col_image = st.sidebar.columns([3, 1])
 with col_tit:
@@ -112,16 +157,25 @@ if selected_while_working:
 
 # Seccion desplegable para datos generales del estudio (visualizacion del dataset limpio y bonitico):
 with st.expander("Ver Datos filtrados", expanded=False):
-    # Solo se mostraran las primeros 14 filas 
-    preview = filtered_df.head(14)
-# Tabla
+    # Copia del dataframe filtrado con los nombres legibles
+    df_display = filtered_df.copy()
+    df_display = df_display.rename(columns=column_labels)
+    
+    # Mostramos 
     st.dataframe(
-        preview,
+        df_display,
         use_container_width=True,
         hide_index=True
     )
-
-    st.caption(f"Mostrando 15 de {len(filtered_df):,} registros • Total de columnas: {filtered_df.shape[1]}")
+    csv = filtered_df.to_csv(index=False).encode('utf-8')
+    st.download_button(
+        label="📥 Descargar Dataset Limpio",
+        data=csv,
+        file_name='datos_musica_limpios.csv',
+        mime='text/csv',
+    )
+    
+    st.caption(f"**{len(df_display):,} participantes** × **{df_display.shape[1]} columnas**")
 
 
 
@@ -138,48 +192,92 @@ with tab_inicio:
     st.subheader("Metricas Principales")                          
 
     # Creacion de columnas
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3 = st.columns(3,gap="small")
 
-    with col1.container(border=True):
-        st.metric(
-            label="Total de Participantes.",
-            value=len(filtered_df)
-        )
+    with col1:
+        st.markdown(f"""
+        <div style="background-color: white; 
+                padding: 20px; 
+                border-radius: 12px; 
+                box-shadow: 0 4px 15px rgba(188, 105, 170, 0.12);">
+        <p style="margin:0; font-size:14px; color:#666;">Total de Participantes</p>
+        <h2 style="margin:8px 0 0 0; color:#AF42AE;">{len(filtered_df):,}</h2>
+        </div>
+        """, unsafe_allow_html=True)
 
-    with col2.container(border=True):
-        improve_pct = (filtered_df["music_effects"] == 1).mean() * 100
-        st.metric(
-            label="% que dice que la música mejora",
-            value=f"{improve_pct:.1f}%",
-            help="Porcentaje de participantes que perciben mejora en su bienestar con la música"
-        )
+    with col2:
+        mejora_pct = (filtered_df["music_effects"] == 1).mean() * 100
+        mejora_str = f"{mejora_pct:.1f}".replace(".", ",")
+        st.markdown(f"""
+        <div style="background-color: white; 
+                padding: 20px; 
+                border-radius: 12px; 
+                box-shadow: 0 4px 15px rgba(175, 66, 174, 0.12);">
+        <p style="margin:0; font-size:14px; color:#666;">% que dice que la música mejora</p>
+        <h2 style="margin:8px 0 0 0; color:#AF42AE;">{mejora_str}%</h2>
+        </div>
+        """, unsafe_allow_html=True)
     
-    with col3.container(border=True):
-        score_promedio = filtered_df[["anxiety", "depression", "insomnia", "ocd"]].mean(axis=1).mean()
-        st.metric(
-            label="Promedio General de Salud Mental",
-            value=f"{score_promedio:.2f}",
-            help="Promedio combinado de ansiedad, depresión, insomnio y OCD (0-10). Mayor valor = peor salud mental reportada."
-        )
+    with col3:
+        promedio_salud = filtered_df['total_salud'].mean()
+        promedio_str = f"{promedio_salud:.2f}".replace(".", ",")
+        st.markdown(f"""
+        <div style="background-color: white; 
+                padding: 20px; 
+                border-radius: 12px; 
+                box-shadow: 0 4px 15px rgba(197, 133, 179, 0.12);">
+        <p style="margin:0; font-size:14px; color:#666;">Promedio General de Salud Mental</p>
+        <h2 style="margin:8px 0 0 0; color:#AF42AE;">{promedio_str}</h2>
+        </div>
+        """, unsafe_allow_html=True)
     
-    st.subheader("Perfil basico de la muestra")
-    # Asegurar que haya datos antes de calcular
+    # Highlights (Cosas a destacar)
+    
+    st.subheader("Perfil básico de la muestra")
+    
+    
+# Asegurar que haya datos antes de calcular
     if not filtered_df.empty:
-        top_service = filtered_df['primary_streaming_service'].mode()[0]
-        top_genre = filtered_df['fav_genre'].mode()[0]
-        avg_hours = filtered_df['hours_per_day'].mean()
+        top_servicio = filtered_df["primary_streaming_service"].mode()[0]
+        top_genero = filtered_df["fav_genre"].mode()[0]
+        horas_promedio = filtered_df["hours_per_day"].mean()
 
     # Columnas de highlights(cual es laplataforma mas usada en el filtro?)
-    col_a, col_b, col_c = st.columns(3)
-    with col_a:
-        with st.container(border=True):
-            st.markdown(f"**🎧 Plataforma Líder**\n\n{top_service}")
-    with col_b:
-        with st.container(border=True):
-            st.markdown(f"**🎸 Género Favorito**\n\n{top_genre}")
-    with col_c:
-        with st.container(border=True):
-            st.markdown(f"**⏰ Promedio de Escucha**\n\n{avg_hours:.1f} horas/día")
+        col_a, col_b, col_c = st.columns(3)
+        with col_a:
+            st.markdown(f"""
+                <div style="background-color: white; 
+                padding: 20px; 
+                border-radius: 12px; 
+                box-shadow: 0 4px 15px rgba(188, 105, 170, 0.12);
+                <p style="margin:0; font-size:18px;">🎧 Plataforma Líder</p>
+                <h3 style="margin:8px 0 0 0; color:#AF42AE;">{top_servicio}</h3>
+                </div>
+                """, unsafe_allow_html=True)
+        with col_b:
+            st.markdown(f"""
+                <div style="background-color: white; 
+                padding: 20px; 
+                border-radius: 12px; 
+                box-shadow: 0 4px 15px rgba(175, 66, 174, 0.12);
+                <p style="margin:0; font-size:18px;">🎸 Género Favorito</p>
+                <h3 style="margin:8px 0 0 0; color:#AF42AE;">{top_genero}</h3>
+                </div>
+                """, unsafe_allow_html=True)
+        with col_c:
+            horas_str = f"{horas_promedio:.1f}".replace(".", ",")
+    
+            st.markdown(f"""
+                <div style="background-color: white; 
+                padding: 20px; 
+                border-radius: 12px; 
+                box-shadow: 0 4px 15px rgba(197, 133, 179, 0.12);
+                <p style="margin:0; font-size:18px;">⏰ Promedio de Escucha</p>
+                <h3 style="margin:8px 0 0 0; color:#AF42AE;">{horas_str} horas/día</h3>
+                </div>
+                """, unsafe_allow_html=True)
+
+# Cita de Schopenhauer, A. (2005).
 st.markdown("""
 ---
 > “La música no es, como todas las otras artes, una representación de las ideas o grados de la objetivación de la voluntad, sino la **expresión directa de la voluntad misma**; 
@@ -192,7 +290,7 @@ st.markdown("""
 
 # tab_salud
 with tab_salud:
-    st.subheader("Distribucion de Indicadores de Salud Mental")
+    st.subheader("Distribución de Indicadores de Salud Mental")
     st.markdown("---")
     st.write("Comparación de distribuciones mediante daiagrams de caja")
 
@@ -202,7 +300,7 @@ with tab_salud:
     y=["anxiety", "depression", "insomnia", "ocd"],
     title="Distribución de los Indicadores de Salud Mental - Diagramas de Caja",
     labels={"variable": "Indicador", "value": "Puntuación (0-10)"},
-    color_discrete_sequence=["#236A24"]
+    color_discrete_sequence=["#8A2E8F"]
     )
 
     fig_box.update_layout(
@@ -214,15 +312,22 @@ with tab_salud:
     )
 
     st.plotly_chart(fig_box, use_container_width=True)
+
+# Diccionario
+    traducciones = {
+    "anxiety": "Ansiedad",
+    "depression": "Depresión",
+    "insomnia": "Insomnio",
+    "ocd": "TOC"
+    }
     
     cols_salud = ["anxiety", "depression", "insomnia", "ocd"]
-    # Columnas para ver el cuadro a un lado y el grafico al otro.
-    col_grafico, col_tabla = st.columns([3, 2])
 
-    with col_tabla:
+    with st.container(border=True):
+        
         st.write("Medidas de tendencia central y dispersión:")
         stats = filtered_df[cols_salud].describe().round(2)
-        
+        stats = stats.rename(columns=traducciones)
         # Renombrar índices
         stats = stats.rename(index={
             "count": "Cantidad",
@@ -234,10 +339,11 @@ with tab_salud:
             "75%": "Percentil 75",
             "max": "Máximo"
         })
-
+        stats = stats.astype(str).replace(r'\.', ',', regex=True)
         st.dataframe(stats, use_container_width=True)
+
+        st.divider()
     
-    with col_grafico:
         # Tema para seaborn
         sb.set_theme(style="whitegrid", palette="muted")
         # Definir variables 
@@ -246,19 +352,32 @@ with tab_salud:
         opcion = st.selectbox(
         "Selecciona un indicador para visualizar:", 
         variables,
-        format_func=lambda x: x.capitalize())
-    
-        for col in variables:
-            if col == opcion:                    
-                fig, ax = plt.subplots(figsize=(8, 5))
+        format_func=lambda x: traducciones.get(x))
 
-                sb.histplot(filtered_df[col], bins=11, kde=True, color="orchid", ax=ax) 
-                plt.title(f"Análisis de {col}")
-                plt.xlim(0, 10)
+        # st.columns para ajustar el tamaño del grafico
+        col_izq, col_centro, col_der = st.columns([1, 2, 1])
+
+        with col_centro:
+            for col in variables:
+                if col == opcion:                    
+                    fig, ax = plt.subplots(figsize=(7, 6))
+
+                    # traduccion del eje x
+                    plt.xlabel(traducciones[opcion], fontsize=10)
+                    plt.ylabel("Frecuencia", fontsize=10)
+                    # Titulo mas pequeño
+                    plt.title(f"Análisis de {traducciones[opcion]}", fontsize=12)
+                    plt.xlim(0, 10)
+
+                    sb.histplot(filtered_df[col], bins=11, kde=True, color="orchid", ax=ax) 
+                    plt.title(f"Análisis de {traducciones[opcion]}")
+                    plt.xlim(0, 10)
     
-                st.pyplot(fig)
-                plt.close(fig)
-                break
+                    st.pyplot(fig)
+                    plt.close(fig)
+                    break
+
+
 # tab_habitos
 with tab_habitos:
     st.subheader("Relación entre ritmo musical (BPM) y nivel de insomnio")
@@ -268,32 +387,56 @@ with tab_habitos:
     _, col_central, _= st.columns([1, 8, 1])
 
     with col_central:
-        fig = px.scatter(
-            filtered_df,
-            x="bpm",
-            y="insomnia",
-            title="Relación entre Ritmo Musical (BPM) y Insomnio",
-            labels={
-                "bpm": "Ritmo Musical (BPM)",
-                "insomnia": "Nivel de Insomnio (0-10)"
-            },
-            opacity=0.8,
-            color_discrete_sequence=["#A33F76"],
-            hover_data=["age", "fav_genre", "hours_per_day"]
-        )
-        fig.update_layout(
-        title_font_size=22  ,
-        title_font_color="#884572",
-        height=500,
-    )
-        st.plotly_chart(fig, use_container_width=True)
-
-    st.divider()
+        # Grafico de embudo
+        filtered_df['rango_salud'] = pd.to_numeric(filtered_df['rango_salud'], errors='coerce')
     
-    # Tabla cruzada
+        orden = [1, 0, -1]
+        df_resumen = (filtered_df.groupby('rango_salud')['bpm']
+                  .mean()
+                  .reindex(orden)
+                  .reset_index())
+    
+        # Nombres legibles
+        nombre_rango = {1: "Buena Salud Mental (1)", 
+                    0: "Regular (0)", 
+                    -1: "Alarmante (-1)"}
+    
+        df_resumen['Rango'] = df_resumen['rango_salud'].map(nombre_rango)
+    
+        # gráfico de embudo
+        fig = px.bar(
+            df_resumen,
+            x="bpm",
+            y="Rango",
+            orientation="h",
+            title="BPM Promedio según Estado General de Salud Mental",
+            labels={"bpm": "Ritmo Musical Promedio (BPM)", "Rango": ""},
+            color="Rango",
+            color_discrete_sequence=["#C585B3", "#D0A3BF", "#9D52A1"],
+            text="bpm"
+    )
+        # Ajustes para que se vea como embudo
+        fig.update_traces(texttemplate="%{text:.1f} BPM", textposition="inside")
+    
+        fig.update_layout(
+            height=520,
+            title_font_size=20,
+            xaxis_title="BPM Promedio",
+            yaxis_title="",
+            showlegend=False,
+            plot_bgcolor='rgba(0,0,0,0)'
+        )
+
+        # Ordenar 
+        fig.update_yaxes(categoryorder='array', 
+                        categoryarray=["Alarmante (-1)", "Regular (0)", "Buena Salud Mental (1)"])
+
+        st.plotly_chart(fig, use_container_width=True)
+    
+    # Tabla cruzada    
     tabla = pd.crosstab(
-        filtered_df['while_working'], 
-        filtered_df['music_effects']
+        filtered_df["while_working"], 
+        filtered_df["music_effects"]
     )
     # diccionarios de mapeo
     map_filas = {0: "No escucha mientras trabaja", 1: "Si escucha mientras trabaja"}
@@ -305,7 +448,7 @@ with tab_habitos:
         tabla,
         title="Impacto de la Música al trabajar",
         labels={"index": "Escucha música mientras trabaja", "value": "Cantidad de personas"},
-        color_discrete_sequence=["#DC91AE","#B06D84", "#588F46"],
+        color_discrete_sequence=["#AF42AE","#BC69AA", "#9D52A1"],
         text_auto=True
     )
     fig_bar.update_layout(
@@ -341,26 +484,6 @@ with tab_habitos:
     
     fig_violin_hours.update_layout(height=550)
     st.plotly_chart(fig_violin_hours, use_container_width=True)
-    
-    # Metricas en dos filas
-    m1, m2 = st.columns(2)
-    m3, m4 = st.columns(2)
-
-    with m1.container(border=True):
-        st.metric(" BPM Promedio", f"{filtered_df['bpm'].mean():.0f}")
-
-    with m2.container(border=True):
-        st.metric("Horas de música al día", f"{filtered_df['hours_per_day'].mean():.1f} h")
-
-    with m3.container(border=True):
-        pct = (filtered_df['while_working'] == 1).mean() * 100
-        st.metric(" Escucha música mientras trabaja", f"{pct:.1f}%")
-
-    with m4.container(border=True):
-        genre_cols = [col for col in filtered_df.columns if col.startswith('frequency_')]
-        if genre_cols:
-            avg_genres = (filtered_df[genre_cols] >= 3).sum(axis=1).mean()
-            st.metric(" Géneros escuchados frecuentemente", f"{avg_genres:.1f}")
 
 #tab_avanzado
 with tab_avanzado:
@@ -389,53 +512,110 @@ with tab_avanzado:
     st.plotly_chart(fig_heatmap, use_container_width=True)
     
     with st.popover("¿Qué significa esto?"):
-        st.markdown("### Guía Rápida")
+        st.markdown("Guía Rápida")
         st.info("Los valores cercanos a **1** indican una relación fuerte, mientras que los cercanos a **0** indican que no hay relación clara.")
         st.write("En este gráfico, los tonos más claros representan las conexiones más importantes entre variables.")
 
+    # Grafico de caja
+    # Grafico de caja por rangos
+    # Rangos
+    bins = [0, 2, 4, 6, 8, 12, 25]
+    labels = ["0-2 horas", "2-4 horas", "4-6 horas", "6-8 horas","8-12 horas", "Más de 12 horas"]
     
-    # Graficos de dispersion
-    # filtrado necesario para los graficos
-    filtered_df["mental_health_score"] = filtered_df[["anxiety", "depression", "insomnia", "ocd"]].mean(axis=1)
+    filtered_df["horas_rango"] = pd.cut(filtered_df["hours_per_day"], bins=bins, labels=labels, right=False)
 
+    # Boxplot por rangos
+    fig_horas = px.box(
+        filtered_df,
+        x="horas_rango",
+        y="total_salud",
+        title="Puntaje de Salud Mental según Horas de Música al Día",
+        labels={
+        "horas_rango": "Horas de música al día",
+        "total_salud": "Suma Total de Salud Mental (Ansiedad + Depresión + Insomnio + TOC)"},
+        color="horas_rango",
+        color_discrete_sequence=[              
+        "#D6BBC0",   # 0-2 horas
+        "#C585B3",   # 2-4 horas
+        "#BC69AA",   # 4-6 horas
+        "#AF42AE",   # 6-8 horas
+        "#9B6A9E",   # 8-12 horas     
+        "#8A2E8F"    # Más de 12 horas 
+    ]
+)
+    
+    fig_horas.update_layout(
+        height=580,
+        xaxis_tickangle=30,
+        title_font_size=20)
 
-# Grafico de dispersion horas de música por día vs Salud Mental
-    fig1 = px.scatter(
-            filtered_df,
-            x="hours_per_day",
-            y="mental_health_score",
-            title="Horas de música por día vs Salud Mental",
-            trendline="ols",
-            color_discrete_sequence=["#9D567C"]
-        )
-    fig1.update_layout(height=480)
-    st.plotly_chart(fig1, use_container_width=True)
+    st.plotly_chart(fig_horas, use_container_width=True)
+
 
 # Grafico de dispersion para edad vs salud mental
-    fig2 = px.scatter(
+    st.subheader("Edad vs Promedio de Salud Mental")
+
+    fig_edad = px.scatter(
         filtered_df,
         x="age",
-        y="mental_health_score",
-        title="Edad vs Puntaje General de Salud Mental",
-        labels={"age": "Edad", "mental_health_score": "Puntaje de Salud Mental (0-10)"},
-        opacity=0.7,
-        trendline="ols",
-        color_discrete_sequence=["#3D6C2F"]
-    )
-    fig2.update_layout(height=520)
-    st.plotly_chart(fig2, use_container_width=True)
+        y="total_salud",
+        color=filtered_df["music_effects"].astype(str),
+        size="hours_per_day",
+        title="Edad vs Promedio de Salud Mental",
+        labels={
+            "age": "Edad",
+            "total_salud": "Promedio de Salud Mental (Suma 0-40)",
+            "music_effects": "Efecto de la música"},
+        opacity=0.78,
+        color_discrete_map={
+            "-1": "#AF42AE", # Empeora
+            "0": "#8A2E8F", # Nulo
+            "1": "#BC69AA"}) # Mejora 
+    
+    fig_edad.update_layout(height=620)
+    st.plotly_chart(fig_edad, use_container_width=True)
+
+    with st.popover("¿Qué significa esto?"):
+        st.markdown("""
+                - **Eje X (horizontal)**: Representa la **edad** de los participantes.
+                - **Eje Y (vertical)**: Representa el **Promedio de Salud Mental** (suma de ansiedad, depresión, insomnio y TOC).
+                - **Cada punto**: Es un participante.
+                - **Tamaño del punto**: Indica cuántas **horas de música** escucha al día (a mayor punto = más horas).
+                - **Color de los puntos**: Representa el **efecto percibido de la música**:
+                - Morado oscuro → Empeora
+                - Morado claro → Nulo
+                - Rosado → Mejora""")
 
 # Grafico de dispersion ritmo musical vs salud mental
-    fig3 = px.scatter(
-            filtered_df,
-            x="bpm",
-            y="mental_health_score",
-            title="Ritmo musical (BPM) vs Salud Mental",
-            trendline="ols",
-            color_discrete_sequence=["#9866B9"]
-        )
-    fig3.update_layout(height=480)
-    st.plotly_chart(fig3, use_container_width=True)
+    fig_bpm = px.scatter(
+        filtered_df,
+        x="bpm",
+        y="total_salud",
+        color= filtered_df["music_effects"].astype(str),                
+        size="hours_per_day",                     
+        title="Ritmo Musical (BPM) vs Promedio de Salud Mental",
+        labels={
+            "bpm": "Ritmo Musical (BPM)",
+            "total_salud": "Promedio de Salud Mental (Suma 0-40)",
+            "music_effects": "Efecto de la música"},
+        opacity=0.75,
+        color_discrete_map={
+            "-1": "#AF42AE", # Empeora
+            "0": "#8A2E8F", # Nulo
+            "1": "#BC69AA"}) # Mejora 
+    
+    fig_bpm.update_layout(height=620)
+    st.plotly_chart(fig_bpm, use_container_width=True)
 
+    with st.popover("¿Qué significa esto?"):
+        st.markdown("""
+                - **Eje X (horizontal)**: Representa el **ritmo musical en BPM** (latidos por minuto).
+                - **Eje Y (vertical)**: Representa el **Promedio de Salud Mental** (suma de ansiedad, depresión, insomnio y TOC).
+                - **Cada punto**: Es un participante.
+                - **Tamaño del punto**: Indica cuántas **horas de música** escucha al día (a mayor punto = más horas).
+                - **Color de los puntos**: Representa el **efecto percibido de la música**:
+                - Morado oscuro → Empeora
+                - Morado claro → Nulo
+                - Rosado → Mejora""")
 
 
