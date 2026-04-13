@@ -218,9 +218,6 @@ dfclean <- read_csv("datos_musica_limpios_FINAL.csv")
 view(dfclean)
 
 ```
-
-
-
 \chapter*{Introducción}
 
 \begin{flushright}
@@ -230,26 +227,19 @@ Schopenhauer, 2005, pág. 177
 \end{flushright}
 
    La música es una manifestación cultural inherente a la condición humana, presente en todas las civilizaciones y épocas históricas. Además de su valor recreativo, diversos estudios contemporáneos han demostrado que la música posee una capacidad única para influir en la química del cerebro. Según Daniel Levitin (neurocientífico y músico): “la música actúa sobre los sistemas neuroquímicos que regulan el estrés y el placer, afectando así directamente en las emociones y el comportamiento humano”.
-   
 Al interactuar con el sistema límbico, la música no solo genera placer, sino que actúa como un regulador del estado de ánimo, capaz de modular la liberación de neurotransmisores claves. De igual forma, se ha documentado que ciertas frecuencias y ritmos musicales, facilitan la reducción de los niveles de cortisol, la principal hormona esteroide del estrés, impactando positivamente en el manejo del mismo y la ansiedad clínica.
-
 Bajo estos precedentes, el presente trabajo se propone describir cuantitativamente la intersección entre la experiencia musical y la salud mental de los participantes. El objetivo central es investigar, mediante técnicas de estadística descriptiva, cómo variables específicas, tales como: el género musical favorito, las pulsaciones por minuto (BPM) y los hábitos de consumo (tiempo de exposición), influyen en indicadores de salud mental, como: la ansiedad, la depresión, y el insomnio, en la muestra estudiada.
-
-
 
 \chapter{Planteamiento del Problema}
 
    Según la Organización Mundial de la Salud (OMS), “La salud mental es un estado de bienestar mental que permite a las personas hacer frente a los momentos de estrés de la vida, desarrollar todo su potencial, aprender y trabajar adecuadamente y contribuir a su comunidad”. Sin embargo, durante los últimos años, diversos estudios han reportado un incremento significativo en los trastornos relacionados con la salud mental, como trastornos de ansiedad, del estado de ánimo, de la personalidad, entre otros; especialmente entre adolescentes y adultos jóvenes. Este incremento se debe a factores como: la pandemia de COVID-19, el aislamiento social y las presiones económicas, según la Organización Panamericana de Salud (OPS). En este contexto, se ha incrementado el interés por analizar los factores cotidianos que pueden influir en la salud mental. Uno de los más relevantes es el consumo de música, actividad que forma parte de la vida diaria de millones de personas, y que puede cumplir diferentes funciones emocionales, cognitivas y sociales. Con este proyecto, se busca establecer relaciones acerca de cómo, la forma en que los hábitos de escucha musical (el tiempo dedicado a escuchar música, los géneros preferidos o la frecuencia de consumo), pueden relacionarse con indicadores de salud mental, como la ansiedad, la depresión, el insomnio o los comportamientos compulsivos; esto mediante la realización de un análisis estadístico de la evaluación entre los hábitos de consumo musical y variables asociadas a la salud mental.\
 
 Debido a esto, se plantea las siguientes preguntas de investigación:\
-
-
 \textbf{1.}¿Existe una asociación estadísticamente significativa entre el tempo del género musical preferido por los participantes y su nivel de insomnio?\
 
 \textbf{2.}¿Cómo se distribuye la percepción del efecto de la música sobre el estado emocional en función de si los participantes escuchan música mientras trabajan o estudian?\
 
 \textbf{3.}¿Qué relación existe entre la diversidad de géneros musicales escuchados por los participantes y sus niveles de bienestar emocional?\
-
 
 \section{Justificación}
 
@@ -274,16 +264,11 @@ Desde una perspectiva académica y científica, resulta significativo analizar e
   \item{Explorar la asociación entre la diversidad de géneros musicales escuchados y los niveles de bienestar emocional mediante herramientas de estadística descriptiva.}
 \end{itemize}
 
-
 \section{Periodo de Referencia}
-
 La población objeto de estudio está conformada por individuos que participaron en una encuesta relacionada con hábitos musicales y salud mental. Dicha encuesta estuvo disponible entre el 27 de julio de 2022 y el 8 de noviembre del mismo año, a nivel mundial. La muestra utilizada corresponde a, aproximadamente, 700 registros (736 observaciones), los cuales contienen información sobre: variables demográficas, hábitos de consumo musical y condiciones relacionadas con la salud mental de los encuestados.\
 
 \section{Variables}
-
-La variable principal en estudio (Variable Dependiente/Objetivo) es el Nivel de Salud Mental, que representa el estado de bienestar psicológico del individuo. Esta se mide a través de una escala cuantitativa de 0 a 10, donde 0 indica ausencia total de síntomas y 10 representa la severidad máxima.\
-
-Para un análisis detallado, se consideran las siguientes variables:\
+La variable principal en estudio (Variable Dependiente/Objetivo) es el Nivel de Salud Mental, que representa el estado de bienestar psicológico del individuo. Esta se mide a través de una escala cuantitativa de 0 a 10, donde 0 indica ausencia total de síntomas y 10 representa la severidad máxima.Para un análisis detallado, se consideran las siguientes variables:\
 
 \textbf{1.}Variables Psicológicas: Ansiedad y Depresión, evaluadas como indicadores del estado emocional predominante.\
 
@@ -294,8 +279,8 @@ Para un análisis detallado, se consideran las siguientes variables:\
 Como variables explicativas o independientes se analizan:\
 \begin{table}[ht]
 \centering
-\renewcommand{\arraystretch}{1}
-\resizebox{15cm}{!} {
+\renewcommand{\arraystretch}{1.5}
+\resizebox{\textwidth}{!}{%
 \begin{tabular}{ccc}
   \hline
 TIPO & VARIABLE & DESCRIPCIÓN \\
@@ -304,6 +289,18 @@ Cuantitativa & Tempo (BPM) & Velocidad o pulsaciones por minuto del género pref
 Cualitativa & Música en horario laboral & Si el participante escucha música mientras trabaja o estudia. \\
 Cualitativa & Percepción & Opinión sobre si la música mejora o empeora el estado emocional. \\
 Cuantitativa & Diversidad & Cantidad o variedad de géneros musicales escuchados. \\
+Cuantitativa & Edad & Edad cronológica del participante. \\
+Cualitativa & Servicio streaming & Plataforma utilizada para escuchar música. \\
+Cuantitativa & Horas por dia & Tiempo diario dedicado a la escucha de música. \\
+Cualitativa & Instrumentista & Indica si el participante toca algún instrumento musical. \\
+Cualitativa & Compositor & Indica si el participante compone música propia. \\
+Cualitativa & Genero favorito & Género musical preferido del usuario. \\
+Cualitativa & Exploratorio & Indica si busca activamente nuevos géneros. \\
+Cualitativa & Idiomas extranjeros & Escucha de música en idiomas no nativos. \\
+Cualitativa & Frecuencia generos & Nivel de recurrencia de escucha por género. \\
+Cuantitativa & Salud total & Puntaje sumatorio de indicadores de salud mental. \\
+Cualitativa & Rango salud & Clasificación del estado de salud según puntaje. \\
+
    \hline
 \end{tabular}
 }
@@ -311,10 +308,6 @@ Cuantitativa & Diversidad & Cantidad o variedad de géneros musicales escuchados
 \end{table}
 
 \chapter{Marco Teórico}
-
-
-$$Total_{Salud} = \sum_{i=1}^{n} (Anxiety + Depression + Insomnia + OCD)$$
-
 
 \section{Bases Teóricas}
 
