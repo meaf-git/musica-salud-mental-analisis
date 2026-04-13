@@ -140,7 +140,7 @@ datos_musica <- datos_musica |>
 #Verificamos el cambio
 table(datos_musica$music_effects)
 
-#Definimos los indicadores
+#Definimos los indicadores de la nueva columna
 indicadores <- c("anxiety", "depression", "insomnia", "ocd")
 
 #Hacemos la suma por fila
