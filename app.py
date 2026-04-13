@@ -279,6 +279,28 @@ with tab_inicio:
                 """, unsafe_allow_html=True)
     
 # Boton para datos curiosos de la muestra
+    # Botón personalizado con CSS
+    boton = f"""
+        <style>
+        div.stButton > button {{
+        background-color: #BC69AA;
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+        padding: 14px 24px;
+        border-radius: 12px;
+        border: none;
+        box-shadow: 0 4px 12px rgba(188, 105, 170, 0.25);
+        transition: all 0.3s ease;
+    }}
+    div.stButton > button:hover {{
+        background-color: #AF42AE;
+        box-shadow: 0 6px 16px rgba(175, 66, 174, 0.35);
+        transform: translateY(-2px);
+    }}
+    </style>
+"""
+    st.markdown(boton, unsafe_allow_html=True)
     if st.button("Generar Dato Curioso", use_container_width=True):
         # Lista de insights basados en los datos filtrados
         datos_curiosos= [
