@@ -123,34 +123,46 @@ plt.show()
 # Objetivo 6: comparación de salud mental por edad de los participantes
 # Correlación entre edad, salud mental y BPM (variables numéricas)
 plt.figure(figsize=(8, 6))
-sb.heatmap(df[['Age', 'Anxiety', 'Depression', "OCD", "Insomnia", "BPM"]].corr(), annot=True, cmap="magma")
+sb.heatmap(df[['Age', 'Anxiety', 'Depression', "OCD", "Insomnia", "BPM", "Hours per day"]].corr(), annot=True, cmap="magma")
 plt.title("Correlación: Variables Numéricas")
 plt.savefig("graficos_img/heatmap_correlacion.png")
 plt.show()
 
 # Objetivo 7: exploración entre top 5 géneros (estadística descriptiva)
+def calcular_ric(columna):
+    q3 = columna.quantile(0.75)
+    q1 = columna.quantile(0.25)
+    return q3 - q1
+
 top_5 = df['Fav genre'].value_counts().nlargest(5).index
 df_top5 = df[df['Fav genre'].isin(top_5)]
 
 indicadores = ["Anxiety", "Depression", "OCD", "Insomnia"]
-tabla = df_top5.groupby('Fav genre')[indicadores].agg(['mean', 'var']).round(2)
+tabla_robusta = df_top5.groupby('Fav genre')[indicadores].agg(['median', calcular_ric]).round(2)
 
-fig, ax = plt.subplots(figsize=(14, 6)) 
+fig, ax = plt.subplots(figsize=(15, 7))
 ax.axis('off')
 
-res_tabla = ax.table(cellText=tabla.values, 
-                     colLabels=[f"{c[0]} ({'x̄' if c[1]=='mean' else 'S²'})" for c in tabla.columns], 
-                     rowLabels=tabla.index, 
-                     loc='center', 
-                     cellLoc='center')
+col_nombres = []
+for col in tabla_robusta.columns:
+    variable = col[0]
+    estadistico = "Me" if col[1] == 'median' else "RIC"
+    col_nombres.append(f"{variable} ({estadistico})")
 
-res_tabla.auto_set_font_size(False)
-res_tabla.set_fontsize(10) 
-res_tabla.scale(1, 2.5) 
-plt.title("Estadísticos Descriptivos (Top 5 Géneros): Media (x̄) y Varianza (S²)", pad=30, weight='bold')
-plt.savefig("graficos_img/tabla_top5.png", dpi=300, bbox_inches='tight')
+res_tabla = ax.table(
+    cellText=tabla_robusta.values, 
+    colLabels=col_nombres, 
+    rowLabels=tabla_robusta.index, 
+    loc='center', 
+    cellLoc='center'
+)
+
+res_tabla.set_fontsize(10)
+res_tabla.scale(1, 2.8)
+
+plt.title("Top 5 Géneros Más Escuchados: Mediana (Me) y Rango Intercuartílico (RIC)", pad=40, weight='bold')
+plt.savefig("graficos_img/tabla_final.png", dpi=300, bbox_inches='tight')
 plt.show()
-
 
 
 
