@@ -312,12 +312,21 @@ Cualitativa & Rango salud & Clasificación del estado de salud según puntaje. \
 
 Existen múltiples investigaciones científicas que describen cómo la música ayuda a mejorar la salud mental de las personas. En el área de psicología, existen diversos autores que teorizan sobre cómo el cerebro se ve afectado positiva o negativamente según el estilo y las características de la música que se escucha. 
 Para el presente trabajo, se ha tomado como referencia principal las investigaciones de Daniel Levitin, neurocientífico y músico. Su trabajo analiza cómo los elementos técnicos, como el ritmo y el tempo, activan sistemas de recompensas en el cerebro, lo que brinda una idea sobre el impacto de los mismos en la salud mental y cómo esto puede verse reflejado en la población de investigación. Este mismo autor señala en su libro: “Tu cerebro y la música. El estudio científico de una obsesión humana", que la música es un estímulo multisensorial complejo, profundamente arraigado en la arquitectura de nuestro cerebro, con la capacidad de provocar respuestas fisiológicas, psicológicas y emocionales profundas. 
-Existe una relación entre las diferentes zonas cerebrales y las características psicológicas de la música y la audición: la actividad sensorial de la música estaría localizada predominantemente en la zona bulbar, donde se encuentra el centro de las reacciones físicas. El mensaje afectivo de la música lo localizamos en el diencéfalo, zona profunda del cerebro, asiento de las emociones. La melodía afecta a la vida emocional y afectiva y es el diencéfalo el que recibe los motivos y diseños melódicos, despertando así todo un mundo interior de sentimientos y emociones. 
+Existe una relación entre las diferentes zonas cerebrales y las características psicológicas de la música y la audición: la actividad sensorial de la música estaría localizada predominantemente en la zona bulbar, donde se encuentra el centro de las reacciones físicas. El mensaje afectivo de la música lo localizamos en el diencéfalo, zona profunda del cerebro, asiento de las emociones. La melodía afecta a la vida emocional y afectiva y es el diencéfalo el que recibe los motivos y diseños melódicos, despertando así todo un mundo interior de sentimientos y emociones.\
 
-
-\subsection{Definición 1}
-
-Descripción de la definición 1\
+\subsection{Conceptos de Salud Mental}
+\begin{itemize}
+ \item{Salud mental: Es el estado de bienestar en el que el individuo es consciente de sus capacidades, afronta las tensiones normales de la vida, trabaja de forma productiva y contribuye a su comunidad (OMS, 2013).}
+ \item{Higiene mental: La higiene mental se refiere a las prácticas y hábitos que ayudan a mantener un equilibrio emocional y una salud mental positiva.}
+ \item{Ansiedad (Anxiety): Los trastornos de ansiedad se pueden definir como la experimentación de miedo y preocupaciones intensas y excesivas. Estos sentimientos suelen ir acompañados de tensión física y otros síntomas conductuales y cognitivos. (OMS, 2013).}
+ \item{Depresión (Depression): Se puede describir como el hecho de sentirse triste, melancólico, infeliz, abatido o derrumbado. La depresión clínica es un trastorno del estado anímico en el cual los sentimientos de tristeza, pérdida, ira o frustración interfieren con la vida diaria. (OMS, 2013).}
+ \item{Insomnio (Insomnia): Es la dificultad para iniciar o mantener el sueño debido a una incapacidad del cerebro para transitar de las ondas beta (alerta) a las ondas alfa y theta (relajación). (OMS, 2013).}
+ \item{Trastorno Obsesivo-Compulsivo (OCD - Obsessive Compulsive Disorder): es un trastorno mental en el cual las personas tienen pensamientos, sentimientos, ideas, sensaciones (obsesiones) y comportamientos repetitivos e indeseables que los impulsan a hacer algo una y otra vez (compulsiones). (OMS, 2013).}
+ \item{Catarsis emocional: es la descarga de emociones intensas, reprimidas o negativas (como ira, tristeza o miedo), que provoca una sensación de alivio, purificación o claridad interior.}
+ \item{Sistema nervioso simpático (SNS): es una red de nervios que ayuda al cuerpo a activar su respuesta de "lucha o huida". La actividad de este sistema aumenta cuando se está estresado, en peligro o durante la actividad física.}
+ \item{Cortisol: es una hormona producida por las glándulas suprarrenales, afecta a casi todos los órganos del cuerpo y es importante para las funciones corporales, como manejar el estrés y mantener la presión arterial. Niveles muy altos o bajos de esta hormona tienen un impacto negativo en la salud mental, causando ansiedad, depresión, problemas de memoria, irritabilidad y fatiga.}
+ \item{Adrenalina: es una hormona y un neurotransmisor que segrega el cuerpo de manera natural a través de las glándulas suprarrenales. El organismo produce y almacena esta sustancia y la libera en situaciones de alarma, estrés, miedo, peligro o excitación.}
+\end{itemize}
 
 \subsection{Definición 2}
 
