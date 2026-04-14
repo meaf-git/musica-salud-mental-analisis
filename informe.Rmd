@@ -328,17 +328,14 @@ Existe una relación entre las diferentes zonas cerebrales y las característica
  \item{Comorbilidad:coexistencia de dos o más enfermedades o trastornos en un mismo individuo, generalmente relacionadas.}
 
 \subsection{Indicadores de Salud Mental}
-
-En psicología y ciencias de la salud, estos trastornos no suelen presentarse de forma aislada; por el contrario, comparten una varianza común que puede ser interpretada como un factor de Malestar Psicológico General. Por ende, la suma de los indicadores de ansiedad, depresión, insomnio y trastorno obsesivo-compulsivo se justifica bajo la premisa de la cormobilidad; y dicha suma se denominaría “Índice de Carga Sintomática Acumulada (ICSA)”.
-Al utilizar una escala homogénea (del 0 a 10) en todas las variables, se garantiza la comparabilidad métrica. Matemáticamente, este procedimiento se define como un Índice Aditivo No Ponderado, donde cada dimensión aporta de igual manera a la carga total del individuo. 
-Si el ICSA mide la severidad de un individuo, la media de todos los participantes representa la Intensidad de Afectación de la muestra.\
-
  \item{Ansiedad (Anxiety): los trastornos de ansiedad se pueden definir como la experimentación de miedo y preocupaciones intensas y excesivas. Estos sentimientos suelen ir acompañados de tensión física y otros síntomas conductuales y cognitivos. (OMS, 2013).}
  \item{Depresión (Depression): se puede describir como el hecho de sentirse triste, melancólico, infeliz, abatido o derrumbado. La depresión clínica es un trastorno del estado anímico en el cual los sentimientos de tristeza, pérdida, ira o frustración interfieren con la vida diaria. (OMS, 2013).}
  \item{Insomnio (Insomnia): es la dificultad para iniciar o mantener el sueño debido a una incapacidad del cerebro para transitar de las ondas beta (alerta) a las ondas alfa y theta (relajación). (OMS, 2013).}
  \item{Trastorno Obsesivo-Compulsivo (OCD - Obsessive Compulsive Disorder): es un trastorno mental en el cual las personas tienen pensamientos, sentimientos, ideas, sensaciones (obsesiones) y comportamientos repetitivos e indeseables que los impulsan a hacer algo una y otra vez (compulsiones). (OMS, 2013).}
 \end{itemize}
-
+En psicología y ciencias de la salud, estos trastornos no suelen presentarse de forma aislada; por el contrario, comparten una varianza común que puede ser interpretada como un factor de Malestar Psicológico General. Por ende, la suma de los indicadores de ansiedad, depresión, insomnio y trastorno obsesivo-compulsivo se justifica bajo la premisa de la cormobilidad; y dicha suma se denominaría “Índice de Carga Sintomática Acumulada (ICSA)”.
+Al utilizar una escala homogénea (del 0 a 10) en todas las variables, se garantiza la comparabilidad métrica. Matemáticamente, este procedimiento se define como un Índice Aditivo No Ponderado, donde cada dimensión aporta de igual manera a la carga total del individuo. 
+Si el ICSA mide la severidad de un individuo, la media de todos los participantes representa la Intensidad de Afectación de la muestra.\
 
 \subsection{Conceptos Musicales}
 \begin{itemize}
