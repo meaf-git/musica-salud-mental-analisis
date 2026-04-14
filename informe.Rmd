@@ -310,7 +310,10 @@ Cualitativa & Rango salud & Clasificación del estado de salud según puntaje. \
 
 \section{Bases Teóricas}
 
-Resumen de las bases teoricas explicadas en el capitulo y su importancia\
+Existen múltiples investigaciones científicas que describen cómo la música ayuda a mejorar la salud mental de las personas. En el área de psicología, existen diversos autores que teorizan sobre cómo el cerebro se ve afectado positiva o negativamente según el estilo y las características de la música que se escucha. 
+Para el presente trabajo, se ha tomado como referencia principal las investigaciones de Daniel Levitin, neurocientífico y músico. Su trabajo analiza cómo los elementos técnicos, como el ritmo y el tempo, activan sistemas de recompensas en el cerebro, lo que brinda una idea sobre el impacto de los mismos en la salud mental y cómo esto puede verse reflejado en la población de investigación. Este mismo autor señala en su libro: “Tu cerebro y la música. El estudio científico de una obsesión humana", que la música es un estímulo multisensorial complejo, profundamente arraigado en la arquitectura de nuestro cerebro, con la capacidad de provocar respuestas fisiológicas, psicológicas y emocionales profundas. 
+Existe una relación entre las diferentes zonas cerebrales y las características psicológicas de la música y la audición: la actividad sensorial de la música estaría localizada predominantemente en la zona bulbar, donde se encuentra el centro de las reacciones físicas. El mensaje afectivo de la música lo localizamos en el diencéfalo, zona profunda del cerebro, asiento de las emociones. La melodía afecta a la vida emocional y afectiva y es el diencéfalo el que recibe los motivos y diseños melódicos, despertando así todo un mundo interior de sentimientos y emociones. 
+
 
 \subsection{Definición 1}
 
