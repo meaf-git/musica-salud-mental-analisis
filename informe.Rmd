@@ -418,9 +418,17 @@ La segunda columna adicional refleja, según el valor resultante de la sumatoria
 \item{Análisis de Asociación: se empleó el Coeficiente de Correlación de Pearson para calcular la covarianza entre variables numéricas, como BPM y las variables de salud mental. También se hizo uso de Tablas de Contingencia, para describir la influencia de la música mientras se trabaja.}
 \end{itemize}
 
-\subsection{Item n}
+\subsection{Desarrollo del Dashboard Interactivo}
+Para complementar el análisis estadístico y facilitar la interpretación de los resultados, se desarrolló un Dashboard interactivo utilizando el framework de Streamlit, integrando en el mismo las librerías necesarias para la visualización e interactividad de los datos. El objetivo principal del Dashboard es permitir una exploración dinámica de los datos, visualizando de forma clara y accesible las relaciones entre los hábitos de consumo musical y los indicadores de salud mental. Esta herramienta se estructuró con cuatro pestañas, cada una diseñada para responder a cada uno de los objetivos específicos del trabajo.\
 
-Descripción\
+\begin{itemize}
+\item{Inicio: a través de métricas calculadas, se muestra la cantidad de participantes en estudio, el porcentaje de participantes que reportan una mejoría en su bienestar emocional al escuchar música, y el promedio de la puntuación acumulada de los indicadores de salud mental por cada individuo. Como añadidura, se creó un generador de datos curiosos con la librería “Random” de Python. Esta sección está construida con componentes de CSS, para obtener una visión personalizada y atractiva de la misma pestaña.}
+\item{Salud Mental: se hizo uso de Plotly Express para generar diagramas de caja (Boxplots) que permiten identificar la mediana y la variabilidad de las cuatro patologías analizadas (Ansiedad, Depresión, Insomnio y TOC).}
+\item{Hábitos Musicales: se analizaron las variables de consumo musical, examinando la relación entre el ritmo promedio (BPM) y el estado general de salud mental, así como el efecto percibido de la música durante la actividad laboral. También, mediante el uso de diagramas de violín, se evaluó el impacto de las horas diarias de escucha sobre la calidad del sueño, específicamente respecto a los niveles de insomnio.}
+\item{Análisis Avanzado: se implementó un mapa de calor (Heatmap) con escalas de color personalizadas, para identificar la fuerza de asociación entre variables como la edad, las horas de escucha y los niveles de salud mental (Correlación de Pearson). De igual manera, se añadió un gráfico de embudo dinámico para representar la relación entre el rango de edad y el puntaje acumulado de salud mental. Por último, se integraron diagramas de caja para realizar una comparativa técnica de los indicadores de Ansiedad y Depresión, segmentados por género musical favorito.}
+\end{itemize}
+
+Asimismo, se implementaron filtros y visualizaciones interactivas mediante la librería Plotly, permitiendo a los usuarios ajustar los parámetros de análisis dinámicamente. El desarrollo del código se centralizó en un repositorio de GitHub bajo un sistema de control de versiones, lo que optimizó la colaboración técnica. Finalmente, la aplicación fue desplegada en la plataforma Render, asegurando la disponibilidad pública y permanente de los resultados a través de una dirección URL única.\
 
 \chapter{Análisis de Resultados}
 
