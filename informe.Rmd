@@ -390,6 +390,14 @@ Por otro lado, el diseño de la investigación es no experimental, transversal. 
 
 Las herramientas utilizadas para el procesamiento de los datos fueron, principalmente, los lenguajes de programación Python y R, en conjunto con ciertas librerías que facilitaron y permitieron la lectura, visualización, y manipulación óptima de los datos. Asimismo, se emplearon entornos de desarrollo como Visual Studio Code y RStudio, la plataforma GitHub para la gestión del estudio y, por último, R Markdown para la realización del informe académico.\
 
+```{r}
+registros <- format(nrow(dfclean), big.mark = ".")
+variables <- ncol(dfclean)
+
+print(paste0("Registros válidos: ", registros, " | Variables: ", variables))
+```
+
+
 \subsection{Limpieza, transformación, y lectura de datos}
 Para realizar la preparación del dataset, en primer lugar, se importaron las librerías necesarias. Tras la lectura de los datos, se procedió a remover las columnas innecesarias para el análisis posterior; en este caso, se removieron las columnas “Timestamp” (luego de verificar que no existieran registros duplicados) y “Permissions”. Posteriormente, se calculó la cantidad de registros nulos y/o inválidos dentro del dataset, para comprobar que no existiera una cantidad significativa de estos que pudiera distorsionar los futuros resultados.\
 
