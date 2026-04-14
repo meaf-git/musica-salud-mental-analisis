@@ -313,7 +313,7 @@ Cualitativa & Rango salud & Clasificación del estado de salud según puntaje. \
 \section{Bases Teóricas}
 
 Existen múltiples investigaciones científicas que describen cómo la música ayuda a mejorar la salud mental de las personas. En el área de psicología, existen diversos autores que teorizan sobre cómo el cerebro se ve afectado positiva o negativamente según el estilo y las características de la música que se escucha. 
-Para el presente trabajo, se ha tomado como referencia principal las investigaciones de Daniel Levitin, neurocientífico y músico. Su trabajo analiza cómo los elementos técnicos, como el ritmo y el tempo, activan sistemas de recompensas en el cerebro, lo que brinda una idea sobre el impacto de los mismos en la salud mental y cómo esto puede verse reflejado en la población de investigación. Este mismo autor señala en su libro: “Tu cerebro y la música. El estudio científico de una obsesión humana", que la música es un estímulo multisensorial complejo, profundamente arraigado en la arquitectura de nuestro cerebro, con la capacidad de provocar respuestas fisiológicas, psicológicas y emocionales profundas. 
+Para el presente trabajo, se ha tomado como referencia principal las investigaciones de Daniel Levitin, neurocientífico y músico. Su trabajo analiza cómo los elementos técnicos, como el ritmo y el tempo, activan sistemas de recompensas en el cerebro, lo que brinda una idea sobre el impacto de los mismos en la salud mental y cómo esto puede verse reflejado en la población de investigación. Este mismo autor señala en su libro: “Tu cerebro y la música. El estudio científico de una obsesión humana", que la música es un estímulo multisensorial complejo, profundamente arraigado en la arquitectura de nuestro cerebro, con la capacidad de provocar respuestas fisiológicas, psicológicas y emocionales profundas.\ 
 
 Existe una relación entre las diferentes zonas cerebrales y las características psicológicas de la música y la audición: la actividad sensorial de la música estaría localizada predominantemente en la zona bulbar, donde se encuentra el centro de las reacciones físicas. El mensaje afectivo de la música lo localizamos en el diencéfalo, zona profunda del cerebro, asiento de las emociones. La melodía afecta a la vida emocional y afectiva y es el diencéfalo el que recibe los motivos y diseños melódicos, despertando así todo un mundo interior de sentimientos y emociones.\
 
@@ -379,23 +379,44 @@ $$RIC = Q_3 - Q_1$$
 **Coeficiente de correlación de Pearson:** se utiliza para medir la fuerza y dirección de la relación lineal entre dos variables cuantitativas.\
 $$r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2 \sum (y_i - \bar{y})^2}}$$
 \chapter{Marco Metódico}
-En esta sección se presentan las metodologías y/o test necesarios relacionados con la práctica divulgada en el marco teórico, así como las fuentes de datos.
- 
+
 \section{Bases metódicas utilizadas en el trabajo de investigación}
 
-Desarrollo\
+El presente estudio es una investigación de tipo cuantitativa, ya que se basa en el análisis de datos mayormente tratados de manera numérica, relacionados con los hábitos de consumo musical y variables de salud mental. A su vez, tiene un carácter descriptivo y correlacional, ya que busca describir, tanto las características de los datos, como la posible relación entre las variables estudiadas.
+Dicho estudio tiene un enfoque empírico y analítico, ya que se fundamenta en el análisis de datos reales obtenidos a partir de una encuesta. Se emplean métodos estadísticos para identificar patrones, tendencias, asociaciones entre las variables y estimar un posible motivo para dichas asociaciones.
+Por otro lado, el diseño de la investigación es no experimental, transversal. Esto debido a que los datos fueron recolectados en un único momento en el tiempo y no se manipularon las variables, sino que se analizaron tal como se presentan en el conjunto de datos.\
 
-\subsection{Item 1}
+\subsection{Procesamiento de datos y herramientas utilizadas}
 
-Descripción\
+Las herramientas utilizadas para el procesamiento de los datos fueron, principalmente, los lenguajes de programación Python y R, en conjunto con ciertas librerías que facilitaron y permitieron la lectura, visualización, y manipulación óptima de los datos. Asimismo, se emplearon entornos de desarrollo como Visual Studio Code y RStudio, la plataforma GitHub para la gestión del estudio y, por último, R Markdown para la realización del informe académico.\
 
-\subsection{Item 2}
+\subsection{Limpieza, transformación, y lectura de datos}
+Para realizar la preparación del dataset, en primer lugar, se importaron las librerías necesarias. Tras la lectura de los datos, se procedió a remover las columnas innecesarias para el análisis posterior; en este caso, se removieron las columnas “Timestamp” (luego de verificar que no existieran registros duplicados) y “Permissions”. Posteriormente, se calculó la cantidad de registros nulos y/o inválidos dentro del dataset, para comprobar que no existiera una cantidad significativa de estos que pudiera distorsionar los futuros resultados.\
 
-Descripción\
+Una vez hecho esto, se procedió a establecer rangos lógicos para cada columna de las variables cuantitativas se estableció un rango de 0 a 110 para la edad de los participantes, de 0 a 24 para las horas de escucha al día, y de 40 a 500 para los valores de BPM; catalogando a los datos que no se encontraran en estos rangos como nulos, para después sustituir los registros vacíos y/o ilógicos con la mediana de cada columna, debido a la robustez de la misma. Esto con la finalidad de no alterar los posteriores cálculos de medidas estadísticas sensibles, como lo es la media aritmética.\
 
-\subsubsection{Item 2.2}
+Luego, se procedió a la asignación de valores numéricos a las columnas de variables cualitativas ordinales; las cuales, en este caso, fueron las referentes a la frecuencia con la que los encuestados escuchan ciertos géneros musicales. Esto con la finalidad de facilitar posteriores cálculos e interpretaciones. Estas columnas, particularmente, no presentaron valores nulos o atípicos, pues posiblemente fueron planteadas en la encuesta a modo de selección simple.\
 
-Descripción\
+Posteriormente, se realizó la asignación de valores numéricos a las columnas de variables cualitativas dicotómicas; que, en este caso, se trataron como datos booleanos, y los registros nulos fueron reemplazados por la respectiva moda. Lo mismo se realizó para la columna “Music effects”, la cual es una variable politómica de 3 categorías (“Improve”, “No Effect”, y “Worsen”), así que simplemente se le asignaron los valores 1 a la categoría “Improve”, 0 a “No Effect”, y -1 a “Worsen”.\
+
+Para finalizar, se evaluaron las columnas cualitativas nominales, de las cuales solo la columna “Primary streaming service” presentaba nulos, y fueron sustituidos por la moda. Asimismo, las columnas de las variables referentes a indicadores de salud mental, tampoco presentaron valores nulos y/o atípicos.\
+
+Por último, se añadieron dos columnas adicionales: “Total_Salud” y “Rango_Salud”. La primera de estas fue generada al realizar la sumatoria de los cuatro indicadores de salud mental para cada individuo o fila. Cada variable de salud mental se encuentra en un rango del 0 a 10, por lo tanto, la sumatoria de los cuatro se encontrará en un rango entre 0 y 40 puntos; donde, mientras más puntos acumulados tenga el participante, peor se considera el estado de salud mental general del mismo.\
+
+La segunda columna adicional refleja, según el valor resultante de la sumatoria, en qué categoría se encuentra el participante: Buena, Regular, o Alarmante. Esto con la finalidad de transformar el puntaje en categorías interpretables posteriormente. Esta división se realizó según los siguientes rangos:\
+
+\begin{itemize}
+\item{Rango 0-13 (Categoría: “Buena” / Código: 1): este rango representa a los participantes con una estabilidad emocional óptima, ya que, en la suma de los indicadores de las variables, indicaron un puntaje bajo, lo que refleja ausencia o niveles mínimos de síntomas asociados a una desfavorable salud mental.}
+\item{Rango 14-16 (Categoría: “Regular” / Código: 0): el valor 0 se asocia a un estado de vulnerabilidad intermedio. Se define como “regular” ya que hay una presencia moderada de los indicadores evaluados.}
+\item{Rango 27-40 (Categoría: “Alarmante” / Código: -1): representa el nivel más crítico de salud mental. Durante la suma de las variables, el participante puntuó alto en las dimensiones evaluadas, lo que representa un nivel de higiene mental poco saludable.}
+\end{itemize}
+
+\subsubsection{Técnicas de análisis de datos}
+\begin{itemize}
+\item{Análisis de tendencia central: para variables cuantitativas, se hizo uso de indicadores como la Media Aritmética y la Mediana, con el fin de encontrar el valor típico y más representativo de cada indicador, y así, poder establecer comparaciones.}
+\item{Análisis de Dispersión: se hizo uso de la Varianza, el Cuartil 1 y el Cuartil 3, con el fin de describir la dispersión de los datos para las variables cuantitativas.}
+\item{Análisis de Asociación: se empleó el Coeficiente de Correlación de Pearson para calcular la covarianza entre variables numéricas, como BPM y las variables de salud mental. También se hizo uso de Tablas de Contingencia, para describir la influencia de la música mientras se trabaja.}
+\end{itemize}
 
 \subsection{Item n}
 
