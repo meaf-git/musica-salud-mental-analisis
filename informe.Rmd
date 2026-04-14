@@ -317,19 +317,28 @@ Para el presente trabajo, se ha tomado como referencia principal las investigaci
 
 Existe una relación entre las diferentes zonas cerebrales y las características psicológicas de la música y la audición: la actividad sensorial de la música estaría localizada predominantemente en la zona bulbar, donde se encuentra el centro de las reacciones físicas. El mensaje afectivo de la música lo localizamos en el diencéfalo, zona profunda del cerebro, asiento de las emociones. La melodía afecta a la vida emocional y afectiva y es el diencéfalo el que recibe los motivos y diseños melódicos, despertando así todo un mundo interior de sentimientos y emociones.\
 
-\subsection{Conceptos de Salud Mental}
+\subsection{Conceptos de Salud Mental} 
 \begin{itemize}
  \item{Salud mental: es el estado de bienestar en el que el individuo es consciente de sus capacidades, afronta las tensiones normales de la vida, trabaja de forma productiva y contribuye a su comunidad (OMS, 2013).}
- \item{Higiene mental: la higiene mental se refiere a las prácticas y hábitos que ayudan a mantener un equilibrio emocional y una salud mental positiva.}
- \item{Ansiedad (Anxiety): los trastornos de ansiedad se pueden definir como la experimentación de miedo y preocupaciones intensas y excesivas. Estos sentimientos suelen ir acompañados de tensión física y otros síntomas conductuales y cognitivos. (OMS, 2013).}
- \item{Depresión (Depression): se puede describir como el hecho de sentirse triste, melancólico, infeliz, abatido o derrumbado. La depresión clínica es un trastorno del estado anímico en el cual los sentimientos de tristeza, pérdida, ira o frustración interfieren con la vida diaria. (OMS, 2013).}
- \item{Insomnio (Insomnia): es la dificultad para iniciar o mantener el sueño debido a una incapacidad del cerebro para transitar de las ondas beta (alerta) a las ondas alfa y theta (relajación). (OMS, 2013).}
- \item{Trastorno Obsesivo-Compulsivo (OCD - Obsessive Compulsive Disorder): es un trastorno mental en el cual las personas tienen pensamientos, sentimientos, ideas, sensaciones (obsesiones) y comportamientos repetitivos e indeseables que los impulsan a hacer algo una y otra vez (compulsiones). (OMS, 2013).}
+ \item{Higiene mental: la higiene mental se refiere a las prácticas y hábitos que ayudan a mantener un equilibrio emocional y una salud mental positiva.} 
  \item{Catarsis emocional: es la descarga de emociones intensas, reprimidas o negativas (como ira, tristeza o miedo), que provoca una sensación de alivio, purificación o claridad interior.}
  \item{Sistema nervioso simpático (SNS): es una red de nervios que ayuda al cuerpo a activar su respuesta de "lucha o huida". La actividad de este sistema aumenta cuando se está estresado, en peligro o durante la actividad física.}
  \item{Cortisol: es una hormona producida por las glándulas suprarrenales, afecta a casi todos los órganos del cuerpo y es importante para las funciones corporales, como manejar el estrés y mantener la presión arterial. Niveles muy altos o bajos de esta hormona tienen un impacto negativo en la salud mental, causando ansiedad, depresión, problemas de memoria, irritabilidad y fatiga.}
  \item{Adrenalina: es una hormona y un neurotransmisor que segrega el cuerpo de manera natural a través de las glándulas suprarrenales. El organismo produce y almacena esta sustancia y la libera en situaciones de alarma, estrés, miedo, peligro o excitación.}
+ \item{Comorbilidad:coexistencia de dos o más enfermedades o trastornos en un mismo individuo, generalmente relacionadas.}
+
+\subsection{Indicadores de Salud Mental}
+
+En psicología y ciencias de la salud, estos trastornos no suelen presentarse de forma aislada; por el contrario, comparten una varianza común que puede ser interpretada como un factor de Malestar Psicológico General. Por ende, la suma de los indicadores de ansiedad, depresión, insomnio y trastorno obsesivo-compulsivo se justifica bajo la premisa de la cormobilidad; y dicha suma se denominaría “Índice de Carga Sintomática Acumulada (ICSA)”.
+Al utilizar una escala homogénea (del 0 a 10) en todas las variables, se garantiza la comparabilidad métrica. Matemáticamente, este procedimiento se define como un Índice Aditivo No Ponderado, donde cada dimensión aporta de igual manera a la carga total del individuo. 
+Si el ICSA mide la severidad de un individuo, la media de todos los participantes representa la Intensidad de Afectación de la muestra.\
+
+ \item{Ansiedad (Anxiety): los trastornos de ansiedad se pueden definir como la experimentación de miedo y preocupaciones intensas y excesivas. Estos sentimientos suelen ir acompañados de tensión física y otros síntomas conductuales y cognitivos. (OMS, 2013).}
+ \item{Depresión (Depression): se puede describir como el hecho de sentirse triste, melancólico, infeliz, abatido o derrumbado. La depresión clínica es un trastorno del estado anímico en el cual los sentimientos de tristeza, pérdida, ira o frustración interfieren con la vida diaria. (OMS, 2013).}
+ \item{Insomnio (Insomnia): es la dificultad para iniciar o mantener el sueño debido a una incapacidad del cerebro para transitar de las ondas beta (alerta) a las ondas alfa y theta (relajación). (OMS, 2013).}
+ \item{Trastorno Obsesivo-Compulsivo (OCD - Obsessive Compulsive Disorder): es un trastorno mental en el cual las personas tienen pensamientos, sentimientos, ideas, sensaciones (obsesiones) y comportamientos repetitivos e indeseables que los impulsan a hacer algo una y otra vez (compulsiones). (OMS, 2013).}
 \end{itemize}
+
 
 \subsection{Conceptos Musicales}
 \begin{itemize}
@@ -396,8 +405,6 @@ variables <- ncol(dfclean)
 
 print(paste0("Registros válidos: ", registros, " | Variables: ", variables))
 ```
-
-
 \subsection{Limpieza, transformación, y lectura de datos}
 Para realizar la preparación del dataset, en primer lugar, se importaron las librerías necesarias. Tras la lectura de los datos, se procedió a remover las columnas innecesarias para el análisis posterior; en este caso, se removieron las columnas “Timestamp” (luego de verificar que no existieran registros duplicados) y “Permissions”. Posteriormente, se calculó la cantidad de registros nulos y/o inválidos dentro del dataset, para comprobar que no existiera una cantidad significativa de estos que pudiera distorsionar los futuros resultados.\
 
@@ -415,9 +422,12 @@ La segunda columna adicional refleja, según el valor resultante de la sumatoria
 
 \begin{itemize}
 \item{Rango 0-13 (Categoría: “Buena” / Código: 1): este rango representa a los participantes con una estabilidad emocional óptima, ya que, en la suma de los indicadores de las variables, indicaron un puntaje bajo, lo que refleja ausencia o niveles mínimos de síntomas asociados a una desfavorable salud mental.}
-\item{Rango 14-16 (Categoría: “Regular” / Código: 0): el valor 0 se asocia a un estado de vulnerabilidad intermedio. Se define como “regular” ya que hay una presencia moderada de los indicadores evaluados.}
+\item{Rango 14-26 (Categoría: “Regular” / Código: 0): el valor 0 se asocia a un estado de vulnerabilidad intermedio. Se define como “regular” ya que hay una presencia moderada de los indicadores evaluados.}
 \item{Rango 27-40 (Categoría: “Alarmante” / Código: -1): representa el nivel más crítico de salud mental. Durante la suma de las variables, el participante puntuó alto en las dimensiones evaluadas, lo que representa un nivel de higiene mental poco saludable.}
 \end{itemize}
+
+Transformar cuatro variables en una sola variable escalar permite simplificar el análisis sin perder la riqueza de los datos originales.
+El propósito de sumar los indicadores es permitir la estratificación de la muestra. Al establecer puntos de corte (0-13, 14-26, 27-40), el estudio puede catalogar a los participantes en grupos de salud mental (Buena, Regular, Alarmante), lo que resulta más cómodo para la obtención de conclusiones que el análisis de síntomas por separado.\
 
 \subsubsection{Técnicas de análisis de datos}
 \begin{itemize}
