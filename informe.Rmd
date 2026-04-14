@@ -228,6 +228,7 @@ Schopenhauer, 2005, pág. 177
 
    La música es una manifestación cultural inherente a la condición humana, presente en todas las civilizaciones y épocas históricas. Además de su valor recreativo, diversos estudios contemporáneos han demostrado que la música posee una capacidad única para influir en la química del cerebro. Según Daniel Levitin (neurocientífico y músico): “la música actúa sobre los sistemas neuroquímicos que regulan el estrés y el placer, afectando así directamente en las emociones y el comportamiento humano”.
 Al interactuar con el sistema límbico, la música no solo genera placer, sino que actúa como un regulador del estado de ánimo, capaz de modular la liberación de neurotransmisores claves. De igual forma, se ha documentado que ciertas frecuencias y ritmos musicales, facilitan la reducción de los niveles de cortisol, la principal hormona esteroide del estrés, impactando positivamente en el manejo del mismo y la ansiedad clínica.
+
 Bajo estos precedentes, el presente trabajo se propone describir cuantitativamente la intersección entre la experiencia musical y la salud mental de los participantes. El objetivo central es investigar, mediante técnicas de estadística descriptiva, cómo variables específicas, tales como: el género musical favorito, las pulsaciones por minuto (BPM) y los hábitos de consumo (tiempo de exposición), influyen en indicadores de salud mental, como: la ansiedad, la depresión, y el insomnio, en la muestra estudiada.
 
 \chapter{Planteamiento del Problema}
@@ -235,6 +236,7 @@ Bajo estos precedentes, el presente trabajo se propone describir cuantitativamen
    Según la Organización Mundial de la Salud (OMS), “La salud mental es un estado de bienestar mental que permite a las personas hacer frente a los momentos de estrés de la vida, desarrollar todo su potencial, aprender y trabajar adecuadamente y contribuir a su comunidad”. Sin embargo, durante los últimos años, diversos estudios han reportado un incremento significativo en los trastornos relacionados con la salud mental, como trastornos de ansiedad, del estado de ánimo, de la personalidad, entre otros; especialmente entre adolescentes y adultos jóvenes. Este incremento se debe a factores como: la pandemia de COVID-19, el aislamiento social y las presiones económicas, según la Organización Panamericana de Salud (OPS). En este contexto, se ha incrementado el interés por analizar los factores cotidianos que pueden influir en la salud mental. Uno de los más relevantes es el consumo de música, actividad que forma parte de la vida diaria de millones de personas, y que puede cumplir diferentes funciones emocionales, cognitivas y sociales. Con este proyecto, se busca establecer relaciones acerca de cómo, la forma en que los hábitos de escucha musical (el tiempo dedicado a escuchar música, los géneros preferidos o la frecuencia de consumo), pueden relacionarse con indicadores de salud mental, como la ansiedad, la depresión, el insomnio o los comportamientos compulsivos; esto mediante la realización de un análisis estadístico de la evaluación entre los hábitos de consumo musical y variables asociadas a la salud mental.\
 
 Debido a esto, se plantea las siguientes preguntas de investigación:\
+
 \textbf{1.}¿Existe una asociación estadísticamente significativa entre el tempo del género musical preferido por los participantes y su nivel de insomnio?\
 
 \textbf{2.}¿Cómo se distribuye la percepción del efecto de la música sobre el estado emocional en función de si los participantes escuchan música mientras trabajan o estudian?\
@@ -246,11 +248,11 @@ Debido a esto, se plantea las siguientes preguntas de investigación:\
 El estudio de la relación entre la música y la salud mental ha adquirido una creciente relevancia en diversas disciplinas, especialmente en la psicología y la sociología. La música constituye una de las formas de expresión cultural más universales y accesibles, y su consumo forma parte de la rutina diaria de una gran parte de la población.
 Asimismo, debido a su capacidad para influir en las emociones, el estado de ánimo y los procesos cognitivos, la música ha sido considerada en múltiples investigaciones como un factor asociado al bienestar psicológico.
 Desde una perspectiva académica y científica, resulta significativo analizar esta relación mediante el uso de herramientas de análisis estadístico y modelado de datos que permitan identificar patrones, tendencias y correlaciones entre variables asociadas con los hábitos musicales y distintos indicadores de salud mental. Este tipo de análisis puede contribuir a ampliar el conocimiento sobre la influencia del consumo musical en el bienestar emocional, así como a generar conclusiones a raíz de los resultados obtenidos sobre la relación entre estas variables dentro de una población determinada.\
+
 \section{Objetivos}
- 
 \subsection{Objetivo General}
 \begin{itemize}
-  \item{Describir y analizar la evaluación entre los hábitos de consumo musical y diferentes indicadores de salud mental mediante el uso de técnicas de análisis estadístico.}
+\item{Describir y analizar la evaluación entre los hábitos de consumo musical y diferentes indicadores de salud mental mediante el uso de técnicas de análisis estadístico.}
 \end{itemize}
 
 \subsection{Objetivos Específicos}
@@ -312,15 +314,16 @@ Cualitativa & Rango salud & Clasificación del estado de salud según puntaje. \
 
 Existen múltiples investigaciones científicas que describen cómo la música ayuda a mejorar la salud mental de las personas. En el área de psicología, existen diversos autores que teorizan sobre cómo el cerebro se ve afectado positiva o negativamente según el estilo y las características de la música que se escucha. 
 Para el presente trabajo, se ha tomado como referencia principal las investigaciones de Daniel Levitin, neurocientífico y músico. Su trabajo analiza cómo los elementos técnicos, como el ritmo y el tempo, activan sistemas de recompensas en el cerebro, lo que brinda una idea sobre el impacto de los mismos en la salud mental y cómo esto puede verse reflejado en la población de investigación. Este mismo autor señala en su libro: “Tu cerebro y la música. El estudio científico de una obsesión humana", que la música es un estímulo multisensorial complejo, profundamente arraigado en la arquitectura de nuestro cerebro, con la capacidad de provocar respuestas fisiológicas, psicológicas y emocionales profundas. 
+
 Existe una relación entre las diferentes zonas cerebrales y las características psicológicas de la música y la audición: la actividad sensorial de la música estaría localizada predominantemente en la zona bulbar, donde se encuentra el centro de las reacciones físicas. El mensaje afectivo de la música lo localizamos en el diencéfalo, zona profunda del cerebro, asiento de las emociones. La melodía afecta a la vida emocional y afectiva y es el diencéfalo el que recibe los motivos y diseños melódicos, despertando así todo un mundo interior de sentimientos y emociones.\
 
 \subsection{Conceptos de Salud Mental}
 \begin{itemize}
- \item{Salud mental: Es el estado de bienestar en el que el individuo es consciente de sus capacidades, afronta las tensiones normales de la vida, trabaja de forma productiva y contribuye a su comunidad (OMS, 2013).}
- \item{Higiene mental: La higiene mental se refiere a las prácticas y hábitos que ayudan a mantener un equilibrio emocional y una salud mental positiva.}
- \item{Ansiedad (Anxiety): Los trastornos de ansiedad se pueden definir como la experimentación de miedo y preocupaciones intensas y excesivas. Estos sentimientos suelen ir acompañados de tensión física y otros síntomas conductuales y cognitivos. (OMS, 2013).}
- \item{Depresión (Depression): Se puede describir como el hecho de sentirse triste, melancólico, infeliz, abatido o derrumbado. La depresión clínica es un trastorno del estado anímico en el cual los sentimientos de tristeza, pérdida, ira o frustración interfieren con la vida diaria. (OMS, 2013).}
- \item{Insomnio (Insomnia): Es la dificultad para iniciar o mantener el sueño debido a una incapacidad del cerebro para transitar de las ondas beta (alerta) a las ondas alfa y theta (relajación). (OMS, 2013).}
+ \item{Salud mental: es el estado de bienestar en el que el individuo es consciente de sus capacidades, afronta las tensiones normales de la vida, trabaja de forma productiva y contribuye a su comunidad (OMS, 2013).}
+ \item{Higiene mental: la higiene mental se refiere a las prácticas y hábitos que ayudan a mantener un equilibrio emocional y una salud mental positiva.}
+ \item{Ansiedad (Anxiety): los trastornos de ansiedad se pueden definir como la experimentación de miedo y preocupaciones intensas y excesivas. Estos sentimientos suelen ir acompañados de tensión física y otros síntomas conductuales y cognitivos. (OMS, 2013).}
+ \item{Depresión (Depression): se puede describir como el hecho de sentirse triste, melancólico, infeliz, abatido o derrumbado. La depresión clínica es un trastorno del estado anímico en el cual los sentimientos de tristeza, pérdida, ira o frustración interfieren con la vida diaria. (OMS, 2013).}
+ \item{Insomnio (Insomnia): es la dificultad para iniciar o mantener el sueño debido a una incapacidad del cerebro para transitar de las ondas beta (alerta) a las ondas alfa y theta (relajación). (OMS, 2013).}
  \item{Trastorno Obsesivo-Compulsivo (OCD - Obsessive Compulsive Disorder): es un trastorno mental en el cual las personas tienen pensamientos, sentimientos, ideas, sensaciones (obsesiones) y comportamientos repetitivos e indeseables que los impulsan a hacer algo una y otra vez (compulsiones). (OMS, 2013).}
  \item{Catarsis emocional: es la descarga de emociones intensas, reprimidas o negativas (como ira, tristeza o miedo), que provoca una sensación de alivio, purificación o claridad interior.}
  \item{Sistema nervioso simpático (SNS): es una red de nervios que ayuda al cuerpo a activar su respuesta de "lucha o huida". La actividad de este sistema aumenta cuando se está estresado, en peligro o durante la actividad física.}
@@ -339,16 +342,42 @@ Existe una relación entre las diferentes zonas cerebrales y las característica
 - Andante (70-110 bpm): a ritmo de paseo,
 - Allegro (110-130 bpm): rápido, veloz y brillante,
 - Vivace (130-140 bpm): animado y rápido,
-- Presto (170 - 200bpm): extremadamente rápido,
+- Presto (170 - 200bpm): extremadamente rápido.
 }
 \end{itemize}
 
+\subsection{Hábitos de consumo musical}
 
-\subsection{Definición n}
+Escucha diaria de música: se define como el tiempo de exposición sonora diaria. Según organizaciones médicas, existe un punto de saturación auditiva o fatiga sensorial. Si bien la música moderada reduce el cortisol, la exposición excesiva (muchas horas a volúmenes altos o con BPM frenéticos) puede provocar fatiga cognitiva, donde el cerebro deja de procesar la música como un estímulo placentero y la comienza a percibir como ruido de fondo estresante.\
 
-Descripción de la definición n\
+\subsection{Estadística descriptiva}
+Para el procesamiento de los datos, se emplearon diversas medidas descriptivas que permiten caracterizar el comportamiento de la muestra en estudio.\
 
+**Medidas de tendencia central:** indicadores que permiten resumir un conjunto de datos (en este caso, la muestra en estudio), en un solo valor representativo.\
 
+**Media aritmética:** representa el promedio aritmético de los puntajes y/o valores del dataset. Es sensible a datos atípicos.\
+
+$$\bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i$$
+**Mediana:** es el valor central de la distribución (es decir, el que deja un 50% de los datos por arriba, y el otro 50% por debajo) cuando los datos se encuentran ordenados.\
+
+$$\tilde{x} = P_{50}$$
+**Moda:** es el valor que ocurre con mayor frecuencia.\
+$$M_o = \text{Valor con mayor frecuencia } (f_i)$$
+**Medidas de dispersión y variabilidad:** indican qué tan dispersos están los datos con respecto a una medida de tendencia central; en este caso, la media aritmética.\
+**Varianza:** promedio de los cuadrados de las desviaciones respecto a la media.\
+
+$$s^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n - 1}$$
+**Desviación estándar:** raíz cuadrada de la varianza.\
+$$s = \sqrt{\frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n - 1}}$$
+**Medidas de posición (cuartiles):** dividen la muestra en cuatro partes iguales para identificar la distribución.\
+**Primer cuartil (Q1):** el valor por debajo del cual se encuentra el 25% de la muestra.\
+$$Q_1 = \text{Valor en la posición } \frac{n+1}{4}$$
+**Tercer cuartil (Q3):** el valor que supera al 75% de los datos.\
+$$Q_3 = \text{Valor en la posición } \frac{3(n+1)}{4}$$
+**Rango intercuartílico (RIC):** es la diferencia entre Q3 y Q1. Representa la dispersión del 50% central de los datos.\
+$$RIC = Q_3 - Q_1$$
+**Coeficiente de correlación de Pearson:** se utiliza para medir la fuerza y dirección de la relación lineal entre dos variables cuantitativas.\
+$$r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum (x_i - \bar{x})^2 \sum (y_i - \bar{y})^2}}$$
 \chapter{Marco Metódico}
 En esta sección se presentan las metodologías y/o test necesarios relacionados con la práctica divulgada en el marco teórico, así como las fuentes de datos.
  
