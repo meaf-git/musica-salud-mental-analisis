@@ -122,8 +122,15 @@ plt.show()
 
 # Objetivo 6: comparación de salud mental por edad de los participantes
 # Correlación entre edad, salud mental y BPM (variables numéricas)
-plt.figure(figsize=(8, 6))
-sb.heatmap(df[['Age', 'Anxiety', 'Depression', "OCD", "Insomnia", "BPM", "Hours per day"]].corr(), annot=True, cmap="magma")
+plt.figure(figsize=(10, 8)) 
+
+sb.heatmap(df[['Age', 'Anxiety', 'Depression', 'OCD', 'Insomnia', 'BPM', 'Hours per day']].corr(), 
+           annot=True,       
+           vmin=-1,          
+           vmax=1,           
+           cmap='coolwarm',
+           fmt=".2f")        
+
 plt.title("Correlación: Variables Numéricas")
 plt.savefig("graficos_img/heatmap_correlacion.png")
 plt.show()
