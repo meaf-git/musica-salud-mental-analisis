@@ -396,12 +396,6 @@ Por otro lado, el diseño de la investigación es no experimental, transversal. 
 
 Las herramientas utilizadas para el procesamiento de los datos fueron, principalmente, los lenguajes de programación Python y R, en conjunto con ciertas librerías que facilitaron y permitieron la lectura, visualización, y manipulación óptima de los datos. Asimismo, se emplearon entornos de desarrollo como Visual Studio Code y RStudio, la plataforma GitHub para la gestión del estudio y, por último, R Markdown para la realización del informe académico.\
 
-```{r}
-registros <- format(nrow(dfclean), big.mark = ".")
-variables <- ncol(dfclean)
-
-print(paste0("Registros válidos: ", registros, " | Variables: ", variables))
-```
 \subsection{Limpieza, transformación, y lectura de datos}
 Para realizar la preparación del dataset, en primer lugar, se importaron las librerías necesarias. Tras la lectura de los datos, se procedió a remover las columnas innecesarias para el análisis posterior; en este caso, se removieron las columnas “Timestamp” (luego de verificar que no existieran registros duplicados) y “Permissions”. Posteriormente, se calculó la cantidad de registros nulos y/o inválidos dentro del dataset, para comprobar que no existiera una cantidad significativa de estos que pudiera distorsionar los futuros resultados.\
 
@@ -426,7 +420,7 @@ La segunda columna adicional refleja, según el valor resultante de la sumatoria
 Transformar cuatro variables en una sola variable escalar permite simplificar el análisis sin perder la riqueza de los datos originales.
 El propósito de sumar los indicadores es permitir la estratificación de la muestra. Al establecer puntos de corte (0-13, 14-26, 27-40), el estudio puede catalogar a los participantes en grupos de salud mental (Buena, Regular, Alarmante), lo que resulta más cómodo para la obtención de conclusiones que el análisis de síntomas por separado.\
 
-\subsubsection{Técnicas de análisis de datos}
+\subsection{Técnicas de análisis de datos}
 \begin{itemize}
 \item{Análisis de tendencia central: para variables cuantitativas, se hizo uso de indicadores como la Media Aritmética y la Mediana, con el fin de encontrar el valor típico y más representativo de cada indicador, y así, poder establecer comparaciones.}
 \item{Análisis de Dispersión: se hizo uso de la Varianza, el Cuartil 1 y el Cuartil 3, con el fin de describir la dispersión de los datos para las variables cuantitativas.}
@@ -446,20 +440,97 @@ Para complementar el análisis estadístico y facilitar la interpretación de lo
 Asimismo, se implementaron filtros y visualizaciones interactivas mediante la librería Plotly, permitiendo a los usuarios ajustar los parámetros de análisis dinámicamente. El desarrollo del código se centralizó en un repositorio de GitHub bajo un sistema de control de versiones, lo que optimizó la colaboración técnica. Finalmente, la aplicación fue desplegada en la plataforma Render, asegurando la disponibilidad pública y permanente de los resultados a través de una dirección URL única.\
 
 \chapter{Análisis de Resultados}
+\section{Distribución de Indicadores de Salud Mental}
+Para los primeros hallazgos, referentes a la distribución de las variables de salud mental, se hizo uso de histogramas de frecuencias con curvas de densidad, las cuales permiten estimar la forma de las distribuciones. Asimismo, se incorporaron medidas tanto de tendencia central como de dispersión, con el fin de comprender a mayor profundidad la tendencia de los datos.\
 
-{\small Este capítulo presenta los resultados obtenidos al aplicar las metodologías descritas en el capítulo anterior, así como del análisis estadístico descriptivo de las variables estudiadas y las ventajas y desventajas al aplicar dichos tests.}
+```{r, echo=FALSE,fig.cap="Gráfico Anxiety 4.1.1" ,out.width="100%", fig.align='center'}
+knitr::include_graphics("graficos_img/hist_Anxiety.png")
+```
 
-\section{Presentación de resultados 1}
+El primer gráfico, para la variable Ansiedad, refleja una tendencia hacia valores moderadamente altos, evidenciada por una mediana de 6 y una media aritmética de 5.84. La proximidad entre estas medidas sugiere una distribución con un ligero sesgo negativo, mientras que, el análisis de la variabilidad a través del RIC, muestra que el 50% central de la muestra se sitúa entre una puntuación de 4.0 y 8.0, siendo este un rango moderadamente alto. Existe una clara división en la muestra entre participantes con niveles moderados-bajos (pico en 3) y un grupo más numeroso con niveles severos (pico en 7.5), dejando el valor central (5) como el punto menos frecuente.\
 
-Descripción\
+```{r, echo=FALSE,fig.cap="Gráfico Depression 4.1.2" ,out.width="100%", fig.align='center'}
+knitr::include_graphics("graficos_img/hist_Depression.png")
+```
 
-\section{Presentación de resultados 2}
+Se observa una tendencia predominante hacia niveles moderados-altos, alcanzando su frecuencia máxima en el 7. A diferencia de otras variables, la depresión muestra una presencia constante en todos los niveles de la escala, aunque con una clara concentración en el segmento superior (6-8). Este comportamiento sugiere que, si bien hay un grupo significativo con bienestar emocional, la mayoría de los participantes reporta indicadores de depresión por encima del punto medio de la escala.\
 
-Descripción\
+```{r, echo=FALSE,fig.cap="Gráfico Insomnia 4.1.3" ,out.width="100%", fig.align='center'}
+knitr::include_graphics("graficos_img/hist_Insomnia.png")
+```
+Este gráfico muestra picos de frecuencia destacados en los extremos inferiores y en el punto 5, lo que sugiere una población con hábitos de sueño muy polarizados: mientras un grupo importante reporta una ausencia casi total de insomnio, existe una proporción considerable de la muestra que experimenta dificultades de sueño en niveles medios.\
 
-\section{Presentación de resultados n}
+```{r, echo=FALSE, fig.cap="Gráfico OCD 4.1.4" ,out.width="100%", fig.align='center'}
+knitr::include_graphics("graficos_img/hist_OCD.png")
+```
 
-Descripción\
+Para la variable TOC, se evidencia una distribución con una tendencia central baja. Visualmente se destacan picos de frecuencia en los valores más bajos de la escala, lo que sugiere que la gran mayoría de la muestra reporta síntomas de TOC mínimos o nulos.
+
+
+\section{Comparación de la Distribución (Diagramas de caja)}
+
+Se refleja que la Ansiedad es, por mucho, el síntoma más severo en la muestra, y sus valores se desplazan hacia los valores altos de la muestra. En contraste, el TOC (OCD) muestra la mediana más baja y una caja notablemente más comprimida hacia el origen, indicando una mayor homogeneidad en los reportes de síntomas mínimos para esta categoría. Por su parte, la Depresión y el Insomnio exhiben una dispersión relativamente similar.\
+
+```{r, echo=FALSE, fig.cap="Box Plots de Salud Mental 4.2" ,out.width="100%", fig.align='center'}
+knitr::include_graphics("graficos_img/boxplot_mental.png")
+```
+
+\section{Indicadores de Salud Mental por Género Favorito}
+
+Se comparó el género favorito de los participantes con sus indicadores tanto de Ansiedad, como de Depresión, ya que son las variables en las que los valores reportados fueron más altos.\
+
+Con respecto a la ansiedad, se observó que, lo oyentes de Latin, reportan los niveles de ansiedad más bajos de la muestra. Por el contrario, géneros como el Folk y el Rock muestran una tendencia central desplazada hacia niveles superiores (7-8), con una dispersión menor en el caso del Folk, lo que sugiere un perfil de usuario más homogéneo en cuanto a su estado emocional. Los puntos observados en Pop y Folk representan casos atípicos de bienestar emocional (nivel 0) dentro de grupos que, por lo general, reportan puntuaciones moderadas-altas.\
+
+Con respecto a la depresión, se evidencian contrastes marcados: mientras que el Gospel y la música Latina presentan las medianas más bajas, sugiriendo una asociación con menores indicadores de depresión, géneros como el Hip hop y el Lofi muestran una tendencia central significativamente más alta. Es notable la homogeneidad en los niveles altos reportados por los oyentes de Lofi, en contraste con la alta dispersión observada en géneros como el Country, donde no se aprecia un patrón definido.\
+
+```{r, echo=FALSE, fig.cap="Box Plots por Género favorito (Anxiety) 4.3.1" ,out.width="100%", fig.align='center'}
+knitr::include_graphics("graficos_img/box_anxiety.png")
+```
+
+```{r, echo=FALSE, fig.cap="Box Plots por Género favorito (Depression) 4.3.2" ,out.width="100%", fig.align='center'}
+knitr::include_graphics("graficos_img/box_depression.png")
+```
+
+
+\section{Relación entre BPM y el rango de Salud Mental}
+
+Existe una correlación directa, aunque muy débil, entre el malestar psicológico y el aumento de las pulsaciones por minuto. A medida que el estado de salud mental empeora (de "Buena" a "Alarmante"), el BPM promedio sube.\
+
+```{r, echo=FALSE, fig.cap="Gráfico Embudo 4.4" ,out.width="100%", fig.align='center'}
+knitr::include_graphics("graficos_img/embudo_bpm.png")
+```
+
+
+\section{Impacto de la Música al Trabajar}
+Se evidencia que la música se percibe mayoritariamente como un potenciador del trabajo, y que el rechazo hacia ella (efecto negativo) es extremadamente bajo en la muestra estudiada. Incluso entre quienes afirman no trabajar habitualmente con música, hay un grupo considerable que opina que esta mejora su desempeño, superando a los que creen que no tiene efecto alguno o les empeora.\
+
+```{r, echo=FALSE, fig.cap="Gráfico Impacto de la música al trabajar 4.5" ,out.width="100%", fig.align='center'}
+knitr::include_graphics("graficos_img/barras_trabajo.png")
+```
+
+\section{Correlación de Variables Numéricas}
+
+En este gráfico, 1 representa correlación positiva, 0 ausencia de correlación, y -1 correlación negativa. Se evidencia que hay una fuerte correlación de 0.52 entre las variables Ansiedad y Depresión; es decir, que quienes reportan altos niveles de Ansiedad, también tienden a reportar altos niveles de Depresión. Asimismo, la ansiedad tiene una relación moderada con los síntomas de trastorno obsesivo-compulsivo, y hay una relación clara entre el estado de ánimo depresivo y los problemas de sueño. \
+Por otro lado, la variable edad presenta una correlación negativa leve con casi todos los indicadores de salud, sugiriendo que, en esta muestra específica, los participantes más jóvenes tienden a reportar niveles ligeramente más altos de ansiedad y otros trastornos que los participantes de mayor edad.\
+Con respecto a la variable BPM, en estos datos, no posee algún tipo de relación significativa con los niveles de salud mental. Por último, la variable 'Hours per day' revela que el tiempo de consumo musical es relativamente independiente del estado de salud mental del usuario, con solo una leve asociación positiva hacia el insomnio.\
+
+```{r, echo=FALSE, fig.cap="Gráfico Mapa de calor 4.6" ,out.width="100%", fig.align='center'}
+knitr::include_graphics("graficos_img/heatmap_correlacion.png")
+```
+
+\section{Estadísticas Descriptivas (Top 5 Géneros Más Escuchados)}
+
+Para esta tabla se tomaron en cuenta la Mediana y el RIC, ya que se está trabajando con variables ordinales, y el espacio entre cada valor no necesariamente es el mismo, por lo que las medidas de posición son más óptimas.\ 
+
+Por la parte de Ansiedad, El Rock destaca con la mediana más alta, de 7. Esto indica que, al menos el 50% de sus oyentes, reportan niveles de ansiedad de 7 o más, superando al resto de los géneros. En cuanto al género Pop, su RIC es el más bajo pese a tener una mediana de 6, indicando que las respuestas de sus oyentes tienden a ser similares entre sí. 
+Por otro lado, Video game music es el género con la mediana más baja en la categoría Depresión, lo que indica que sus oyentes tienden a reportar estados de ánimo ligeramente más positivos o neutrales.\
+
+Con respecto al Insomnio, el Metal tiene la mediana más alta y uno de los RIC más altos. Esto indica que que los oyentes de este género están muy divididos: un grupo posee insomnio severo y otro duerme perfectamente.
+Por último, TOC es el indicador con los valores más bajos en todos los géneros, reflejando así que los síntomas obsesivo-compulsivos son poco comunes dentro de la muestra, independientemente de la preferencia en el género musical.\
+
+```{r, echo=FALSE, fig.cap="Tabla 5 Géneros Más Escuchados 4.7" ,out.width="100%", fig.align='center'}
+knitr::include_graphics("graficos_img/tabla_final.png")
+```
 
 \chapter{Conclusiones y Recomendaciones}
 
