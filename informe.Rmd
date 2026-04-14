@@ -328,9 +328,21 @@ Existe una relación entre las diferentes zonas cerebrales y las característica
  \item{Adrenalina: es una hormona y un neurotransmisor que segrega el cuerpo de manera natural a través de las glándulas suprarrenales. El organismo produce y almacena esta sustancia y la libera en situaciones de alarma, estrés, miedo, peligro o excitación.}
 \end{itemize}
 
-\subsection{Definición 2}
+\subsection{Conceptos Musicales}
+\begin{itemize}
+ \item{Música: es una sucesión de señales acústicas que el oído humano recoge y envía al cerebro. Allí, se decodifican y se les da un significado. El cerebro involucra a las emociones, que son las encargadas de convertir el sonido en algo comprensible. (UNIR, 2026).}
+ \item{Tempo: es la velocidad o ritmo al que se interpreta una pieza musical, determinando qué tan rápido o lento es el pulso. Se mide en bpm (beats per minute o pulsaciones por minuto), indicando cuántos pulsos ocurren en un minuto: a mayor número de bpm, más rápida es la música.}
+ \item{BPM (beats per minute): es la unidad de medida objetiva. 60 bpm equivalen a un pulso por segundo, 120 bpm significan dos pulsos por segundo, y así sucesivamente.Algunas marcas de tempo comunes incluyen:
+- Grave (20-40 bpm): extremadamente lento,
+- Largo (45-50 bpm): ampliamente lento,
+- Adagio (55-65 bpm): lento,
+- Andante (70-110 bpm): a ritmo de paseo,
+- Allegro (110-130 bpm): rápido, veloz y brillante,
+- Vivace (130-140 bpm): animado y rápido,
+- Presto (170 - 200bpm): extremadamente rápido,
+}
+\end{itemize}
 
-Descripción de la definición 2\
 
 \subsection{Definición n}
 
