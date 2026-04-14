@@ -33,7 +33,7 @@ output:
 
 # --- Resumen (Abstract) ---
 abstract: |
-  Resumen del trabajo de investigación...
+  En el presente informe se realiza un análisis descriptivo sobre la relación entre los hábitos de consumo musical y ciertos indicadores de salud mental. Se estudian variables como: el género musical favorito, las horas de escucha al día, y el impacto de la música en el bienestar emocional; aplicando técnicas de estadística descriptiva y visualización de datos avanzada mediante R y Python.
 ---
 
 ```{r setup, include=FALSE}
