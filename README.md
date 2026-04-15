@@ -15,3 +15,6 @@ Describir y analizar la correlación entre los hábitos de consumo musical y dif
 5.	Describir la relación entre el uso de música en el trabajo y la percepción de su impacto (Mejora, Empeora, Nulo) en el bienestar de los participantes.
 6.	Comparar la distribución de edades de la muestra con los niveles de salud mental reportados. 
 7.	Explorar la asociación entre la diversidad de generos musicales escuchados y los niveles de bienestar emocional mediante herramientas de estadística descriptiva.
+
+Pagina web con Streamlit:
+https://musica-salud-mental-analisis.onrender.com/
