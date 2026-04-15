@@ -69,7 +69,7 @@ column_labels = {
     "frequency_video_game_music": "Frecuencia de escucha - Música de Videojuegos",
     "anxiety": "Ansiedad",
     "depression":"Depresión",
-    "insomnia": "Insomnia",
+    "insomnia": "Insomnio",
     "ocd": "TOC",
     "music_effects":"Efectos percibido de la Música",
     "total_salud": "Puntaje Total de Salud",
@@ -161,18 +161,25 @@ selected_effect_values = [effect_map[text] for text in selected_effect_text]
 
 # Aplicacion de los filtros
 filtered_df = df[
-    (df["age"] >= age_min) & (df["age"] <= age_max) &
-    (df["primary_streaming_service"].isin(selected_streaming)) &
-    (df["fav_genre"].isin(selected_genres)) &
-    (df["hours_per_day"].between(hours_min, hours_max)) &
-    (df["music_effects"].isin(selected_effect_values))
+    (df["age"] >= age_min) & 
+    (df["age"] <= age_max) &
+    (df["hours_per_day"].between(hours_min, hours_max))
 ]
 
-# Filtro para "While Working" (Si/No)
+if selected_streaming:
+    filtered_df = filtered_df[filtered_df["primary_streaming_service"].isin(selected_streaming)]
+if selected_genres:
+    filtered_df = filtered_df[filtered_df["fav_genre"].isin(selected_genres)]
+if selected_effect_values:
+    filtered_df = filtered_df[filtered_df["music_effects"].isin(selected_effect_values)]
 if selected_while_working:
     while_map = {"Sí": 1, "No": 0}
     selected_values = [while_map[w] for w in selected_while_working]
     filtered_df = filtered_df[filtered_df["while_working"].isin(selected_values)]
+
+if len(filtered_df) == 0:
+    st.warning("⚠️ No se encontraron resultados con los filtros actuales. Prueba a modificar los filtros.")
+    filtered_df = df.copy()
 
 
 # Seccion desplegable para datos generales del estudio (visualizacion del dataset limpio y bonitico):
@@ -350,17 +357,17 @@ st.markdown("""
 with tab_salud:
     st.subheader("Distribución de Indicadores de Salud Mental")
     st.markdown("---")
-    st.write("Comparación de distribuciones mediante daiagrams de caja")
+    st.write("Comparación de distribuciones mediante daiagramas de caja")
 
     # Box plot  
     fig_box = px.box(                          
     filtered_df,
     y=["anxiety", "depression", "insomnia", "ocd"],
-    title="Distribución de los Indicadores de Salud Mental - Diagramas de Caja",
+    title="Distribución de los Indicadores de Salud Mental",
     labels={"variable": "Indicador", "value": "Puntuación (0-10)"},
     color_discrete_sequence=["#8A2E8F"]
     )
-
+   
     fig_box.update_layout(
     height=580,
     xaxis_title="Indicadores de Salud Mental",
@@ -439,7 +446,7 @@ with tab_salud:
 # tab_habitos
 with tab_habitos:
 
-    # Grafico de dispersion intereactivo
+    # Grafico de embudo intereactivo
     _, col_central, _= st.columns([1, 8, 1])
 
     with col_central:
@@ -447,7 +454,8 @@ with tab_habitos:
         # Nombres 
         nombre_rango = {1: "Buena (1)",0: "Regular (0)",-1: "Alarmante (-1)"}
         df_resumen["Rango"] = df_resumen["rango_salud"].map(nombre_rango)
-        # Ordenar de mejor a peor(parad que se vea bien)
+
+        # Ordenar de mejor a peor salud
         orden = ["Buena (1)", "Regular (0)", "Alarmante (-1)"]
         df_resumen["Rango"] = pd.Categorical(df_resumen["Rango"], categories=orden, ordered=True)
         df_resumen = df_resumen.sort_values("Rango")
@@ -464,9 +472,11 @@ with tab_habitos:
             color="Rango",
             color_discrete_sequence=["#E0A8E6", "#C89EC4", "#9B6A9E"],
             text="bpm")
+        
         fig.update_traces(
             texttemplate="%{text:.1f} BPM",
             textposition="inside")
+        
         fig.update_layout(
             height=520,
             title_font_size=20,
@@ -477,6 +487,12 @@ with tab_habitos:
             plot_bgcolor="rgba(0,0,0,0)")
         
         st.plotly_chart(fig, use_container_width=True)
+        with st.popover("¿Qué significa esto?"):
+            st.markdown("""
+                **Ritmo y Bienestar**
+                * **Estabilidad:** El BPM (latidos por minuto) promedio se mantiene muy similar entre los tres grupos (121-126 BPM).
+                * **Interpretación:** Esto sugiere que el **ritmo** por sí solo no es un predictor determinante del estado de salud mental; personas en estado "Alarmante" y "Bueno" escuchan ritmos similares.
+                """)
 
     # Tabla cruzada    
     tabla = pd.crosstab(
@@ -493,7 +509,7 @@ with tab_habitos:
         tabla,
         title="Impacto de la Música al trabajar",
         labels={"index": "Escucha música mientras trabaja", "value": "Cantidad de personas"},
-        color_discrete_sequence=["#C585B3","#D0A3BF", "#9D52A1"],
+        color_discrete_sequence=["#E0A8E6","#D0A3BF", "#9D52A1"],
         text_auto=True
     )
     fig_bar.update_layout(
@@ -505,6 +521,13 @@ with tab_habitos:
         barmode='group'
     )
     st.plotly_chart(fig_bar, use_container_width=True)
+    with st.popover("¿Qué significa esto?"):
+        st.markdown("""
+            **Productividad Sonora**
+            * **Efecto Positivo:** Existe un consenso masivo: la gran mayoría de quienes escuchan música mientras trabajan reportan que esta **mejora** su desempeño.
+            * **Riesgo Mínimo:** Muy pocos participantes indican que la música "Empeora" su situación, lo que valida el uso de herramientas auditivas en entornos académicos o laborales.
+            * **Dato Curioso:** Incluso quienes no escuchan música frecuentemente al trabajar, reconocen en su mayoría que tiene un potencial efecto positivo.
+            """)
     
     st.divider()
     
@@ -528,6 +551,12 @@ with tab_habitos:
     
     fig_violin_hours.update_layout(height=550)
     st.plotly_chart(fig_violin_hours, use_container_width=True)
+    with st.popover("¿Qué significa esto?"):
+        st.markdown("""
+        **Distribución del Insomnio**
+        * **Densidad:** El ancho del "violín" representa dónde se concentra la mayoría de las personas. Un violín más ancho en la parte superior indica que en ese grupo el insomnio es más frecuente.
+        * **Tendencia:** Observamos que quienes escuchan **más de 8 horas** de música tienden a mostrar una mayor dispersión y medianas ligeramente más altas de insomnio.
+        """)
 
 #tab_avanzado
 with tab_avanzado:
@@ -563,12 +592,12 @@ with tab_avanzado:
     st.plotly_chart(fig_heatmap, use_container_width=True)
     
     with st.popover("¿Qué significa esto?"):
-        st.markdown("Guía Rápida")
-        st.write("""Esta matriz utiliza el **Coeficiente de Correlación de Pearson**, que mide la fuerza y dirección de la relación lineal entre dos variables:
-        
-            +1,00: Correlación positiva perfecta (si una aumenta, la otra también).
-            0,00: No existe relación lineal entre las variables.
-            -1,00: Correlación negativa perfecta (si una aumenta, la otra disminuye).""")
+        st.markdown("""
+            **Relaciones entre Variables**
+            * **Correlación Fuerte:** La relación más clara se da entre **Ansiedad y Depresión (0.52)**, lo cual es estadísticamente esperado en estudios psicológicos.
+            * **Correlación Débil:** La **Edad** tiene una correlación negativa casi nula con el TOC o el Insomnio, sugiriendo que estos indicadores afectan por igual a jóvenes y adultos en esta muestra.
+            * **Lectura:** Cuanto más cerca esté el número de **1**, más crecen las variables juntas. Si está cerca de **0**, no hay relación lineal clara.
+            """)
         
     # Grafico de caja
     
@@ -607,6 +636,14 @@ with tab_avanzado:
 
     st.plotly_chart(fig_horas, use_container_width=True)
 
+    with st.popover("¿Qué significa esto?"):
+            st.markdown("""
+                **Carga Sintomática Acumulada**
+                * **Crecimiento:** Se observa una tendencia levemente ascendente: a mayor número de horas de música, la mediana del índice ICSA tiende a subir.
+                * **Outliers:** El grupo de **0-2 horas** presenta un valor atípico muy alto, lo que indica que existen casos aislados con alta carga sintomática a pesar del bajo consumo.
+                * **Cuartiles:** El desplazamiento hacia arriba de las cajas en los grupos de **8-12 horas** sugiere una mayor prevalencia de síntomas en consumidores intensivos.
+                """)
+
     # Comparacion de Ansiedad y Depresion por Genero musical favorito
     st.subheader("Comparacion de Ansiedad y Depresion por Género Musical Favorito")
     indicadores = ["anxiety","depression"]
@@ -641,6 +678,13 @@ with tab_avanzado:
             plot_bgcolor="#F8F1F4")
         
         st.plotly_chart(fig, use_container_width=True)
+        with st.popover("¿Qué significa esto?"):
+            st.markdown("""
+                **Análisis por Género**
+                * **Variabilidad:** Géneros como el **Rock** y el **K-Pop** muestran rangos intercuartílicos más amplios en ansiedad, indicando audiencias con estados de ánimo muy diversos.
+                * **Niveles Bajos:** Géneros como la música **Latina** o el **Gospel** presentan medianas de depresión y ansiedad ligeramente más bajas en comparación con el promedio.
+                * **Nota:** No implica causalidad; es decir, escuchar un género no causa la ansiedad, sino que personas con ciertos niveles de ansiedad podrían preferir ciertos géneros.
+                """)
         
                     
 
