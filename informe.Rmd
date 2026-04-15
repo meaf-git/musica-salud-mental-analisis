@@ -237,9 +237,9 @@ Bajo estos precedentes, el presente trabajo se propone describir cuantitativamen
 
 Debido a esto, se plantea las siguientes preguntas de investigación:\
 
-\textbf{1.}¿Existe una asociación estadísticamente significativa entre el tempo del género musical preferido por los participantes y su nivel de insomnio?\
+\textbf{1.}¿Existe una asociación estadísticamente significativa entre el tempo del género musical preferido por los participantes y su nivel de salud mental?\
 
-\textbf{2.}¿Cómo se distribuye la percepción del efecto de la música sobre el estado emocional en función de si los participantes escuchan música mientras trabajan o estudian?\
+\textbf{2.}¿Cómo se distribuye la percepción del efecto de la música sobre el estado emocional en función de si los participantes escuchan música mientras trabajan?\
 
 \textbf{3.}¿Qué relación existe entre la diversidad de géneros musicales escuchados por los participantes y sus niveles de bienestar emocional?\
 
@@ -270,7 +270,7 @@ Desde una perspectiva académica y científica, resulta significativo analizar e
 La población objeto de estudio está conformada por individuos que participaron en una encuesta relacionada con hábitos musicales y salud mental. Dicha encuesta estuvo disponible entre el 27 de julio de 2022 y el 8 de noviembre del mismo año, a nivel mundial. La muestra utilizada corresponde a, aproximadamente, 700 registros (736 observaciones), los cuales contienen información sobre: variables demográficas, hábitos de consumo musical y condiciones relacionadas con la salud mental de los encuestados.\
 
 \section{Variables}
-La variable principal en estudio (Variable Dependiente/Objetivo) es el Nivel de Salud Mental, que representa el estado de bienestar psicológico del individuo. Esta se mide a través de una escala cuantitativa de 0 a 10, donde 0 indica ausencia total de síntomas y 10 representa la severidad máxima.Para un análisis detallado, se consideran las siguientes variables:\
+La variable principal en estudio (Variable Dependiente/Objetivo) es el Nivel de Salud Mental, que representa el estado de bienestar psicológico del individuo. Esta se mide a través de una escala cuantitativa de 0 a 10, donde 0 indica ausencia total de síntomas y 10 representa la severidad máxima.Se consideran las siguientes variables:\
 
 \textbf{1.}Variables Psicológicas: Ansiedad y Depresión, evaluadas como indicadores del estado emocional predominante.\
 
@@ -534,25 +534,71 @@ knitr::include_graphics("graficos_img/tabla_final.png")
 
 \chapter{Conclusiones y Recomendaciones}
 
-\textbf{1.-} Conclusion 1 del trabajo de investigación.\
+\textbf{1.-}  Los valores de salud mental referidos, especialmente para las variables Ansiedad e Insomnio, son preocupantes, ya que la tendencia es hacia valores medios-altos a pesar de que la muestra fue completamente aleatoria; es decir, no se centró en individuos con antecedentes patológicos conocidos, lo que sugiere una prevalencia significativa en la población general estudiada. Esto puede deberse al hecho de que la encuesta fue realizada durante una época en la que, la salud mental de la población a nivel mundial, se vio fuertemente afectada debido al aislamiento social, la crisis económica, y las pérdidas que generó la Pandemia (COVID-19); pues esta aumentó en un 25% la prevalencia de la ansiedad y la depresión en todo el mundo, afectando desproporcionalmente a adultos jóvenes y adolescentes, según la Organización Mundial de la Salud (OMS).\
+
+\textbf{2.-}  El Rock y el Metal presentan los indicadores más críticos: el Rock, con una mediana de 7 en ansiedad, y el Metal con la mayor prevalencia de insomnio, pero con una variabilidad bastante alta. Esto puede asociarse con que, la música con un Tempo elevado, puede generar un fenómeno llamado entrenamiento rítmico, estimulando el sistema nervioso simpático, aumentando la liberación de cortisol y adrenalina. La mediana de ansiedad en el Rock sugiere que, este estado de alerta constante, inducido por ritmos enérgicos, podría estar generando una sensación de tensión en los oyentes frecuentes. Por otro lado, la variabilidad alta del Insomnio indica que el Metal actúa de forma distinta según el individuo: mientras que para algunos el BPM alto resulta en catarsis, para otros funciona como un estresor que fragmenta el ciclo del sueño.\
+A pesar de esto, se debe tener en cuenta que la música funciona a menudo como un mecanismo de afrontamiento; por ende, es posible que las personas ya ansiosas busquen ritmos rápidos para externalizar su energía, creando una relación donde el género musical no es necesariamente la causa, sino el refugio del estado mental.\
+
+\textbf{3.-}El gráfico 4.4 refleja que los estados "Alarmantes" coinciden con BPMs promedio más altos. Sin embargo, el mapa de calor (Gráfico 4.6) muestra una correlación de apenas 0.05 entre BPM y ansiedad/depresión. Teniendo esto en cuenta, se concluye que no es solo la velocidad del Tempo lo que altera la salud mental, sino también factores como la exposición prolongada y la sensibilidad individual.\
+
+Por otro lado, se muestra una correlación negativa entre las variables Edad y Ansiedad. Es decir: a medida que aumenta la edad de los participantes, disminuye la intensidad de la ansiedad reportada. Esto podría indicar que los jóvenes, en el intervalo de tiempo donde fue tomada la muestra, fueron el grupo más vulnerable al estrés del entorno global, mostrando consistencia con las tendencias globales reportadas por la OMS en 2022.\
+
+\textbf{Recomendación} Ampliación de la muestra: se sugiere para futuras investigaciones incrementar el tamaño de la población y su muestra, con la finalidad de mejorar la representatividad de los resultados y reducir el margen de error. Una muestra más robusta permitirá realizar inferencias más concretas y sólidas sobre la población del estudio.\
 
 \textbf{Recomendación} 
-Recomendación 1 del trabajo de investigación.\
-
-\textbf{2.-} Conclusion 2 del trabajo de investigación.\
+Mejora en los instrumentos de evaluación: debido a que los niveles de salud mental fueron evaluados mediante encuestas digitales (Google Forms), los datos están sujetos a la percepción subjetiva y a sesgos del entrevistado. Para minimizar el sesgo, se recomienda que en futuros estudios se incorporen evaluaciones hechas por profesionales del área de la salud mental, para de esta manera garantizar una medición objetiva y clínica de las variables.\
 
 \textbf{Recomendación} 
-Recomendación 2 del trabajo de investigación.\
+Mediciones corporales: se recomienda para futuras investigaciones se incorporen mediciones biométricas como la variabilidad de la frecuencia cardíaca o niveles de cortisol al escuchar géneros específicos, para correlacionar la percepción subjetiva con respuestas fisiológicas objetivas.\
 
-\textbf{n.-} Conclusion n del trabajo de investigación.\
-
-\textbf{Recomendación} Recomendación n del trabajo de investigación.\
+\textbf{Recomendación} 
+Prevención de la fatiga auditiva: se recomienda el uso de la música dentro de los decibeles recomendados por la OMS (generalmente por debajo de los 80 dB para exposiciones prolongadas). El uso de volúmenes excesivos no solo anula los efectos relajantes de la música, sino que puede inducir estados de estrés fisiológico, irritabilidad y daños irreversibles en el sistema auditivo.\
 
 \appendix
 \renewcommand{\thechapter}{\Alph{chapter}}
 
 \chapter{Anexo A}
 
+```{r, echo=FALSE, fig.cap="Gráfico de violín Insomnio según horas de música al dia" ,out.width="100%", fig.align='center'}
+knitr::include_graphics("graficos_img/newplot.png")
+```
+Crecimiento: Se observa una tendencia levemente ascendente: a mayor número de horas de música, la mediana del índice ICSA tiende a subir.\
+
+Outliers: El grupo de 0-2 horas presenta un valor atípico muy alto, lo que indica que existen casos aislados con alta carga sintomática a pesar del bajo consumo.\
+
+Cuartiles: El desplazamiento hacia arriba de las cajas en los grupos de 8-12 horas sugiere una mayor prevalencia de síntomas en consumidores intensivos.\
+
+
 \chapter{Anexo B}
 
-\chapter{Anexo C}
+```{r, echo=FALSE, fig.cap="ICSA según horas de música al día" ,out.width="100%", fig.align='center'}
+knitr::include_graphics("graficos_img/boxplot.png")
+```
+
+Densidad: El ancho del "violín" representa dónde se concentra la mayoría de las personas. Un violín más ancho en la parte superior indica que en ese grupo el insomnio es más frecuente.\
+
+Tendencia: Observamos que quienes escuchan más de 8 horas de música tienden a mostrar una mayor dispersión y medianas ligeramente más altas de insomnio.\
+
+
+\chapter{Referencias bibliográficas}
+
+\begin{itemize}
+\item{Healthdirect. (s.f.).“The role of cortisol in the body”.}
+
+\item{Morales, M. L. (1990).“Psicometría aplicada”. Editorial Trillas.}
+
+\item{Organización Mundial de la Salud. (17 de noviembre de 2021).“Salud mental del adolescente”.}
+
+\item{Organización Mundial de la Salud. (2 de marzo de 2022). “La pandemia de COVID-19 provoca un aumento del 25% en la prevalencia de la ansiedad y la depresión en todo el mundo”.}
+
+\item{Tomatis, Afred (1969):“El oído y el lenguaje”. Barcelona. Ed. Martínez Roca.}
+
+\item{Willems, E. (1956):“Las bases psicológicas de la educación musical”. Buenos Aires. Eudeba.}
+
+\item{Despins, Jean Paul (1989):“La música y el cerebro”. Barcelona. Ed.Gedisa.}
+
+\item{Levitin, D. J. (2006).Tu cerebro y la música: El estudio científico de una obsesión humana. RBA Libros.}
+
+\item{Organización Mundial de la Salud. (2013).Plan de acción sobre salud mental 2013-2020. OMS. https://apps.who.int/iris/handle/10665/97488.}
+}
+\end{itemize}
